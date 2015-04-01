@@ -30,7 +30,7 @@ import com.mongodb.ServerAddress;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 
 @Configuration

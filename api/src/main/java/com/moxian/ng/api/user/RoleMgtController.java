@@ -33,7 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 @RestController()
 @RequestMapping(value = ApiConstants.URI_API_MGT)

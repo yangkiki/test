@@ -13,7 +13,7 @@ import org.springframework.core.env.Environment;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  *
  */
 @Configuration

@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 @Embeddable
 public class PriceRange implements Serializable{

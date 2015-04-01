@@ -7,7 +7,7 @@ package com.moxian.ng.model;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 public class LabelValueBean {
 

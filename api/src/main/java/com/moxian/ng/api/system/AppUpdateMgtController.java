@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 @RequestMapping(value = ApiConstants.URI_API_MGT + ApiConstants.URI_API_APPUPDATE)
 @RestController

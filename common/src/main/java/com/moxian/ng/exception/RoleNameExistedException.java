@@ -7,7 +7,7 @@ package com.moxian.ng.exception;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 public class RoleNameExistedException extends RuntimeException {
 

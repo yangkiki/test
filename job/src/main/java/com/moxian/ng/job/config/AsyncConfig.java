@@ -17,7 +17,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 @Configuration
 @EnableAsync(mode = AdviceMode.ASPECTJ)

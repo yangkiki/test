@@ -16,7 +16,7 @@ import com.moxian.ng.domain.Post_;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  *
  */
 public class PostSpecifications {

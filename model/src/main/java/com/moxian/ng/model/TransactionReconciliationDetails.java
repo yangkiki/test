@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 public class TransactionReconciliationDetails implements Serializable {
 

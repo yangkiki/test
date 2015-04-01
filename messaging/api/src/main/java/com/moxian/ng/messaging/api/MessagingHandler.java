@@ -7,7 +7,7 @@ package com.moxian.ng.messaging.api;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 public interface MessagingHandler<T> {
 

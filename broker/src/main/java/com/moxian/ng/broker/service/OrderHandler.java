@@ -24,7 +24,7 @@ import org.springframework.util.Assert;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 @Service
 @Transactional

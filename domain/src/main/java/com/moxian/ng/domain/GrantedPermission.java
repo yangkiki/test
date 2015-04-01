@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 @Table(name = "granted_permissions")
 @Entity

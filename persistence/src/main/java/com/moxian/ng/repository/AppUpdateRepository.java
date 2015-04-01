@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 public interface AppUpdateRepository extends JpaRepository<AppUpdate, Long>, //
         JpaSpecificationExecutor<AppUpdate> {

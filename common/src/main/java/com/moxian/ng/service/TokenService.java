@@ -17,7 +17,7 @@ import org.springframework.util.DigestUtils;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 @Service
 public class TokenService {

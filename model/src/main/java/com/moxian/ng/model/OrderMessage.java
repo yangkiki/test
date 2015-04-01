@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 public class OrderMessage implements Serializable {
 

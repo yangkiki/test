@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 public class OrderDetails implements Serializable {
 

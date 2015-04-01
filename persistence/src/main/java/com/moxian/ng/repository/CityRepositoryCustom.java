@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 public interface CityRepositoryCustom {
     

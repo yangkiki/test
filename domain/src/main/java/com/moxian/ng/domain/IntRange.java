@@ -10,7 +10,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
  */
 @Embeddable
 public class IntRange implements Serializable {

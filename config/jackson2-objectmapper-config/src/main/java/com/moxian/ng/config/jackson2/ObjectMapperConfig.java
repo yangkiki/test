@@ -23,7 +23,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 /**
  *
- * @author hansy
+ * @author hantsy<hantsy@gmail.com>
  */
 @Configuration
 public class ObjectMapperConfig {
@@ -31,20 +31,7 @@ public class ObjectMapperConfig {
     @Bean
     public ObjectMapper objectMapper() {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        //write dates as string.
-//        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-//
-//        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-//
-//        objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
-//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//
-//        objectMapper.setSerializationInclusion(Include.NON_EMPTY);
-//
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
-        //builder.configure(objectMapper);
         builder.deserializerByType(LocalDate.class, new CustomLocalDateDeserializer());
         builder.deserializerByType(LocalDateTime.class, new CustomLocalDateTimeDeserializer());
         builder.serializerByType(LocalDateTime.class, new CustomLocalDateTimeSerializer());

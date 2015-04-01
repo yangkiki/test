@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author hantsy
+ * @author hantsy<hantsy@gmail.com>
  */
 @Entity
 @Table(name = "cities")

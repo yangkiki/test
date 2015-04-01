@@ -28,31 +28,31 @@ This application serves as backend REST API producer.
 
    Clone the codes into your local system via your favorite GIT client, such as TortoiseGit or Eclipse integrated GIT client.
 
-   <pre>
-	http://192.168.0.111:8080/gitbucket/git/fljr/server.git
-   </pre>
+   
+   	git clone 114.215.189.121:8080/gitbucket/git/moxian/server.git
+   
 
 ## Build project via Apache Maven
 
  
    1. Open your system command line tool, and build the project.
    
-	<pre>
-	mvn clean install
-	</pre>
+	
+		mvn clean install
+	
   
    2. Enter the project root folder, run `mvn tomcat7:run` to start up an embedded tomcat7 to serve this application.
   
-        <pre>
-        mvn tomcat7:run
-        </pre>
+     
+    	mvn tomcat7:run
+    
 
 
    3. Run in embedded Jetty.
 
-       <pre>
-          mvn jetty:run
-       </pre>
+      
+     	mvn jetty:run
+      
 
 
 ## Build project in Spring Tool Suite
