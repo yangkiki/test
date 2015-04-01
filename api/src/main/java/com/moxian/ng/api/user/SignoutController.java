@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author hantsy<hantsy@gmail.com>
  */
-@RequestMapping(value = ApiConstants.URI_API_PUBLIC)
+@RequestMapping(value = ApiConstants.URI_API)
 @RestController
 public class SignoutController {
     

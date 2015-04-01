@@ -140,7 +140,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry interceptUrlRegistry = http
                 .authorizeRequests()
-                .antMatchers("/api/authenticate", "/api/signup", "/api/signin","/api/register", "/api/public/**")
+                .antMatchers("/api/authenticate", "/api/signup", "/api/signin","/api/signout", "/api/public/**")
                 .permitAll();
 //        http.
 //                authorizeRequests()
