@@ -628,11 +628,11 @@
                 <spring.profiles.active>dev</spring.profiles.active>
 				
                 <!-- redis configuration -->
-                <redis.host>localhost</redis.host>
+                <redis.host>112.124.100.141</redis.host>
                 <redis.password></redis.password>
 				
                 <!-- mongo configuration -->
-                <mongo.host>localhost</mongo.host>
+                <mongo.host>112.124.100.141</mongo.host>
                 <mongo.dbname>flbill</mongo.dbname>
                 <mongo.username></mongo.username>
                 <mongo.password></mongo.password>
@@ -658,7 +658,7 @@
                 <mail.debug>true</mail.debug>
                 
                 <!-- rabbitmq config -->
-                <rb.addresses>192.168.0.199:5672</rb.addresses>
+                <rb.addresses>112.124.100.141:5672</rb.addresses>
                 <rb.vhost>/f</rb.vhost>
                 <rb.username>fuser</rb.username>
                 <rb.password>fpwd</rb.password>
@@ -668,14 +668,8 @@
                 <sms.appKey>6SDK-EMY-6688-KGUNM</sms.appKey>
                 <sms.appSecret>201827</sms.appSecret>
                 
-                <!-- payment gateway config-->
-                <gwApiUrl>http://www.storevm.org:8660/paygw/services/</gwApiUrl>
-                
-                <!-- account operations for withfunding -->
-				<signature.algorthm>RSA</signature.algorthm>
-				<signature.channelNo>880001</signature.channelNo>
-				<signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
-				<signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
+
+
             </properties>
             
             <dependencyManagement>
