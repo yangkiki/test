@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Controller
 @RequestMapping()

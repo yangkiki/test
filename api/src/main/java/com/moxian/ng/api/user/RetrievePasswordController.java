@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @RequestMapping(value = ApiConstants.URI_API_PUBLIC)
 @RestController

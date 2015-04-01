@@ -12,7 +12,7 @@ import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteExcep
 import org.springframework.batch.core.repository.JobRestartException;
 
 /**
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public interface SchedulingTasks {
 

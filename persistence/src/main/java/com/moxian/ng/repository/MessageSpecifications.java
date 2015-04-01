@@ -18,7 +18,7 @@ import javax.persistence.criteria.Join;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  *
  */
 public class MessageSpecifications {

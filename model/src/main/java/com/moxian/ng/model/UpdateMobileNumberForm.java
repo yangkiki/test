@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class UpdateMobileNumberForm implements Serializable {
 

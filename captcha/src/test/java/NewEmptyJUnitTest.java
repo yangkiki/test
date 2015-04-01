@@ -22,7 +22,7 @@ import com.moxian.ng.model.ImgCaptchaResult;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @RunWith(BlockJUnit4ClassRunner.class)
 public class NewEmptyJUnitTest {

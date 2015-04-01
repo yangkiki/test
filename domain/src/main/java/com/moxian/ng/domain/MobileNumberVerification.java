@@ -13,7 +13,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Embeddable
 public class MobileNumberVerification implements Serializable {

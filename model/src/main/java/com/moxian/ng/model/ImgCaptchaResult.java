@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class ImgCaptchaResult implements Serializable {
 

@@ -26,7 +26,7 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Configuration
 @EnableSwagger
@@ -99,7 +99,7 @@ public class SwaggerConfig {
                 "Moxian RESTful APIs",//
                 "Moxian RESTful APIs for developers", //
                 "Moxian API terms of service",//
-                "hantsy<hantsy@gmail.com>",//
+                "Hantsy Bai<hantsy@gmail.com>",//
                 "Commericial Lisence", //
                 "lisence URL");
         return apiInfo;

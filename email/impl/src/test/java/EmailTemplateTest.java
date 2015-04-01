@@ -33,7 +33,7 @@ public class EmailTemplateTest {
         
         log.debug("call test in EmailTemplateTest!");
         try {
-            //tempalte.send("hantsy<hantsy@gmail.com>@tom.com", "test email subject", "test email content");
+            //tempalte.send("Hantsy Bai<hantsy@gmail.com>@tom.com", "test email subject", "test email content");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

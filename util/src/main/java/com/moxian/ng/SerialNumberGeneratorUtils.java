@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Service
 public class SerialNumberGeneratorUtils {

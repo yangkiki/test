@@ -7,7 +7,7 @@ package com.moxian.ng.exception;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class InvalidTokenException extends RuntimeException {
 

@@ -15,7 +15,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  *
  */
 @Entity

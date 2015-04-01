@@ -590,14 +590,14 @@ public class DataImporter {
 //
 //        UserProfile appTestProfile = new UserProfile();
 //        appTestProfile.setAccount(appTestAccountSaved);
-//        appTestProfile.setSecondaryEmail("hantsy<hantsy@gmail.com>bai@tom.com");
+//        appTestProfile.setSecondaryEmail("Hantsy Bai<hantsy@gmail.com>bai@tom.com");
 //        appTestProfile.setSecondaryMobileNumber("138001380000");
 //        appTestProfile.setInstantMessager("QQ:332343423");
 //        createUserProfileIfAbsent(appTestProfile);
 //
 //        UserProfile userProfile = new UserProfile();
 //        userProfile.setAccount(savedTestUser1);
-//        userProfile.setSecondaryEmail("hantsy<hantsy@gmail.com>bai@tom.com");
+//        userProfile.setSecondaryEmail("Hantsy Bai<hantsy@gmail.com>bai@tom.com");
 //        userProfile.setSecondaryMobileNumber("138001380000");
 //        userProfile.setInstantMessager("QQ:332343423");
 //        createUserProfileIfAbsent(userProfile);

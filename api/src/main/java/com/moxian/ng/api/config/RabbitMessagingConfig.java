@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Configuration
 @PropertySource("classpath:/rabbit.properties")

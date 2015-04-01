@@ -24,7 +24,7 @@ import org.springframework.security.crypto.codec.Base64;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class KaptchaDelegate {
 

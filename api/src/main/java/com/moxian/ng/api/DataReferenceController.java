@@ -27,7 +27,7 @@ import com.moxian.ng.repository.PermissionRepository;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @RestController
 @RequestMapping(value = ApiConstants.URI_API + "/public/refs")

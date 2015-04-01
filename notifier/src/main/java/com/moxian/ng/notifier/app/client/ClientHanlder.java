@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Named
 public class ClientHanlder {

@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class OrderStatistics implements Serializable {
 

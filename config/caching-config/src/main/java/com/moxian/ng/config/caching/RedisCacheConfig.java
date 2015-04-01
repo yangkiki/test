@@ -24,7 +24,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Configuration
 @EnableCaching(mode = AdviceMode.ASPECTJ)
