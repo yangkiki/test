@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
+ * @author hantsy<hantsy@gmail.com>
  */
 @Service
 public class ConfigService {

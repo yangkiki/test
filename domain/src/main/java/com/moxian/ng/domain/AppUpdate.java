@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
+ * @author hantsy<hantsy@gmail.com>
  */
 @Entity
 @Table(name = "app_updates")

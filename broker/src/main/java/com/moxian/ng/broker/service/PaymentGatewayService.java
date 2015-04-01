@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
+ * @author hantsy<hantsy@gmail.com>
  */
 @Service 
 @Transactional

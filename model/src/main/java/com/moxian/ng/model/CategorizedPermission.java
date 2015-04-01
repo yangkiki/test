@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
+ * @author hantsy<hantsy@gmail.com>
  */
 public class CategorizedPermission implements Serializable {
 
