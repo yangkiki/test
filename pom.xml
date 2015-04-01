@@ -30,11 +30,6 @@
         <module>job</module> 
         <module>broker</module>  
         <module>config</module>  
-		<module>gateway-api</module>  	
-		<module>gateway-model</module>  
-		<module>gateway-common</module>  	
-		<module>report-model</module>  
-		<module>report-common</module>  
     </modules>
 
     <properties>

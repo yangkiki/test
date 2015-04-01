@@ -16,9 +16,9 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fenglianfinance.bill.cache.service.CacheService;
-import com.fenglianfinance.bill.captcha.KaptchaDelegate;
-import com.fenglianfinance.bill.model.ImgCaptchaResult;
+import com.moxian.ng.cache.service.CacheService;
+import com.moxian.ng.captcha.KaptchaDelegate;
+import com.moxian.ng.model.ImgCaptchaResult;
 
 /**
  *

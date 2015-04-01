@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import com.fenglianfinance.bill.notifier.sms.api.SmsConfiguration;
+import com.moxian.ng.notifier.sms.api.SmsConfiguration;
 
 
 @Configuration
