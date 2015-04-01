@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.Query;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
+ * @author hantsy<hantsy@gmail.com>
  */
 public interface GrantedPermissionRepository extends JpaRepository<GrantedPermission, Long> {
 

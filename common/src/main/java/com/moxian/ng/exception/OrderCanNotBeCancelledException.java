@@ -7,7 +7,7 @@ package com.moxian.ng.exception;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
+ * @author hantsy<hantsy@gmail.com>
  */
 public class OrderCanNotBeCancelledException extends RuntimeException {
 

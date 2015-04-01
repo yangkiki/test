@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com><hantsy<hantsy@gmail.com>@gmail.com>
+ * @author hantsy<hantsy@gmail.com>
  */
 public class UserSearchCriteria implements Serializable {
 
