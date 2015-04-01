@@ -13,15 +13,15 @@
 
     <modules>
         <module>api</module>
-		<module>domain</module>
-		<module>persistence</module>
+        <module>domain</module>
+        <module>persistence</module>
         <module>common</module>
-		<module>util</module>
+        <module>util</module>
         <module>client</module>
         <module>model</module>
         <module>sdoc</module>
         <module>sms</module>  
-		<module>email</module>  
+        <module>email</module>  
         <module>notifier</module>     
         <module>i18n</module>     
         <module>messaging</module>    
@@ -57,7 +57,7 @@
             <id>local-nexus-repo</id>
             <url>http://114.215.189.121:8081/nexus/content/groups/public/</url>
         </repository>
-<!--        <repository>
+        <!--        <repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Maven Repository Group</name>
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
@@ -96,7 +96,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>local-nexus-repo</id>
-             <url>http://114.215.189.121:8081/nexus/content/groups/public/</url>
+            <url>http://114.215.189.121:8081/nexus/content/groups/public/</url>
         </pluginRepository>
         <!--        <pluginRepository>
             <id>io.spring.repo.maven.release</id>
@@ -621,10 +621,10 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-				<!--log4j level-->
+                <!--log4j level-->
                 <log4j.level>DEBUG</log4j.level>
 				
-				<!--spring profile activated-->
+                <!--spring profile activated-->
                 <spring.profiles.active>dev</spring.profiles.active>
 				
                 <!-- redis configuration -->
@@ -672,10 +672,10 @@
                 <gwApiUrl>http://www.storevm.org:8660/paygw/services/</gwApiUrl>
                 
                 <!-- account operations for withfunding -->
-				<signature.algorthm>RSA</signature.algorthm>
-				<signature.channelNo>880001</signature.channelNo>
-				<signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
-				<signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
+                <signature.algorthm>RSA</signature.algorthm>
+                <signature.channelNo>880001</signature.channelNo>
+                <signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
+                <signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
             </properties>
             
             <dependencyManagement>
@@ -756,10 +756,10 @@
                 <gwApiUrl>http://www.storevm.org:8660/paygw/services/</gwApiUrl>
                 
                 <!-- account operations for withfunding -->
-				<signature.algorthm>RSA</signature.algorthm>
-				<signature.channelNo>880001</signature.channelNo>
-				<signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
-				<signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
+                <signature.algorthm>RSA</signature.algorthm>
+                <signature.channelNo>880001</signature.channelNo>
+                <signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
+                <signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
             </properties>
             <dependencyManagement>
                 <dependencies>
