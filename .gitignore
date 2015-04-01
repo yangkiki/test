@@ -1,0 +1,12 @@
+.settings
+target
+bin
+.classpath
+.project
+.externalToolBuilders
+customs.json
+nb-configuration.xml
+nbactions.xml
+*.log
+/.idea
+*.iml
