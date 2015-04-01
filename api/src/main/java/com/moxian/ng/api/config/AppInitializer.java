@@ -64,8 +64,8 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         Class swaggerConfigClass = null;
 
         try {
-            swaggerConfigClass = ClassUtils.forName("SwaggerConfig", null);
-        } catch (Exception ex) {
+            swaggerConfigClass = ClassUtils.forName("com.moxian.ng.sdoc.config.SwaggerConfig", null);
+        } catch (ClassNotFoundException ex) {
             swaggerConfigClass = null;
             log.error("exception is thrown when loading SwaggerConfig class [SwaggerConfig]...@" + ex);
         }
