@@ -7,7 +7,6 @@ import com.moxian.ng.config.MongoConfig;
 import com.moxian.ng.config.caching.RedisCacheConfig;
 import com.moxian.ng.config.jackson2.ObjectMapperConfig;
 import com.moxian.ng.config.redis.RedisConfig;
-import com.moxian.ng.gateway.common.GatewayCommonConfiguer;
 import com.moxian.ng.i18n.config.MessageSourceConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -54,7 +53,7 @@ import org.springframework.context.annotation.Import;
             MongoConfig.class,//
             RedisConfig.class,//
             RedisCacheConfig.class,//
-            GatewayCommonConfiguer.class
+          //  GatewayCommonConfiguer.class
         }//
 )//
 public class AppConfig {

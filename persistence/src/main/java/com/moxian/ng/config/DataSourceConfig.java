@@ -51,7 +51,7 @@ public class DataSourceConfig {
      * 
      * <pre>
      * &lt;?xml version="1.0" encoding="UTF-8"?>
-     * &lt;Context antiJARLocking="true" path="/bill-api">
+     * &lt;Context antiJARLocking="true" path="/mx-api">
      *    &lt;Resource auth="Container"
      *    name="jdbc/flbillDS"
      *    type="javax.sql.DataSource"

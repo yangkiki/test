@@ -394,7 +394,7 @@ mvn clean install -Pstaging
 
 具体参见 [server 项目下的 README.txt](http://192.168.0.111:8080/gitbucket/fljr/server/blob/master/README.md) 。
 
-将 `api/target/bill-api.war`, `notifiter/target/notifiter.war` 等 WAR 包复制到 Tomcat 目录下 webapps 目录。 
+将 `api/target/mx-api.war`, `notifiter/target/notifiter.war` 等 WAR 包复制到 Tomcat 目录下 webapps 目录。 
 
 1. 如果 Tomcat 8 已经在运行，WAR 会自动部署。
 2. 如果 Tomcat 8 处于停止状态，在 `&lt;TOMCAT_8>/bin` 下运行以下命令启动 Tomcat：
@@ -432,8 +432,8 @@ gulp
 
     <VirtualHost *:80>
         DocumentRoot /home/fljr/wwwdata/console/
-        ProxyPass /api/ http://localhost:8080/bill-api/api/
-        ProxyPassReverse /api/ http://localhost:8080/bill-api/api/
+        ProxyPass /api/ http://localhost:8080/mx-api/api/
+        ProxyPassReverse /api/ http://localhost:8080/mx-api/api/
         ProxyPass /paygw/ http://www.storevm.org:8660/paygw/
         ProxyPassReverse /paygw/ http://www.storevm.org:8660/paygw/
         <Directory /home/fljr/wwwdata/console/>

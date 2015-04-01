@@ -16,9 +16,9 @@ import com.moxian.ng.domain.UserAccount;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
-import com.fenglianfinance.bill.domain.Role_;
-import com.fenglianfinance.bill.domain.StaffProfile_;
-import com.fenglianfinance.bill.domain.UserAccount_;
+import com.moxian.ng.domain.Role_;
+import com.moxian.ng.domain.StaffProfile_;
+import com.moxian.ng.domain.UserAccount_;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

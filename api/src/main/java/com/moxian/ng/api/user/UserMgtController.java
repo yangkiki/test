@@ -2,7 +2,6 @@ package com.moxian.ng.api.user;
 
 import javax.inject.Inject;
 
-import com.moxian.ng.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -47,28 +46,6 @@ public class UserMgtController {
     @Inject
     private UserService userService;
 
-    @Inject
-    private OrderService orderService;
-
-//    @RequestMapping(value = {""}, method = RequestMethod.GET)
-//    @ResponseBody
-//    public Page<UserAccountDetails> allUsers(
-//            @RequestParam("q") String q, //
-//            @RequestParam("locked") String locked,//
-//            @RequestParam("active") String active, //
-//            @PageableDefault(value = 10) Pageable page) {
-//        if (log.isDebugEnabled()) {
-//            log.debug("fetch all users @ q@" + q + ", locked@" + locked + ", page@" + page);
-//        }
-//
-//        Page<UserAccountDetails> users = userService.findUserAccounts(q, Role.ROLE_USER, active, locked, page);
-//
-//        if (log.isDebugEnabled()) {
-//            log.debug("count of users @" + users.getTotalElements());
-//        }
-//
-//        return users;
-//    }
     @RequestMapping(value = {"/search"}, method = RequestMethod.POST)
     @ResponseBody
     public Page<UserAccountDetails> searchUsers(
@@ -152,58 +129,6 @@ public class UserMgtController {
 //
 //        return new ResponseEntity<>(user, HttpStatus.OK);
 //    }
-    @RequestMapping(value = {"/{id}/cards"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<BankCardInfoDetails>> boundCards(@PathVariable("id") Long id) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("accounting info @" + id);
-        }
-
-        List<BankCardInfoDetails> cards = userService.findBoundCardsByUserId(id);
-
-        return new ResponseEntity<>(cards, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = {"/{id}/logs"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Page<TransactionLogDetails>> transactionLogs(
-            @PathVariable("id") Long id,
-            @PageableDefault(value = 10, sort = "createdDate", direction = Sort.Direction.DESC) Pageable page
-    ) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("get transaction logs of@" + id);
-        }
-
-        Page<TransactionLogDetails> logs = userService.findTransactionLogsByUserId(id, page);
-
-        return new ResponseEntity<>(logs, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = {"/{id}/orders"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Page<OrderDetails>> getUserOrders(//
-            @PathVariable("id") Long userId,
-            @RequestParam("type") String type,
-            @RequestParam("status") String status,
-            @PageableDefault(page = 0, size = 10, sort = {"placedDate"}, direction = Sort.Direction.DESC) Pageable page) {
-        if (log.isDebugEnabled()) {
-            log.debug("get all orders by  search@" + userId
-                    + ", type=" + type
-                    + ", status =" + status
-                    + ", page @" + page
-            );
-        }
-
-        OrderSearchCriteria criteria = new OrderSearchCriteria();
-        criteria.setType(type);
-        criteria.setStatus(status);
-
-        Page<OrderDetails> result = orderService.findOrders(criteria, userId, page);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
 
     @RequestMapping(value = {"/{id}"}, method = RequestMethod.DELETE)
     @ResponseBody
@@ -266,23 +191,5 @@ public class UserMgtController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = {"{id}/stat"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<OrderStatistics> statistics(
-            @PathVariable("id") Long id
-    ) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("get order statistics @" + id);
-        }
-
-        OrderStatistics result = userService.calculateOrderStatistics(id);
-
-        if (log.isDebugEnabled()) {
-            log.debug("order statistics @" + result);
-        }
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
+    
 }

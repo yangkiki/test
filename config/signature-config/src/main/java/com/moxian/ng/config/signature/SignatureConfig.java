@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.util.StringUtils;
 
-import com.fenglianfinance.account.model.SignatureInfo;
+import com.moxian.ng.account.model.SignatureInfo;
 
 @Configuration
 @PropertySource("classpath:/signature.properties")

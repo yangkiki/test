@@ -5,7 +5,6 @@
  */
 package com.moxian.ng.api;
 
-import com.moxian.ng.DTOUtils;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -22,14 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.moxian.ng.domain.Bank;
-import com.moxian.ng.domain.Enterprise;
-import com.moxian.ng.domain.Permission;
-import com.moxian.ng.domain.Post;
-import com.moxian.ng.domain.PurchaseOrder;
-import com.moxian.ng.model.BankDetails;
-import com.moxian.ng.payment.model.AcctTransactionType;
-import com.moxian.ng.repository.BankRepository;
+
+
 import com.moxian.ng.repository.PermissionRepository;
 
 /**
@@ -63,48 +56,48 @@ public class DataReferenceController {
     @Inject
     private PermissionRepository permissionRepository;
 
-    @Inject
-    private BankRepository bankRepository;
+//    @Inject
+//    private BankRepository bankRepository;
 
 //    @RequestMapping(value = "/starLevels")
 //    public Hotel.StarLevel[] starLevels() {
 //        return Hotel.StarLevel.values();
 //    }
     
-    @RequestMapping(value = "/acctTransactionTypes")
-    public AcctTransactionType[] acctTransactionTypes() {
-        return AcctTransactionType.values();
-    }
+//    @RequestMapping(value = "/acctTransactionTypes")
+//    public AcctTransactionType[] acctTransactionTypes() {
+//        return AcctTransactionType.values();
+//    }
 
 //    @RequestMapping(value = "/breakfastTypes")
 //    public Room.BreakfastType[] breakfastTypes() {
 //        return Room.BreakfastType.values();
 //    }
+//
+//    @RequestMapping(value = "/bankTypes")
+//    public Bank.Type[] bankTypes() {
+//        return Bank.Type.values();
+//    }
+//
+//    @RequestMapping(value = "/enterpriseTypes")
+//    public Enterprise.Type[] enterpriseTypes() {
+//        return Enterprise.Type.values();
+//    }
+//
+//    @RequestMapping(value = "/productTypes")
+//    public Product.Type[] productTypes() {
+//        return Product.Type.values();
+//    }
 
-    @RequestMapping(value = "/bankTypes")
-    public Bank.Type[] bankTypes() {
-        return Bank.Type.values();
-    }
-
-    @RequestMapping(value = "/enterpriseTypes")
-    public Enterprise.Type[] enterpriseTypes() {
-        return Enterprise.Type.values();
-    }
-
-    @RequestMapping(value = "/productTypes")
-    public Product.Type[] productTypes() {
-        return Product.Type.values();
-    }
-
-    @RequestMapping(value = "/productStatus")
-    public Product.Status[] productStatus() {
-        return Product.Status.values();
-    }
-
-    @RequestMapping(value = "/orderStatus")
-    public PurchaseOrder.Status[] orderStatus() {
-        return PurchaseOrder.Status.values();
-    }
+//    @RequestMapping(value = "/productStatus")
+//    public Product.Status[] productStatus() {
+//        return Product.Status.values();
+//    }
+//
+//    @RequestMapping(value = "/orderStatus")
+//    public PurchaseOrder.Status[] orderStatus() {
+//        return PurchaseOrder.Status.values();
+//    }
 
     @RequestMapping(value = "/postTypes")
     public Post.Type[] postTypes() {
@@ -116,21 +109,21 @@ public class DataReferenceController {
         return Post.Status.values();
     }
 
-    @RequestMapping(value = "/interestAccrualTypes")
-    public Product.InterestAccrualType[] interestAccrualTypes() {
-        return Product.InterestAccrualType.values();
-
-    }
-
-    @RequestMapping(value = "/accountTypes")
-    public Enterprise.AccountTypes[] accountTypes() {
-        return Enterprise.AccountTypes.values();
-    }
-
-    @RequestMapping(value = "/enterpriseVerifyStatus")
-    public Enterprise.VerifyStatus[] enterpriseVerifyStatus() {
-        return Enterprise.VerifyStatus.values();
-    }
+//    @RequestMapping(value = "/interestAccrualTypes")
+//    public Product.InterestAccrualType[] interestAccrualTypes() {
+//        return Product.InterestAccrualType.values();
+//
+//    }
+//
+//    @RequestMapping(value = "/accountTypes")
+//    public Enterprise.AccountTypes[] accountTypes() {
+//        return Enterprise.AccountTypes.values();
+//    }
+//
+//    @RequestMapping(value = "/enterpriseVerifyStatus")
+//    public Enterprise.VerifyStatus[] enterpriseVerifyStatus() {
+//        return Enterprise.VerifyStatus.values();
+//    }
 
 //    @RequestMapping(value = "/bedTypes")
 //    public List<BedType> bedTypes() {
@@ -167,24 +160,24 @@ public class DataReferenceController {
         return result;
     }
 
-    @RequestMapping(value = "/banks")
-    public List<BankDetails> banks(@RequestParam("q") String q) {
-        if (log.isDebugEnabled()) {
-            log.debug("get cities by q@" + q);
-        }
-
-        List<Bank> result = bankRepository.filterByKeyword(q);
-
-        if (log.isDebugEnabled()) {
-            log.debug("found cities @" + result.size());
-        }
-
-        if (!result.isEmpty()) {
-            return DTOUtils.mapList(result, BankDetails.class);
-        }
-
-        return null;
-    }
+//    @RequestMapping(value = "/banks")
+//    public List<BankDetails> banks(@RequestParam("q") String q) {
+//        if (log.isDebugEnabled()) {
+//            log.debug("get cities by q@" + q);
+//        }
+//
+//        List<Bank> result = bankRepository.filterByKeyword(q);
+//
+//        if (log.isDebugEnabled()) {
+//            log.debug("found cities @" + result.size());
+//        }
+//
+//        if (!result.isEmpty()) {
+//            return DTOUtils.mapList(result, BankDetails.class);
+//        }
+//
+//        return null;
+//    }
 
     @RequestMapping(value = {ApiConstants.URI_ROLES}, method = RequestMethod.GET)
     @ResponseBody

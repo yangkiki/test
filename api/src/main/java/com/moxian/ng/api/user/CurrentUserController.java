@@ -27,20 +27,15 @@ import com.moxian.ng.model.ProfileForm;
 import com.moxian.ng.model.ResponseMessage;
 import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.model.ApiErrors;
-import com.moxian.ng.model.BankCardInfoDetails;
 import com.moxian.ng.model.IdCardForm;
 import com.moxian.ng.model.LongValue;
 import com.moxian.ng.model.MessageDetails;
 import com.moxian.ng.model.MobileNumberForm;
 import com.moxian.ng.model.OrderDetails;
 import com.moxian.ng.model.OrderSearchCriteria;
-import com.moxian.ng.model.OrderStatistics;
-import com.moxian.ng.model.TransactionLogDetails;
 import com.moxian.ng.model.UpdateMobileNumberForm;
-import com.moxian.ng.service.OrderService;
 import com.moxian.ng.service.SmsService;
 import com.moxian.ng.service.UserService;
-import java.util.List;
 import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,9 +62,6 @@ public class CurrentUserController {
     
     @Inject
     private SmsService smsService;
-    
-    @Inject
-    private OrderService orderService;
     
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
@@ -272,81 +264,5 @@ public class CurrentUserController {
         
         return new ResponseEntity<>(new LongValue(cnt), HttpStatus.OK);
     }
-
-    // get all bank card info
-    @RequestMapping(value = {"cards"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<BankCardInfoDetails>> boundCards(@CurrentUser UserAccount user) {
-        
-        if (log.isDebugEnabled()) {
-            log.debug("user account @" + user);
-        }
-        
-        List<BankCardInfoDetails> cards = userService.findBoundCardsByUserId(user.getId());
-        
-        return new ResponseEntity<>(cards, HttpStatus.OK);
-    }
-
-    //transation logs
-    @RequestMapping(value = {"logs"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Page<TransactionLogDetails>> transactionLogs(
-            @CurrentUser UserAccount user,
-            @PageableDefault(value = 10, sort = "createdDate", direction = Sort.Direction.DESC) Pageable page
-    ) {
-        
-        if (log.isDebugEnabled()) {
-            log.debug("fetching transaction logs of@" + user);
-        }
-        
-        Page<TransactionLogDetails> logs = userService.findTransactionLogsByUserId(user.getId(), page);
-        
-        return new ResponseEntity<>(logs, HttpStatus.OK);
-    }
-
-    //transation logs
-    @RequestMapping(value = {"stat"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<OrderStatistics> statistics(
-            @CurrentUser UserAccount user
-    ) {
-        
-        if (log.isDebugEnabled()) {
-            log.debug("get order statistics @" + user.getId());
-        }
-        
-        OrderStatistics result = userService.calculateOrderStatistics(user.getId());
-        
-        if (log.isDebugEnabled()) {
-            log.debug("order statistics @" + result);
-        }
-        
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    //orders
-    @RequestMapping(value = {"orders"}, method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Page<OrderDetails>> getUserOrders(//
-            @CurrentUser UserAccount user,
-            @RequestParam("type") String type,
-            @RequestParam("status") String status,
-            @PageableDefault(page = 0, size = 10, sort = {"placedDate"}, direction = Sort.Direction.DESC) Pageable page) {
-        if (log.isDebugEnabled()) {
-            log.debug("get all orders of @" + user.getId()
-                    + ", type=" + type
-                    + ", status =" + status
-                    + ", page @" + page
-            );
-        }
-        
-        OrderSearchCriteria criteria = new OrderSearchCriteria();
-        criteria.setType(type);
-        criteria.setStatus(status);
-        
-        Page<OrderDetails> result = orderService.findOrders(criteria, user.getId(), page);
-        
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-    
+   
 }

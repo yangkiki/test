@@ -4,29 +4,29 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.fenglianfinance.bill.messaging</groupId>
-        <artifactId>bill-messaging-parent</artifactId>
+        <groupId>com.moxian.ng.messaging</groupId>
+        <artifactId>mx-messaging-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 	
-    <artifactId>bill-messaging-impl</artifactId>
+    <artifactId>mx-messaging-impl</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <dependencies>
         
         <dependency>
-            <groupId>com.fenglianfinance.bill.config</groupId>
-            <artifactId>bill-jackson2-objectmapper-config</artifactId>
+            <groupId>com.moxian.ng.config</groupId>
+            <artifactId>mx-jackson2-objectmapper-config</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.fenglianfinance.bill.messaging</groupId>
-            <artifactId>bill-messaging-core</artifactId>
+            <groupId>com.moxian.ng.messaging</groupId>
+            <artifactId>mx-messaging-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.fenglianfinance.bill.messaging</groupId>
-            <artifactId>bill-messaging-api</artifactId>
+            <groupId>com.moxian.ng.messaging</groupId>
+            <artifactId>mx-messaging-api</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <!-- Spring BOM -->

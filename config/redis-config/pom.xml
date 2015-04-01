@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.fenglianfinance.bill.config</groupId>
-        <artifactId>bill-config-parent</artifactId>
+        <groupId>com.moxian.ng.config</groupId>
+        <artifactId>mx-config-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 	
-    <artifactId>bill-redis-config</artifactId>
+    <artifactId>mx-redis-config</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
 	
@@ -24,8 +24,8 @@
         </dependency> 
         
         <dependency>
-            <groupId>com.fenglianfinance.bill.messaging</groupId>
-            <artifactId>bill-messaging-core</artifactId>
+            <groupId>com.moxian.ng.messaging</groupId>
+            <artifactId>mx-messaging-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency> 
         <!-- Spring BOM -->

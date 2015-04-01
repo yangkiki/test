@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fenglianfinance.account.model.RegisterAccountReq;
+import com.moxian.ng.account.model.RegisterAccountReq;
 
 public class FLStringUtils {
 

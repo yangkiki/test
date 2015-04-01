@@ -1,49 +1,19 @@
 package com.moxian.ng.job.config;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
 
-import com.moxian.ng.domain.BackLogItem;
-import com.moxian.ng.domain.PurchaseOrder;
-import com.moxian.ng.domain.WithFundingInfos;
-import com.moxian.ng.job.processor.ExpirationBillProcessor;
-import com.moxian.ng.repository.BackLogItemRepository;
-import com.moxian.ng.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobExecutionListener;
-import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemReader;
-import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.data.RepositoryItemReader;
-import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.moxian.ng.gateway.common.GatewayService;
-import com.moxian.ng.job.listener.UserRepaymentJobExecutionListener;
-import com.moxian.ng.job.processor.DailyPurchaseOrderItemProcessor;
-import com.moxian.ng.job.processor.ExpiredWithFundingInfosItemProcessor;
-import com.moxian.ng.job.processor.SinglePurchaseOrderItemProcessor;
-import com.moxian.ng.job.processor.UserRepaymentProcessor;
-import com.moxian.ng.job.writer.UserRepaymentWriter;
-import com.moxian.ng.repository.ProductRepository;
-import com.moxian.ng.repository.TransactionLogRepository;
-import com.moxian.ng.repository.WithFundingInfosRepository;
+
 
 @Configuration
 public class JobConfiguration {
@@ -60,271 +30,254 @@ public class JobConfiguration {
     private JobBuilderFactory jobBuilderFactory;
     @Inject
     private StepBuilderFactory stepBuilderFactory;
-    @Inject
-    private EntityManagerFactory entityManagerFactory;
 
-    @Inject
-    private OrderRepository orderRepository;
 
-    @Inject
-    private BackLogItemRepository backLogItemRepository;
 
-    @Inject
-    private TransactionLogRepository transactionLogRepository;
 
     @Inject
     private RedisTemplate<Object, Object> redisTemplate;
 
-    @Inject
-    private GatewayService gatewayService;
-    
-    @Inject
-    private ProductRepository productRepository;
-    
-    @Inject
-    private WithFundingInfosRepository withFundingInfosRepository;
+//    @Bean
+//    public Job dailyInterestJob() {
+//        return jobBuilderFactory.get("dailyInterestJob").start(dailyInterestStep()).build();
+//    }
 
-    @Bean
-    public Job dailyInterestJob() {
-        return jobBuilderFactory.get("dailyInterestJob").start(dailyInterestStep()).build();
-    }
-
-    @Bean
-    public Step dailyInterestStep() {
-        return stepBuilderFactory.get("dailyInterestStep")//
-                .allowStartIfComplete(true)//
-                .transactionManager(transactionManager)//
-                .<PurchaseOrder, PurchaseOrder>chunk(100)//
-                .reader(dailyInterestReader())//
-                .processor(dailyInterestProcessor())//
-                .writer(dailyInterestWriter())//
-                .build();
-    }
-
-    @Bean
-    @StepScope
-    public ItemReader<PurchaseOrder> dailyInterestReader() {
-        RepositoryItemReader<PurchaseOrder> reader = new RepositoryItemReader<PurchaseOrder>();
-        reader.setPageSize(20);
-        reader.setMethodName("findDemandPaidPurchaseOrder");
-        reader.setRepository(orderRepository);
-        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
-        sorts.put("id", Sort.Direction.ASC);
-        reader.setSort(sorts);
-        return reader;
-    }
-
-    @Bean
-    public ItemProcessor<PurchaseOrder, PurchaseOrder> dailyInterestProcessor() {
-        return new DailyPurchaseOrderItemProcessor();
-    }
-
-    @Bean
-    @StepScope
-    public ItemWriter<PurchaseOrder> dailyInterestWriter() {
-
-        RepositoryItemWriter<PurchaseOrder> writer = new RepositoryItemWriter<PurchaseOrder>();
-        writer.setMethodName("saveAndFlush");
-        writer.setRepository(orderRepository);
-        return writer;
-
-    }
-
-    @Bean
-    public Job expirationBillJob() {
-        return jobBuilderFactory.get("expirationBillJob").start(expirationBillStep()).build();
-    }
-
-    @Bean
-    public Step expirationBillStep() {
-        return stepBuilderFactory.get("expirationBillStep")//
-                .allowStartIfComplete(true)//
-                .transactionManager(transactionManager)//
-                .<BackLogItem, BackLogItem>chunk(100)//
-                .reader(expirationBillReader())//
-                .processor(expirationBillProcessor())//
-                .writer(expirationBillWriter())//
-                .build();
-    }
-
-    @Bean
-    @StepScope
-    public ItemReader<BackLogItem> expirationBillReader() {
-        RepositoryItemReader<BackLogItem> reader = new RepositoryItemReader<BackLogItem>();
-        reader.setPageSize(20);
-        reader.setMethodName("findByExpirationBill");
-        reader.setRepository(backLogItemRepository);
-        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
-        sorts.put("id", Sort.Direction.ASC);
-        reader.setSort(sorts);
-
-        List<LocalDate> arguments = new ArrayList<LocalDate>();
-        arguments.add(LocalDate.now().plusDays(-1));
-        reader.setArguments(arguments);
-
-        return reader;
-    }
-
-    @Bean
-    public ItemProcessor<BackLogItem, BackLogItem> expirationBillProcessor() {
-        return new ExpirationBillProcessor(redisTemplate);
-    }
-
-    @Bean
-    @StepScope
-    public ItemWriter<BackLogItem> expirationBillWriter() {
-        RepositoryItemWriter<BackLogItem> writer = new RepositoryItemWriter<BackLogItem>();
-        writer.setMethodName("saveAndFlush");
-        writer.setRepository(backLogItemRepository);
-        return writer;
-    }
-
-    @Bean
-    public Job userRepaymentJob() {
-        return jobBuilderFactory.get("userRepaymentJob")//
-                .start(userRepaymentStep())//
-                .listener(userRepaymentJobExecutionListener())//
-                .build();
-    }
-
-    @Bean
-    public Step userRepaymentStep() {
-        return stepBuilderFactory.get("userRepaymentStep")//
-                .allowStartIfComplete(true)//
-                .transactionManager(transactionManager)//
-                .<PurchaseOrder, PurchaseOrder>chunk(100)//
-                .reader(userRepaymentReader())//
-                .processor(userRepaymentOrderProcessor())//
-                .writer(userRepaymentWriter())//
-                .build();
-    }
-
-    @Bean
-    @StepScope
-    public ItemReader<PurchaseOrder> userRepaymentReader() {
-        RepositoryItemReader<PurchaseOrder> reader = new RepositoryItemReader<PurchaseOrder>();
-        reader.setPageSize(20);
-        reader.setMethodName("findNotDemandPaid");
-        reader.setRepository(orderRepository);
-        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
-        sorts.put("id", Sort.Direction.ASC);
-        reader.setSort(sorts);
-
-        List<LocalDate> arguments = new ArrayList<LocalDate>();
-        arguments.add(LocalDate.now());
-        reader.setArguments(arguments);
-
-        return reader;
-    }
-
-    @Bean
-    public ItemProcessor<PurchaseOrder, PurchaseOrder> userRepaymentOrderProcessor() {
-        return new UserRepaymentProcessor(gatewayService);
-    }
-
-    @Bean
-    @StepScope
-    public ItemWriter<PurchaseOrder> userRepaymentWriter() {
-        UserRepaymentWriter writer = new UserRepaymentWriter(gatewayService);
-        // RepositoryItemWriter<PurchaseOrder> writer = new RepositoryItemWriter<PurchaseOrder>();
-        writer.setMethodName("saveAndFlush");
-        writer.setRepository(orderRepository);
-        return writer;
-    }
-    
-    @Bean
-    public JobExecutionListener userRepaymentJobExecutionListener(){
-        return new UserRepaymentJobExecutionListener(productRepository);
-    }
-
-    @Bean
-    public Job singleInterestJob() {
-        return jobBuilderFactory.get("singleInterestJob").start(singleInterestStep()).build();
-    }
-
-    @Bean
-    public Step singleInterestStep() {
-        return stepBuilderFactory.get("singleInterest")//
-                .allowStartIfComplete(true)//
-                .transactionManager(transactionManager)//
-                .<PurchaseOrder, PurchaseOrder>chunk(100)//
-                .reader(singleInterestReader())//
-                .processor(singleInterestProcessor())//
-                .writer(singleInterestWriter())//
-                .build();
-    }
-
-    @Bean
-    @StepScope
-    public ItemReader<PurchaseOrder> singleInterestReader() {
-        RepositoryItemReader<PurchaseOrder> reader = new RepositoryItemReader<PurchaseOrder>();
-        reader.setPageSize(20);
-        reader.setMethodName("findNewbieOrHotPaidPurchaseOrder");
-        reader.setRepository(orderRepository);
-        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
-        sorts.put("id", Sort.Direction.ASC);
-        reader.setSort(sorts);
-        return reader;
-    }
-
-    @Bean
-    public ItemProcessor<PurchaseOrder, PurchaseOrder> singleInterestProcessor() {
-        return new SinglePurchaseOrderItemProcessor();
-    }
-
-    @Bean
-    @StepScope
-    public ItemWriter<PurchaseOrder> singleInterestWriter() {
-        RepositoryItemWriter<PurchaseOrder> writer = new RepositoryItemWriter<PurchaseOrder>();
-        writer.setMethodName("saveAndFlush");
-        writer.setRepository(orderRepository);
-        return writer;
-    }
-    
-    @Bean
-    public Job expiredWithFundingInfosJob() {
-        return jobBuilderFactory.get("expiredWithFundingInfosJob").start(expiredWithFundingInfosStep()).build();
-    }
-
-    @Bean
-    public Step expiredWithFundingInfosStep() {
-        return stepBuilderFactory.get("expiredWithFundingInfosStep")//
-                .allowStartIfComplete(true)//
-                .transactionManager(transactionManager)//
-                .<WithFundingInfos, WithFundingInfos>chunk(100)//
-                .reader(expiredWithFundingInfosReader())//
-                .processor(expiredWithFundingInfosProcessor())//
-                .writer(expiredWithFundingInfosWriter())//
-                .build();
-    }
-
-    @Bean
-    @StepScope
-    public ItemReader<WithFundingInfos> expiredWithFundingInfosReader() {
-        RepositoryItemReader<WithFundingInfos> reader = new RepositoryItemReader<WithFundingInfos>();
-        reader.setPageSize(20);
-        reader.setMethodName("findUnpublishedWithFundingInfos");
-        reader.setRepository(withFundingInfosRepository);
-        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
-        sorts.put("id", Sort.Direction.ASC);
-        reader.setSort(sorts);
-        return reader;
-    }
-
-    @Bean
-    public ItemProcessor<WithFundingInfos, WithFundingInfos> expiredWithFundingInfosProcessor() {
-        return new ExpiredWithFundingInfosItemProcessor();
-    }
-
-    @Bean
-    @StepScope
-    public ItemWriter<WithFundingInfos> expiredWithFundingInfosWriter() {
-        RepositoryItemWriter<WithFundingInfos> writer = new RepositoryItemWriter<WithFundingInfos>();
-        writer.setMethodName("saveAndFlush");
-        writer.setRepository(withFundingInfosRepository);
-        return writer;
-
-    }
+//    @Bean
+//    public Step dailyInterestStep() {
+//        return stepBuilderFactory.get("dailyInterestStep")//
+//                .allowStartIfComplete(true)//
+//                .transactionManager(transactionManager)//
+//                .<PurchaseOrder, PurchaseOrder>chunk(100)//
+//                .reader(dailyInterestReader())//
+//                .processor(dailyInterestProcessor())//
+//                .writer(dailyInterestWriter())//
+//                .build();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemReader<PurchaseOrder> dailyInterestReader() {
+//        RepositoryItemReader<PurchaseOrder> reader = new RepositoryItemReader<PurchaseOrder>();
+//        reader.setPageSize(20);
+//        reader.setMethodName("findDemandPaidPurchaseOrder");
+//        reader.setRepository(orderRepository);
+//        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
+//        sorts.put("id", Sort.Direction.ASC);
+//        reader.setSort(sorts);
+//        return reader;
+//    }
+//
+//    @Bean
+//    public ItemProcessor<PurchaseOrder, PurchaseOrder> dailyInterestProcessor() {
+//        return new DailyPurchaseOrderItemProcessor();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemWriter<PurchaseOrder> dailyInterestWriter() {
+//
+//        RepositoryItemWriter<PurchaseOrder> writer = new RepositoryItemWriter<PurchaseOrder>();
+//        writer.setMethodName("saveAndFlush");
+//        writer.setRepository(orderRepository);
+//        return writer;
+//
+//    }
+//
+//    @Bean
+//    public Job expirationBillJob() {
+//        return jobBuilderFactory.get("expirationBillJob").start(expirationBillStep()).build();
+//    }
+//
+//    @Bean
+//    public Step expirationBillStep() {
+//        return stepBuilderFactory.get("expirationBillStep")//
+//                .allowStartIfComplete(true)//
+//                .transactionManager(transactionManager)//
+//                .<BackLogItem, BackLogItem>chunk(100)//
+//                .reader(expirationBillReader())//
+//                .processor(expirationBillProcessor())//
+//                .writer(expirationBillWriter())//
+//                .build();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemReader<BackLogItem> expirationBillReader() {
+//        RepositoryItemReader<BackLogItem> reader = new RepositoryItemReader<BackLogItem>();
+//        reader.setPageSize(20);
+//        reader.setMethodName("findByExpirationBill");
+//        reader.setRepository(backLogItemRepository);
+//        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
+//        sorts.put("id", Sort.Direction.ASC);
+//        reader.setSort(sorts);
+//
+//        List<LocalDate> arguments = new ArrayList<LocalDate>();
+//        arguments.add(LocalDate.now().plusDays(-1));
+//        reader.setArguments(arguments);
+//
+//        return reader;
+//    }
+//
+//    @Bean
+//    public ItemProcessor<BackLogItem, BackLogItem> expirationBillProcessor() {
+//        return new ExpirationBillProcessor(redisTemplate);
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemWriter<BackLogItem> expirationBillWriter() {
+//        RepositoryItemWriter<BackLogItem> writer = new RepositoryItemWriter<BackLogItem>();
+//        writer.setMethodName("saveAndFlush");
+//        writer.setRepository(backLogItemRepository);
+//        return writer;
+//    }
+//
+//    @Bean
+//    public Job userRepaymentJob() {
+//        return jobBuilderFactory.get("userRepaymentJob")//
+//                .start(userRepaymentStep())//
+//                .listener(userRepaymentJobExecutionListener())//
+//                .build();
+//    }
+//
+//    @Bean
+//    public Step userRepaymentStep() {
+//        return stepBuilderFactory.get("userRepaymentStep")//
+//                .allowStartIfComplete(true)//
+//                .transactionManager(transactionManager)//
+//                .<PurchaseOrder, PurchaseOrder>chunk(100)//
+//                .reader(userRepaymentReader())//
+//                .processor(userRepaymentOrderProcessor())//
+//                .writer(userRepaymentWriter())//
+//                .build();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemReader<PurchaseOrder> userRepaymentReader() {
+//        RepositoryItemReader<PurchaseOrder> reader = new RepositoryItemReader<PurchaseOrder>();
+//        reader.setPageSize(20);
+//        reader.setMethodName("findNotDemandPaid");
+//        reader.setRepository(orderRepository);
+//        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
+//        sorts.put("id", Sort.Direction.ASC);
+//        reader.setSort(sorts);
+//
+//        List<LocalDate> arguments = new ArrayList<LocalDate>();
+//        arguments.add(LocalDate.now());
+//        reader.setArguments(arguments);
+//
+//        return reader;
+//    }
+//
+//    @Bean
+//    public ItemProcessor<PurchaseOrder, PurchaseOrder> userRepaymentOrderProcessor() {
+//        return new UserRepaymentProcessor(gatewayService);
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemWriter<PurchaseOrder> userRepaymentWriter() {
+//        UserRepaymentWriter writer = new UserRepaymentWriter(gatewayService);
+//        // RepositoryItemWriter<PurchaseOrder> writer = new RepositoryItemWriter<PurchaseOrder>();
+//        writer.setMethodName("saveAndFlush");
+//        writer.setRepository(orderRepository);
+//        return writer;
+//    }
+//    
+//    @Bean
+//    public JobExecutionListener userRepaymentJobExecutionListener(){
+//        return new UserRepaymentJobExecutionListener(productRepository);
+//    }
+//
+//    @Bean
+//    public Job singleInterestJob() {
+//        return jobBuilderFactory.get("singleInterestJob").start(singleInterestStep()).build();
+//    }
+//
+//    @Bean
+//    public Step singleInterestStep() {
+//        return stepBuilderFactory.get("singleInterest")//
+//                .allowStartIfComplete(true)//
+//                .transactionManager(transactionManager)//
+//                .<PurchaseOrder, PurchaseOrder>chunk(100)//
+//                .reader(singleInterestReader())//
+//                .processor(singleInterestProcessor())//
+//                .writer(singleInterestWriter())//
+//                .build();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemReader<PurchaseOrder> singleInterestReader() {
+//        RepositoryItemReader<PurchaseOrder> reader = new RepositoryItemReader<PurchaseOrder>();
+//        reader.setPageSize(20);
+//        reader.setMethodName("findNewbieOrHotPaidPurchaseOrder");
+//        reader.setRepository(orderRepository);
+//        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
+//        sorts.put("id", Sort.Direction.ASC);
+//        reader.setSort(sorts);
+//        return reader;
+//    }
+//
+//    @Bean
+//    public ItemProcessor<PurchaseOrder, PurchaseOrder> singleInterestProcessor() {
+//        return new SinglePurchaseOrderItemProcessor();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemWriter<PurchaseOrder> singleInterestWriter() {
+//        RepositoryItemWriter<PurchaseOrder> writer = new RepositoryItemWriter<PurchaseOrder>();
+//        writer.setMethodName("saveAndFlush");
+//        writer.setRepository(orderRepository);
+//        return writer;
+//    }
+//    
+//    @Bean
+//    public Job expiredWithFundingInfosJob() {
+//        return jobBuilderFactory.get("expiredWithFundingInfosJob").start(expiredWithFundingInfosStep()).build();
+//    }
+//
+//    @Bean
+//    public Step expiredWithFundingInfosStep() {
+//        return stepBuilderFactory.get("expiredWithFundingInfosStep")//
+//                .allowStartIfComplete(true)//
+//                .transactionManager(transactionManager)//
+//                .<WithFundingInfos, WithFundingInfos>chunk(100)//
+//                .reader(expiredWithFundingInfosReader())//
+//                .processor(expiredWithFundingInfosProcessor())//
+//                .writer(expiredWithFundingInfosWriter())//
+//                .build();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemReader<WithFundingInfos> expiredWithFundingInfosReader() {
+//        RepositoryItemReader<WithFundingInfos> reader = new RepositoryItemReader<WithFundingInfos>();
+//        reader.setPageSize(20);
+//        reader.setMethodName("findUnpublishedWithFundingInfos");
+//        reader.setRepository(withFundingInfosRepository);
+//        Map<String, Sort.Direction> sorts = new HashMap<String, Sort.Direction>();
+//        sorts.put("id", Sort.Direction.ASC);
+//        reader.setSort(sorts);
+//        return reader;
+//    }
+//
+//    @Bean
+//    public ItemProcessor<WithFundingInfos, WithFundingInfos> expiredWithFundingInfosProcessor() {
+//        return new ExpiredWithFundingInfosItemProcessor();
+//    }
+//
+//    @Bean
+//    @StepScope
+//    public ItemWriter<WithFundingInfos> expiredWithFundingInfosWriter() {
+//        RepositoryItemWriter<WithFundingInfos> writer = new RepositoryItemWriter<WithFundingInfos>();
+//        writer.setMethodName("saveAndFlush");
+//        writer.setRepository(withFundingInfosRepository);
+//        return writer;
+//
+//    }
 
     // @Bean
     // public JobLauncher launcher() throws Exception {

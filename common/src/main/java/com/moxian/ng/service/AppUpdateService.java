@@ -7,7 +7,7 @@ package com.moxian.ng.service;
 
 import com.moxian.ng.DTOUtils;
 import com.moxian.ng.domain.AppUpdate;
-import com.fenglianfinance.bill.domain.AppUpdate_;
+import com.moxian.ng.domain.AppUpdate_;
 import com.moxian.ng.exception.ResourceNotFoundException;
 import com.moxian.ng.model.AppUpdateDetails;
 import com.moxian.ng.model.AppUpdateForm;

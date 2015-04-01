@@ -1,4 +1,4 @@
-package com.fenglianfinance.account.model;
+package com.moxian.ng.account.model;
 
 /**
  * 渠道往丰联配资系统进行子账户开户，消息发送body

@@ -2,47 +2,47 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.fenglianfinance.bill</groupId>
-        <artifactId>bill-parent</artifactId>
+        <groupId>com.moxian.ng</groupId>
+        <artifactId>mx-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <packaging>war</packaging>
-    <artifactId>bill-notifier</artifactId>
+    <artifactId>mx-notifier</artifactId>
     <name>${project.artifactId}</name>
     <dependencies>
         
          <dependency>
-            <groupId>com.fenglianfinance.bill.config</groupId>
-            <artifactId>bill-jackson2-objectmapper-config</artifactId>
+            <groupId>com.moxian.ng.config</groupId>
+            <artifactId>mx-jackson2-objectmapper-config</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         
         <dependency>
-            <groupId>com.fenglianfinance.bill.config</groupId>
-            <artifactId>bill-rabbit-config</artifactId>
+            <groupId>com.moxian.ng.config</groupId>
+            <artifactId>mx-rabbit-config</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.fenglianfinance.bill.sms</groupId>
-            <artifactId>bill-sms-impl</artifactId>
+            <groupId>com.moxian.ng.sms</groupId>
+            <artifactId>mx-sms-impl</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 		
         <dependency>
-            <groupId>com.fenglianfinance.bill.email</groupId>
-            <artifactId>bill-email-impl</artifactId>
+            <groupId>com.moxian.ng.email</groupId>
+            <artifactId>mx-email-impl</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         
         <dependency>
-            <groupId>com.fenglianfinance.bill.messaging</groupId>
-            <artifactId>bill-messaging-core</artifactId>
+            <groupId>com.moxian.ng.messaging</groupId>
+            <artifactId>mx-messaging-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>   
            
         <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-model</artifactId>
+            <groupId>com.moxian.ng</groupId>
+            <artifactId>mx-model</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         

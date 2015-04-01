@@ -34,7 +34,7 @@ import com.mongodb.ServerAddress;
  */
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.fenglianfinance.bill.repository")
+@EnableMongoRepositories(basePackages = "com.moxian.ng.repository")
 public class MongoConfig extends AbstractMongoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(MongoConfig.class);

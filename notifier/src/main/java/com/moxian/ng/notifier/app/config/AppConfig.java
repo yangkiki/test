@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @ComponentScan(//
         basePackages = {//
-            "com.fenglianfinance.bill.notifier",//
+            "com.moxian.ng.notifier",//
         }, //
         excludeFilters = { //          
             @Filter(//

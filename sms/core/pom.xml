@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
    <parent>
-        <groupId>com.fenglianfinance.bill.sms</groupId>
-        <artifactId>bill-sms-parent</artifactId>
+        <groupId>com.moxian.ng.sms</groupId>
+        <artifactId>mx-sms-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
-    <artifactId>bill-sms-core</artifactId>
+    <artifactId>mx-sms-core</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <dependencies>

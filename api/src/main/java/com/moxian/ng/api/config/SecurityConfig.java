@@ -24,7 +24,7 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.fenglianfinance.bill.domain.Permission_;
+import com.moxian.ng.domain.Permission_;
 import com.moxian.ng.repository.GrantedPermissionRepository;
 import com.moxian.ng.repository.PermissionRepository;
 import com.moxian.ng.repository.UserRepository;

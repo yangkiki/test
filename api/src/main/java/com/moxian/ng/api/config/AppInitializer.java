@@ -1,7 +1,6 @@
 package com.moxian.ng.api.config;
 
-import com.moxian.ng.config.signature.SignatureConfig;
-import com.moxian.ng.report.config.ReportConfig;
+
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -57,7 +56,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
             RabbitMessagingConfig.class, //
             RedisHttpSessionConfig.class,//
             SecurityConfig.class,
-            SignatureConfig.class
         };
     }
 
@@ -75,7 +73,6 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         List<Class> classes = new ArrayList<>();
 
         classes.add(WebConfig.class);
-        classes.add(ReportConfig.class);
 
         if (swaggerConfigClass != null) {
             classes.add(swaggerConfigClass);

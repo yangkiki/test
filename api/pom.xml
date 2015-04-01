@@ -4,63 +4,52 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.fenglianfinance.bill</groupId>
-        <artifactId>bill-parent</artifactId>
+        <groupId>com.moxian.ng</groupId>
+        <artifactId>mx-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>bill-api</artifactId>
+    <artifactId>mx-api</artifactId>
     <packaging>war</packaging>
     <name>${project.artifactId}</name>
     <dependencies>
-        <dependency>
-            <groupId>com.fenglianfinance.bill.config</groupId>
-            <artifactId>bill-signature-config</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
     
         <dependency>
-            <groupId>com.fenglianfinance.bill.config</groupId>
-            <artifactId>bill-rabbit-config</artifactId>
+            <groupId>com.moxian.ng.config</groupId>
+            <artifactId>mx-rabbit-config</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         
         <dependency>
-            <groupId>com.fenglianfinance.bill.config</groupId>
-            <artifactId>bill-caching-config</artifactId>
+            <groupId>com.moxian.ng.config</groupId>
+            <artifactId>mx-caching-config</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         
         <dependency>
-            <groupId>com.fenglianfinance.bill.config</groupId>
-            <artifactId>bill-jackson2-objectmapper-config</artifactId>
+            <groupId>com.moxian.ng.config</groupId>
+            <artifactId>mx-jackson2-objectmapper-config</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-model</artifactId>
+            <groupId>com.moxian.ng</groupId>
+            <artifactId>mx-model</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-common</artifactId>
+            <groupId>com.moxian.ng</groupId>
+            <artifactId>mx-common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-        
+               
         <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-report-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-i18n</artifactId>
+            <groupId>com.moxian.ng</groupId>
+            <artifactId>mx-i18n</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-captcha</artifactId>
+            <groupId>com.moxian.ng</groupId>
+            <artifactId>mx-captcha</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         
@@ -501,8 +490,8 @@
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>com.fenglianfinance.bill</groupId>
-                    <artifactId>bill-sdoc</artifactId>
+                    <groupId>com.moxian.ng</groupId>
+                    <artifactId>mx-sdoc</artifactId>
                 </dependency>
             </dependencies>
         </profile>     
@@ -510,8 +499,8 @@
             <id>test</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.fenglianfinance.bill</groupId>
-                    <artifactId>bill-sdoc</artifactId>
+                    <groupId>com.moxian.ng</groupId>
+                    <artifactId>mx-sdoc</artifactId>
                 </dependency>          
                 <dependency>
                     <groupId>mysql</groupId>
@@ -523,8 +512,8 @@
             <id>sit</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.fenglianfinance.bill</groupId>
-                    <artifactId>bill-sdoc</artifactId>
+                    <groupId>com.moxian.ng</groupId>
+                    <artifactId>mx-sdoc</artifactId>
                 </dependency>          
                 <dependency>
                     <groupId>mysql</groupId>
@@ -536,8 +525,8 @@
             <id>uat</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.fenglianfinance.bill</groupId>
-                    <artifactId>bill-sdoc</artifactId>
+                    <groupId>com.moxian.ng</groupId>
+                    <artifactId>mx-sdoc</artifactId>
                 </dependency>          
                 <dependency>
                     <groupId>mysql</groupId>
@@ -549,8 +538,8 @@
             <id>staging</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.fenglianfinance.bill</groupId>
-                    <artifactId>bill-sdoc</artifactId>
+                    <groupId>com.moxian.ng</groupId>
+                    <artifactId>mx-sdoc</artifactId>
                 </dependency>         
                 <dependency>
                     <groupId>mysql</groupId>

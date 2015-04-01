@@ -2,18 +2,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.fenglianfinance.bill.email</groupId>
-        <artifactId>bill-email-parent</artifactId>
+        <groupId>com.moxian.ng.email</groupId>
+        <artifactId>mx-email-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
-    <artifactId>bill-email-api</artifactId>
+    <artifactId>mx-email-api</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <dependencies>
         <dependency>
-            <groupId>com.fenglianfinance.bill.email</groupId>
-            <artifactId>bill-email-core</artifactId>
+            <groupId>com.moxian.ng.email</groupId>
+            <artifactId>mx-email-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <!-- SPRING -->

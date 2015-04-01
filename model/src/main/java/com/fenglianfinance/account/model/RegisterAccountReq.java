@@ -1,4 +1,4 @@
-package com.fenglianfinance.account.model;
+package com.moxian.ng.account.model;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

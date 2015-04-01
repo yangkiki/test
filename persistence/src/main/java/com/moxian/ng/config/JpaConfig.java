@@ -32,7 +32,7 @@ import com.moxian.ng.domain.UserAccount;
 @Configuration
 @EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 //enable jpa repositories
-@EnableJpaRepositories(basePackages = {"com.fenglianfinance.bill.repository"})
+@EnableJpaRepositories(basePackages = {"com.moxian.ng.repository"})
 @EnableJpaAuditing(auditorAwareRef = "auditor")
 @PropertySource(value = "classpath:/database.properties", ignoreResourceNotFound = true) //
 public class JpaConfig implements TransactionManagementConfigurer {
@@ -51,7 +51,7 @@ public class JpaConfig implements TransactionManagementConfigurer {
         emf.setDataSource(dataSource);
         emf.setMappingResources("META-INF/orm.xml");
         emf.setPersistenceXmlLocation("classpath:META-INF/persistence.xml");
-        emf.setPackagesToScan("com.fenglianfinance.bill.domain");
+        emf.setPackagesToScan("com.moxian.ng.domain");
         emf.setPersistenceProvider(new HibernatePersistenceProvider());
         emf.setJpaProperties(jpaProperties());
         emf.setJpaDialect(new HibernateJpaDialect());

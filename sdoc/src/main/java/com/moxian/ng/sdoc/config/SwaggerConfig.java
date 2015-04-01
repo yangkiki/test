@@ -57,7 +57,7 @@ public class SwaggerConfig {
         Class pageableClazz = null;
 
         try {
-            userAccountClazz = ClassUtils.forName("com.fenglianfinance.bill.domain.UserAccount", null);
+            userAccountClazz = ClassUtils.forName("com.moxian.ng.domain.UserAccount", null);
         } catch (ClassNotFoundException ex) {
             log.error("ex@" + ex);
         } catch (LinkageError ex) {

@@ -2,7 +2,7 @@
  * Storevm.org Inc.
  * Copyright (c) 2004-2015 All Rights Reserved.
  */
-package com.fenglianfinance.account.model;
+package com.moxian.ng.account.model;
 
 import java.io.Serializable;
 import java.util.HashMap;

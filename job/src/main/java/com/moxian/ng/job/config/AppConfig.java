@@ -1,6 +1,5 @@
 package com.moxian.ng.job.config;
 
-import com.moxian.ng.gateway.common.GatewayCommonConfiguer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @ComponentScan(//
         basePackages = {//
-            "com.fenglianfinance.bill",//
+            "com.moxian.ng",//
         }, //
         excludeFilters = { //          
             @Filter(//
@@ -46,7 +45,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
             DataSourceConfig.class,//
             JpaConfig.class,//
             BatchInfrastructureConfig.class,//
-            GatewayCommonConfiguer.class,//
+            //GatewayCommonConfiguer.class,//
             JobConfiguration.class,//
             RedisConfig.class,//
             

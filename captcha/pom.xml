@@ -4,24 +4,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.fenglianfinance.bill</groupId>
-        <artifactId>bill-parent</artifactId>
+        <groupId>com.moxian.ng</groupId>
+        <artifactId>mx-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>bill-captcha</artifactId>
+    <artifactId>mx-captcha</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <dependencies>
 
         <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-cache</artifactId>
+            <groupId>com.moxian.ng</groupId>
+            <artifactId>mx-cache</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         
         <dependency>
-            <groupId>com.fenglianfinance.bill</groupId>
-            <artifactId>bill-model</artifactId>
+            <groupId>com.moxian.ng</groupId>
+            <artifactId>mx-model</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
                 

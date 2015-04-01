@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.fenglianfinance.bill.config</groupId>
-        <artifactId>bill-config-parent</artifactId>
+        <groupId>com.moxian.ng.config</groupId>
+        <artifactId>mx-config-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 	
-    <artifactId>bill-jackson2-objectmapper-config</artifactId>
+    <artifactId>mx-jackson2-objectmapper-config</artifactId>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
 	

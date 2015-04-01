@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.fenglianfinance.bill</groupId>
-		<artifactId>bill-parent</artifactId>
+		<groupId>com.moxian.ng</groupId>
+		<artifactId>mx-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>bill-client</artifactId>
+	<artifactId>mx-client</artifactId>
 
 	<packaging>jar</packaging>
 	<name>${project.artifactId}</name>

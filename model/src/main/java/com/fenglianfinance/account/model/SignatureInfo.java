@@ -1,4 +1,4 @@
-package com.fenglianfinance.account.model;
+package com.moxian.ng.account.model;
 
 /**
  * 由丰联配资系统提供的签名方式、公钥、私钥以及渠道号信息

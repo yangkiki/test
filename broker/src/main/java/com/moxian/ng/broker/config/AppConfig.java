@@ -18,7 +18,7 @@ import org.springframework.context.annotation.PropertySources;
 @Configuration
 @ComponentScan(//
         basePackages = {//
-            "com.fenglianfinance.bill",//
+            "com.moxian.ng",//
         }, //
         excludeFilters = { //          
 

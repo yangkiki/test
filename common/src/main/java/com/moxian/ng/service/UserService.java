@@ -4,10 +4,8 @@
  */
 package com.moxian.ng.service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +16,6 @@ import com.moxian.ng.DTOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,15 +24,11 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import com.moxian.ng.captcha.CaptchaService;
-import com.moxian.ng.domain.BankCardInfo;
 import com.moxian.ng.domain.GrantedPermission;
 import com.moxian.ng.domain.Message;
 import com.moxian.ng.domain.Permission;
-import com.moxian.ng.domain.PurchaseOrder;
 import com.moxian.ng.domain.Role;
 import com.moxian.ng.domain.StaffProfile;
-import com.moxian.ng.domain.TransactionLog;
-import com.moxian.ng.domain.TransactionType;
 import com.moxian.ng.domain.UserAccount;
 import com.moxian.ng.domain.UserProfile;
 import com.moxian.ng.exception.CaptchaMismatchedException;
@@ -44,38 +37,29 @@ import com.moxian.ng.exception.PasswordMismatchedException;
 import com.moxian.ng.exception.ResourceNotFoundException;
 import com.moxian.ng.exception.RoleNameExistedException;
 import com.moxian.ng.exception.UsernameExistedException;
-import com.moxian.ng.model.BankCardInfoDetails;
 import com.moxian.ng.model.CategorizedPermission;
 import com.moxian.ng.model.MessageDetails;
 import com.moxian.ng.model.NewPasswordForm;
-import com.moxian.ng.model.OrderStatistics;
 import com.moxian.ng.model.PasswordForm;
 import com.moxian.ng.model.PermissionDetails;
 import com.moxian.ng.model.PermissionForm;
-import com.moxian.ng.model.PurchaseOrderModel;
 import com.moxian.ng.model.RegisterForm;
 import com.moxian.ng.model.RoleDetails;
 import com.moxian.ng.model.RoleForm;
 import com.moxian.ng.model.SignupForm;
 import com.moxian.ng.model.SystemUserDetails;
 import com.moxian.ng.model.SystemUserForm;
-import com.moxian.ng.model.TransactionLogDetails;
-import com.moxian.ng.model.TransactionLogStatistics;
 import com.moxian.ng.model.UserAccountDetails;
-import com.moxian.ng.model.UserAcctView;
 import com.moxian.ng.model.UserProfileDetails;
 import com.moxian.ng.model.UserSearchCriteria;
-import com.moxian.ng.repository.BankCardInfoRepository;
-import com.moxian.ng.repository.EnterpriseRepository;
+
 import com.moxian.ng.repository.GrantedPermissionRepository;
 import com.moxian.ng.repository.MessageRepository;
 import com.moxian.ng.repository.MessageSpecifications;
-import com.moxian.ng.repository.OrderRepository;
+
 import com.moxian.ng.repository.PermissionRepository;
 import com.moxian.ng.repository.RoleRepository;
 import com.moxian.ng.repository.StaffProfileRepository;
-import com.moxian.ng.repository.TransactionLogRepository;
-import com.moxian.ng.repository.TransactionLogSpecifications;
 import com.moxian.ng.repository.UserProfileRepository;
 import com.moxian.ng.repository.UserRepository;
 import com.moxian.ng.repository.UserSpecifications;
@@ -122,18 +106,6 @@ public class UserService {
 
     @Inject
     private UserProfileRepository userProfileRepository;
-
-    @Inject
-    private EnterpriseRepository enterpriseRepository;
-
-    @Inject
-    private BankCardInfoRepository cardRepository;
-
-    @Inject
-    private TransactionLogRepository transactionLogRepository;
-
-    @Inject
-    private OrderRepository orderRepository;
 
     public Page<SystemUserDetails> findUsers(String keyword, String role, String activeStatus, String locked, Pageable page) {
 
@@ -583,32 +555,32 @@ public class UserService {
 
         return DTOUtils.map(saved, UserAccountDetails.class);
     }
-	
-	public UserAccountDetails registerUser(RegisterForm form) {
-		Assert.notNull(form, "RegisterForm can not be null");
-		Assert.notNull(form.getMobileNumber(), "mobileNumber can not be null");
 
-		if (log.isDebugEnabled()) {
-			log.debug("saving user@" + form);
-		}
+    public UserAccountDetails registerUser(RegisterForm form) {
+        Assert.notNull(form, "RegisterForm can not be null");
+        Assert.notNull(form.getMobileNumber(), "mobileNumber can not be null");
 
-		if (userRepository.findByMobileNumber(form.getMobileNumber()) != null) {
-			throw new MobileNumberExistedException(form.getMobileNumber());
-		}
+        if (log.isDebugEnabled()) {
+            log.debug("saving user@" + form);
+        }
 
-		UserAccount user = DTOUtils.map(form, UserAccount.class);
-		user.setRoles(Arrays.asList("USER"));
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		// TODO 用户名默认为手机号
-    	user.setUsername(form.getMobileNumber());
-		UserAccount saved = userRepository.save(user);
+        if (userRepository.findByMobileNumber(form.getMobileNumber()) != null) {
+            throw new MobileNumberExistedException(form.getMobileNumber());
+        }
 
-		if (log.isDebugEnabled()) {
-			log.debug("saved user @" + saved);
-		}
+        UserAccount user = DTOUtils.map(form, UserAccount.class);
+        user.setRoles(Arrays.asList("USER"));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // TODO 用户名默认为手机号
+        user.setUsername(form.getMobileNumber());
+        UserAccount saved = userRepository.save(user);
 
-		return DTOUtils.map(saved, UserAccountDetails.class);
-	}
+        if (log.isDebugEnabled()) {
+            log.debug("saved user @" + saved);
+        }
+
+        return DTOUtils.map(saved, UserAccountDetails.class);
+    }
 
     public void retrievePasswordByMobileNumber(NewPasswordForm form) {
 
@@ -660,56 +632,6 @@ public class UserService {
         return count;
     }
 
-    public UserAcctView getUserAcctView(UserAccount userAccount) {
-        UserAcctView userAcctView = new UserAcctView();
-        Assert.notNull(userAccount, " userAccount can't  be null ");
-        UserAccountDetails userAccountDetails = new UserAccountDetails();
-        DTOUtils.mapTo(userAccount, userAccountDetails);
-
-        Pageable page = new PageRequest(0, 10);
-
-        Page<PurchaseOrder> recentPurchasedOrderPage = orderRepository
-                .findHotPaidPurchaseOrdersPaidDateDesByUsername(
-                        userAccount.getUsername(), page);
-        List<PurchaseOrderModel> recentPurchasedOrderModels = DTOUtils
-                .mapList(recentPurchasedOrderPage.getContent(),
-                        PurchaseOrderModel.class);
-
-        Page<PurchaseOrder> maturePurchasedOrderPage = orderRepository
-                .findHotPaidPurchaseOrdersCompletedDateDesByUsername(
-                        userAccount.getUsername(), page);
-        List<PurchaseOrderModel> maturePurchasedOrderModels = DTOUtils
-                .mapList(maturePurchasedOrderPage.getContent(),
-                        PurchaseOrderModel.class);
-
-        // TODO 账户余额
-        // 爆款,定期累计收益
-        // 活期累计收益
-        userAcctView.setUserAccountDetails(userAccountDetails);
-        userAcctView.setRecentPurchasedOrders(recentPurchasedOrderModels);
-        userAcctView.setMaturePurchasedOrders(maturePurchasedOrderModels);
-        return userAcctView;
-    }
-
-    public void markAllMessagesAsRead(Long userId) {
-        Assert.notNull(userId, " user id can't  be empty ");
-
-        messageRepository.batchUpdateReadStatus(userId);
-
-    }
-
-    public Page<MessageDetails> getSentMessages(Long userId, Pageable page) {
-        Assert.notNull(userId, " userId can't  be null ");
-        Page<Message> messages = messageRepository.findAll(MessageSpecifications.filterSentMessages(userId), page);
-
-        if (log.isDebugEnabled()) {
-            log.debug("found mesages@" + messages.getTotalElements());
-        }
-
-        return DTOUtils.mapPage(messages, MessageDetails.class);
-
-    }
-
     public UserProfileDetails findUserProfileByUserId(Long id) {
         Assert.notNull(id, " account id can't  be null ");
 
@@ -734,6 +656,25 @@ public class UserService {
     public void lockUser(Long id) {
         Assert.notNull(id, "user id can not be null");
         userRepository.updateLockedStatus(id, true);
+    }
+
+    public void markAllMessagesAsRead(Long userId) {
+        Assert.notNull(userId, " user id can't  be empty ");
+
+        messageRepository.batchUpdateReadStatus(userId);
+
+    }
+
+    public Page<MessageDetails> getSentMessages(Long userId, Pageable page) {
+        Assert.notNull(userId, " userId can't  be null ");
+        Page<Message> messages = messageRepository.findAll(MessageSpecifications.filterSentMessages(userId), page);
+
+        if (log.isDebugEnabled()) {
+            log.debug("found mesages@" + messages.getTotalElements());
+        }
+
+        return DTOUtils.mapPage(messages, MessageDetails.class);
+
     }
 
     public MessageDetails getMessage(Long id) {
@@ -782,107 +723,4 @@ public class UserService {
 //
 //        return null;
 //    }
-    public List<BankCardInfoDetails> findBoundCardsByUserId(Long id) {
-        Assert.notNull(id, " account id can't  be null ");
-
-        if (log.isDebugEnabled()) {
-            log.debug("fetch user profile by account id@" + id);
-        }
-
-        List<BankCardInfo> cards = cardRepository.findByUserId(id);
-
-        if (cards != null && !cards.isEmpty()) {
-            return DTOUtils.mapList(cards, BankCardInfoDetails.class);
-        }
-
-        return Collections.emptyList();
-    }
-
-    public Page<TransactionLogDetails> findTransactionLogsByUserId(Long id, Pageable page) {
-        Assert.notNull(id, "user account id can't  be null ");
-
-        if (log.isDebugEnabled()) {
-            log.debug("fetch user transaction logs by user id@" + id);
-        }
-
-        Page<TransactionLog> logs = transactionLogRepository.findAll(TransactionLogSpecifications.filterByCriteria(id, null), page);
-
-        return DTOUtils.mapPage(logs, TransactionLogDetails.class);
-    }
-
-    public TransactionLogStatistics getUserAcctTransactionLogStatisticsByType(
-            String username, TransactionType type) {
-        Assert.notNull(username, "user account username can't be null ");
-        if (log.isDebugEnabled()) {
-            log.debug("fetch user transaction logs by username@" + username
-                    + " and logs type@" + type);
-        }
-		BigDecimal sumAmount = transactionLogRepository
-				.sumTransactionLogAmount(username, type);
-		sumAmount = (sumAmount == null ? BigDecimal.ZERO : sumAmount);
-        int times = transactionLogRepository
-                .countTransactionLog(username, type);
-
-        TransactionLogStatistics transactionLogStatistics = new TransactionLogStatistics();
-        transactionLogStatistics.setSumAmount(sumAmount);
-        transactionLogStatistics.setTimes(times);
-        return transactionLogStatistics;
-    }
-
-    public Page<TransactionLogDetails> getUserAcctTransactionLogsByType(
-            String username, TransactionType type, Pageable page) {
-        Assert.notNull(username, "user account username can't be null ");
-        if (log.isDebugEnabled()) {
-            log.debug("fetch user transaction logs by to.username@" + username
-                    + " and logs type@" + type);
-        }
-        Page<TransactionLog> logs = transactionLogRepository
-                .findByToUsernameAndType(username, type, page);
-        return DTOUtils.mapPage(logs, TransactionLogDetails.class);
-    }
-
-    public OrderStatistics calculateOrderStatistics(Long id) {
-        Assert.notNull(id, "user id can not be null");
-        Map<String, BigDecimal> items = orderRepository.sumOrdersByUser(id);
-
-        BigDecimal totalAmount = BigDecimal.ZERO;
-        for (String item : items.keySet()) {
-            totalAmount = totalAmount.add(items.get(item));
-        }
-
-        Map<String, BigDecimal> activeItems = orderRepository.sumActiveOrdersByUser(id);
-
-        BigDecimal activeAmount = BigDecimal.ZERO;
-        for (String activeItem : activeItems.keySet()) {
-            activeAmount = activeAmount.add(activeItems.get(activeItem));
-        }
-
-        Map<String, BigDecimal> interestItems = orderRepository.sumOrderInterestsByUser(id);
-
-        BigDecimal totalInterestAmount = BigDecimal.ZERO;
-        for (String item : interestItems.keySet()) {
-            totalInterestAmount = totalInterestAmount.add(interestItems.get(item));
-        }
-
-        Map<String, BigDecimal> activeInterestItems = orderRepository.sumActiveOrderInterestsByUser(id);
-
-        BigDecimal activeInterestAmount = BigDecimal.ZERO;
-        for (String activeInterestItem : activeInterestItems.keySet()) {
-            activeInterestAmount = activeInterestAmount.add(activeInterestItems.get(activeInterestItem));
-        }
-
-        OrderStatistics stat = new OrderStatistics();
-        stat.setActiveItems(activeItems);
-        stat.setItems(items);
-        stat.setActiveInterestItems(activeInterestItems);
-        stat.setInterestItems(interestItems);
-        
-        stat.setTotalActiveInterestAmount(activeInterestAmount);
-        stat.setTotalInterestAmount(totalInterestAmount);
-        stat.setTotalAmount(totalAmount);
-        stat.setTotalActiveAmount(activeAmount);
-
-        return stat;
-
-    }
 }

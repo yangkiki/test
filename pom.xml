@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fenglianfinance.bill</groupId>
-    <artifactId>bill-parent</artifactId>
+    <groupId>com.moxian.ng</groupId>
+    <artifactId>mx-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
@@ -675,14 +675,14 @@
 				<signature.algorthm>RSA</signature.algorthm>
 				<signature.channelNo>880001</signature.channelNo>
 				<signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
-				<signature.prefixRetUrl>http://192.168.0.112:8180/bill-api/api/public/acct/withFunding/</signature.prefixRetUrl>
+				<signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
             </properties>
             
             <dependencyManagement>
                 <dependencies>
                     <dependency>
-                        <groupId>com.fenglianfinance.bill</groupId>
-                        <artifactId>bill-sdoc</artifactId>
+                        <groupId>com.moxian.ng</groupId>
+                        <artifactId>mx-sdoc</artifactId>
                         <version>1.0.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
@@ -759,7 +759,7 @@
 				<signature.algorthm>RSA</signature.algorthm>
 				<signature.channelNo>880001</signature.channelNo>
 				<signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
-				<signature.prefixRetUrl>http://192.168.0.112:8180/bill-api/api/public/acct/withFunding/</signature.prefixRetUrl>
+				<signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
             </properties>
             <dependencyManagement>
                 <dependencies>
@@ -769,8 +769,8 @@
                         <version>5.1.30</version>
                     </dependency>
                     <dependency>
-                        <groupId>com.fenglianfinance.bill</groupId>
-                        <artifactId>bill-sdoc</artifactId>
+                        <groupId>com.moxian.ng</groupId>
+                        <artifactId>mx-sdoc</artifactId>
                         <version>1.0.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
@@ -848,7 +848,7 @@
                 <signature.keyPath>/RSAkeyInfo.key</signature.keyPath>
                 <signature.channelNo>880001</signature.channelNo>
                 <signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
-                <signature.prefixRetUrl>http://192.168.0.112:8180/bill-api/api/public/acct/withFunding/</signature.prefixRetUrl>
+                <signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
             </properties>
             <dependencyManagement>
                 <dependencies>

@@ -1,4 +1,4 @@
-package com.fenglianfinance.account.model;
+package com.moxian.ng.account.model;
 
 /**
  * 子账户查询请求业务参数
