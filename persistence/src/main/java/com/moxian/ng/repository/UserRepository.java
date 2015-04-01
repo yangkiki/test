@@ -25,6 +25,6 @@ public interface UserRepository extends JpaRepository<UserAccount, Long>,//
     @Query("update UserAccount user set user.locked=:locked where user.id=:id")
     public void updateLockedStatus(@Param("id") Long id, @Param("locked") boolean locked);
 
-    public UserAccount findByAccountingInfoAcctCustId(String usrCustId);
+
 
 }
