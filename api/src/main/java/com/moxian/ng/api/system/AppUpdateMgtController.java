@@ -5,12 +5,11 @@
  */
 package com.moxian.ng.api.system;
 
-import com.moxian.ng.model.AppUpdateDetails;
-import com.moxian.ng.service.AppUpdateService;
-import javax.inject.Inject;
-
 import com.moxian.ng.model.ApiConstants;
+import com.moxian.ng.model.AppUpdateDetails;
 import com.moxian.ng.model.AppUpdateForm;
+import com.moxian.ng.service.AppUpdateService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -25,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.inject.Inject;
 
 /**
  *
