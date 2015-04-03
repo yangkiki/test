@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class OrderForm implements Serializable {
 

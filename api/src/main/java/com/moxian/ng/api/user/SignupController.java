@@ -29,9 +29,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
-@RequestMapping(value = ApiConstants.URI_API_PUBLIC)
+@RequestMapping(value = ApiConstants.URI_API)
 @RestController
 public class SignupController {
     

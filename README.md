@@ -37,21 +37,15 @@ This application serves as backend REST API producer.
  
    1. Open your system command line tool, and build the project.
    
-	
 		mvn clean install
 	
-  
    2. Enter the project root folder, run `mvn tomcat7:run` to start up an embedded tomcat7 to serve this application.
-  
      
     	mvn tomcat7:run
     
-
-
    3. Run in embedded Jetty.
-
-      
-     	mvn jetty:run
+  
+    	mvn jetty:run
       
 
 

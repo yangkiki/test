@@ -7,7 +7,7 @@ package com.moxian.ng.notifier.email.api;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class EmailConfiguration {
 

@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 //@Service
 public class TestService {

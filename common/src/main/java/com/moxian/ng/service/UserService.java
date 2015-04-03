@@ -66,7 +66,7 @@ import com.moxian.ng.repository.UserSpecifications;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Service
 @Transactional

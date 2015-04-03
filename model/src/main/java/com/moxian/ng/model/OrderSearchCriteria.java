@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 public class OrderSearchCriteria implements Serializable {
 

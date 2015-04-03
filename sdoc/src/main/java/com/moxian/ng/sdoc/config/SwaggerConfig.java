@@ -26,7 +26,7 @@ import org.springframework.web.context.request.async.WebAsyncTask;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Configuration
 @EnableSwagger
@@ -96,10 +96,10 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         ApiInfo apiInfo = new ApiInfo(//
-                "FengLian BILL RESTful API",//
-                "FengLian BILL RESTful APIs for developers", //
-                "FengLian BILL API terms of service",//
-                "hantsy<hantsy@gmail.com>@gmail.com",//
+                "Moxian RESTful APIs",//
+                "Moxian RESTful APIs for developers", //
+                "Moxian API terms of service",//
+                "Hantsy Bai<hantsy@gmail.com>",//
                 "Commericial Lisence", //
                 "lisence URL");
         return apiInfo;

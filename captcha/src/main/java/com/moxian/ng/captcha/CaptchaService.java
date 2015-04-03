@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
 
 /**
  *
- * @author hantsy<hantsy@gmail.com>
+ * @author Hantsy Bai<hantsy@gmail.com>
  */
 @Service
 public class CaptchaService {

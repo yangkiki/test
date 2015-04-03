@@ -16,6 +16,5 @@
 		<module>rabbit-config</module>
 		<module>redis-config</module>
 		<module>caching-config</module>
-		<module>signature-config</module>
     </modules>
 </project>

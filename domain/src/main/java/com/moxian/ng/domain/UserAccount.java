@@ -22,7 +22,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import com.moxian.ng.domain.support.AuditableEntity;
-import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,22 +105,8 @@ public class UserAccount extends AuditableEntity<UserAccount, Long> implements U
     )
     private List<String> roles = new ArrayList<>();
 
-    @Column(name = "total_order_amount")
-    private BigDecimal totalOrderAmount = BigDecimal.ZERO;
-
-    @Column(name = "total_payment_amount")
-    private BigDecimal totalPaymentAmount = BigDecimal.ZERO;
 
 
-
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "user_bank_cards",
-//            joinColumns = {
-//                @JoinColumn(name = "user_id")
-//            }
-//    )
-//    private List<BankCardInfo> cards = new ArrayList<>();
     public UserAccount() {
     }
 
@@ -135,46 +120,6 @@ public class UserAccount extends AuditableEntity<UserAccount, Long> implements U
         this.type = type;
     }
 
-//    public List<BankCardInfo> getCards() {
-//        return cards;
-//    }
-//
-//    public void setCards(List<BankCardInfo> cards) {
-//        this.cards = cards;
-//    }
-//
-//    public void addBankCardInfo(BankCardInfo bankCardInfo) {
-//        if (!this.cards.contains(bankCardInfo)) {
-//            this.cards.add(bankCardInfo);
-//        }
-//    }
-//
-//    public void removeBankCardInfo(String bankId) {
-//        ListIterator<BankCardInfo> cardsIterator = this.cards.listIterator();
-//        while (cardsIterator.hasNext()) {
-//            if (cardsIterator.next().getBankId().equals(bankId)) {
-//                cardsIterator.remove();
-//            }
-//        }
-//
-//    }
-
-
-    public BigDecimal getTotalOrderAmount() {
-        return totalOrderAmount;
-    }
-
-    public void setTotalOrderAmount(BigDecimal totalOrderedAmount) {
-        this.totalOrderAmount = totalOrderedAmount;
-    }
-
-    public BigDecimal getTotalPaymentAmount() {
-        return totalPaymentAmount;
-    }
-
-    public void setTotalPaymentAmount(BigDecimal totalPurchasedAmount) {
-        this.totalPaymentAmount = totalPurchasedAmount;
-    }
 
     public synchronized void addRole(String r) {
         if (!this.roles.contains(r)) {
