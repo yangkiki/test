@@ -4,25 +4,7 @@
  */
 package com.moxian.ng.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
-
 import com.moxian.ng.DTOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
-
 import com.moxian.ng.captcha.CaptchaService;
 import com.moxian.ng.domain.GrantedPermission;
 import com.moxian.ng.domain.Message;
@@ -52,17 +34,33 @@ import com.moxian.ng.model.SystemUserForm;
 import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.model.UserProfileDetails;
 import com.moxian.ng.model.UserSearchCriteria;
-
 import com.moxian.ng.repository.GrantedPermissionRepository;
 import com.moxian.ng.repository.MessageRepository;
 import com.moxian.ng.repository.MessageSpecifications;
-
 import com.moxian.ng.repository.PermissionRepository;
 import com.moxian.ng.repository.RoleRepository;
 import com.moxian.ng.repository.StaffProfileRepository;
 import com.moxian.ng.repository.UserProfileRepository;
 import com.moxian.ng.repository.UserRepository;
 import com.moxian.ng.repository.UserSpecifications;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 /**
  *

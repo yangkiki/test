@@ -1,12 +1,13 @@
 package com.moxian.ng.api.config;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
 import com.moxian.ng.api.security.SimpleUserDetailsServiceImpl;
 import com.moxian.ng.domain.Permission;
-import com.moxian.ng.repository.*;
+import com.moxian.ng.domain.Permission_;
+import com.moxian.ng.repository.GrantedPermissionRepository;
+import com.moxian.ng.repository.PermissionRepository;
+import com.moxian.ng.repository.RoleRepository;
+import com.moxian.ng.repository.UserRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +25,9 @@ import org.springframework.security.config.annotation.web.configurers.Expression
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.moxian.ng.domain.Permission_;
-import com.moxian.ng.repository.GrantedPermissionRepository;
-import com.moxian.ng.repository.PermissionRepository;
-import com.moxian.ng.repository.UserRepository;
+import java.util.List;
+
+import javax.inject.Inject;
 
 @Configuration
 @EnableWebSecurity

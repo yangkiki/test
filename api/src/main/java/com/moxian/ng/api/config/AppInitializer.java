@@ -1,8 +1,15 @@
 package com.moxian.ng.api.config;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.context.request.RequestContextListener;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -10,15 +17,6 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.core.annotation.Order;
-import org.springframework.util.ClassUtils;
-import org.springframework.web.context.request.RequestContextListener;
-import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 @Order(0)
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {

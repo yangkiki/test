@@ -1,8 +1,5 @@
 package com.moxian.ng.config;
 
-import javax.inject.Inject;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +8,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
-import org.springframework.jndi.JndiObjectFactoryBean;
+
+import javax.inject.Inject;
+import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {

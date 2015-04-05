@@ -1,5 +1,17 @@
 package com.moxian.ng.repository;
 
+import com.moxian.ng.domain.Role;
+import com.moxian.ng.domain.Role_;
+import com.moxian.ng.domain.StaffProfile;
+import com.moxian.ng.domain.StaffProfile_;
+import com.moxian.ng.domain.UserAccount;
+import com.moxian.ng.domain.UserAccount_;
+
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.StringUtils;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,24 +22,12 @@ import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.moxian.ng.domain.Role;
-import com.moxian.ng.domain.StaffProfile;
-import com.moxian.ng.domain.UserAccount;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.util.StringUtils;
-
-import com.moxian.ng.domain.Role_;
-import com.moxian.ng.domain.StaffProfile_;
-import com.moxian.ng.domain.UserAccount_;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 /**
  *
  * @author Hantsy Bai<hantsy@gmail.com>
  *
  */
+
 public class UserSpecifications {
 
     public static Specification<StaffProfile> filterUserAccountsByKeywordAndRole(
@@ -112,13 +112,6 @@ public class UserSpecifications {
                 predicates.add(cb.equal(root.get(UserAccount_.active), Boolean.valueOf(activeStatus)));
             }
 
-            if (min != null) {
-                predicates.add(cb.ge(root.get(UserAccount_.totalPaymentAmount), min));
-            }
-
-            if (max != null) {
-                predicates.add(cb.le(root.get(UserAccount_.totalPaymentAmount), max));
-            }
 
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };

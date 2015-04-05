@@ -1,14 +1,23 @@
 package com.moxian.ng.domain;
 
-import static com.moxian.ng.domain.UserAccount.Gender.NA;
-import static com.moxian.ng.domain.UserAccount.Type.USER;
+import com.moxian.ng.domain.support.AuditableEntity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,24 +25,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import static com.moxian.ng.domain.UserAccount.Gender.NA;
+import static com.moxian.ng.domain.UserAccount.Type.USER;
 
-import com.moxian.ng.domain.support.AuditableEntity;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 //import java.util.ListIterator;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Transient;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(//
