@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,11 +22,18 @@ import javax.persistence.Table;
 @Table(name = "connection_requests")
 public class ConnectionRequests extends PersistableEntity<Long> {
 
+  public enum Status {
+
+    ACCEPT, //
+    REJECT;//
+  }
+
   @Column(name = "source")
   private String source;
 
   @Column(name = "status")
-  private String status;
+  @Enumerated(EnumType.STRING)
+  private Status status;
 
   @Column(name = "create_on")
   private LocalDateTime createOn;
@@ -69,11 +78,11 @@ public class ConnectionRequests extends PersistableEntity<Long> {
     this.connectedUser = connectedUser;
   }
 
-  public String getStatus() {
+  public Status getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(Status status) {
     this.status = status;
   }
 
