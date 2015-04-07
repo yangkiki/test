@@ -26,9 +26,14 @@ public class Connections extends PersistableEntity<Long> {
   @Column(name = "create_on")
   private LocalDateTime createOn;
 
+
   @ManyToOne
   @JoinColumn(name = "member_id")
   private UserAccount memberUser;
+
+  @ManyToOne
+  @JoinColumn(name = "group_id")
+  private Group group;
 
   @ManyToOne
   @JoinColumn(name = "connected_to")
@@ -66,12 +71,21 @@ public class Connections extends PersistableEntity<Long> {
     this.connectedUser = connectedUser;
   }
 
+  public Group getGroup() {
+    return group;
+  }
+
+  public void setGroup(Group group) {
+    this.group = group;
+  }
+
   @Override
   public String toString() {
     return "Connections{" +
            "source='" + source + '\'' +
            ", createOn=" + createOn +
            ", memberUser=" + memberUser +
+           ", group=" + group +
            ", connectedUser=" + connectedUser +
            '}';
   }

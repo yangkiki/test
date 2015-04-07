@@ -37,9 +37,9 @@ public class ApiConstants {
 
     public static final String URI_ACCT = "/acct";
 
-    public static final String URI_WITH_FUNDING = "/withFunding";
     public static final String URI_API_CONF = "/conf";
     public static final String URI_API_APPUPDATE="/appupdates";
-    public static final String URI_API_REPORT="/reports";
+
+    public static final String URI_API_CONNECTION="/connections";
 
 }

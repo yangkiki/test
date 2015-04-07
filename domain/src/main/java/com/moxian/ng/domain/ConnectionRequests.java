@@ -24,6 +24,7 @@ public class ConnectionRequests extends PersistableEntity<Long> {
 
   public enum Status {
 
+    UNREAD,//
     ACCEPT, //
     REJECT;//
   }
@@ -33,7 +34,7 @@ public class ConnectionRequests extends PersistableEntity<Long> {
 
   @Column(name = "status")
   @Enumerated(EnumType.STRING)
-  private Status status;
+  private Status status=Status.UNREAD;
 
   @Column(name = "create_on")
   private LocalDateTime createOn;

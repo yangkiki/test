@@ -1,10 +1,25 @@
 package com.moxian.ng.service;
 
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.sql.DataSource;
+import com.moxian.ng.domain.City;
+import com.moxian.ng.domain.Country;
+import com.moxian.ng.domain.GrantedPermission;
+import com.moxian.ng.domain.Permission;
+import com.moxian.ng.domain.Post;
+import com.moxian.ng.domain.Province;
+import com.moxian.ng.domain.Role;
+import com.moxian.ng.domain.UserAccount;
+import com.moxian.ng.domain.UserProfile;
+import com.moxian.ng.repository.CityRepository;
+import com.moxian.ng.repository.CountryRepository;
+import com.moxian.ng.repository.GrantedPermissionRepository;
+import com.moxian.ng.repository.MessageRepository;
+import com.moxian.ng.repository.PermissionRepository;
+import com.moxian.ng.repository.PostRepository;
+import com.moxian.ng.repository.ProvinceRepository;
+import com.moxian.ng.repository.RoleRepository;
+import com.moxian.ng.repository.UserProfileRepository;
+import com.moxian.ng.repository.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,27 +30,10 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.moxian.ng.domain.City;
-import com.moxian.ng.domain.Country;
-import com.moxian.ng.domain.GrantedPermission;
-import com.moxian.ng.domain.Permission;
-import com.moxian.ng.domain.Post;
-import com.moxian.ng.domain.Province;
-import com.moxian.ng.domain.Role;
-import com.moxian.ng.domain.UserAccount;
-import com.moxian.ng.domain.UserProfile;
-
-import com.moxian.ng.repository.CityRepository;
-import com.moxian.ng.repository.CountryRepository;
-
-import com.moxian.ng.repository.GrantedPermissionRepository;
-import com.moxian.ng.repository.MessageRepository;
-import com.moxian.ng.repository.PermissionRepository;
-import com.moxian.ng.repository.PostRepository;
-import com.moxian.ng.repository.ProvinceRepository;
-import com.moxian.ng.repository.RoleRepository;
-import com.moxian.ng.repository.UserProfileRepository;
-import com.moxian.ng.repository.UserRepository;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.sql.DataSource;
 
 @Named
 @Transactional

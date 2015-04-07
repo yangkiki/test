@@ -12,8 +12,6 @@ import com.moxian.ng.messaging.api.MessagingConstants;
 import com.moxian.ng.model.SmsCodeResult;
 import com.moxian.ng.notifier.sms.core.SmsMessage;
 import com.moxian.ng.repository.UserRepository;
-import java.util.Date;
-import javax.inject.Inject;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.modelmapper.internal.util.Assert;
@@ -22,6 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+import javax.inject.Inject;
 
 /**
  *
