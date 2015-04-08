@@ -43,5 +43,7 @@ public class ApiConstants {
     public static final String URI_API_CONNECTION="/connections";
     
     public static final String URI_CONNECTIONREQUEST="/connectionsrequest";
+    
+    public static final String URI_FANS="/fans";
 
 }
