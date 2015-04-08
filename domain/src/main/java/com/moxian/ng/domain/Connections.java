@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,6 +21,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "connections")
 public class Connections extends PersistableEntity<Long> {
+
+  public enum Type {
+
+    UNIDIRECTIONAL,//
+    BILATERAL; //
+
+  }
 
   @Column(name = "source")
   private String source;
@@ -38,6 +47,10 @@ public class Connections extends PersistableEntity<Long> {
   @ManyToOne
   @JoinColumn(name = "connected_to")
   private UserAccount connectedUser;
+
+  @Column(name = "type")
+  @Enumerated(EnumType.STRING)
+  private Type status=Type.UNIDIRECTIONAL;
 
   public String getSource() {
     return source;
@@ -79,6 +92,14 @@ public class Connections extends PersistableEntity<Long> {
     this.group = group;
   }
 
+  public Type getStatus() {
+    return status;
+  }
+
+  public void setStatus(Type status) {
+    this.status = status;
+  }
+
   @Override
   public String toString() {
     return "Connections{" +
@@ -87,6 +108,7 @@ public class Connections extends PersistableEntity<Long> {
            ", memberUser=" + memberUser +
            ", group=" + group +
            ", connectedUser=" + connectedUser +
+           ", status=" + status +
            '}';
   }
 }
