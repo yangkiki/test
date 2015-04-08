@@ -46,6 +46,11 @@ public class ConnectionService {
 
   @Inject
   private GroupRepository groupRepository;
+  
+  @Inject
+  private FansService fansService ;
+  
+ 
 
 
   public Page<UserAccountDetails> findUserAllGroupFriends(Long userId, Pageable page) {
@@ -197,7 +202,7 @@ public class ConnectionService {
 
 
   @Transactional
-  public <S> void saveConnectionByConnectionRequest(ConnectionRequests connectionRequests) {
+  public  void saveConnectionByConnectionRequest(ConnectionRequests connectionRequests) {
 
     final ConnectionRequests cr = connectionRequests;
 
@@ -229,6 +234,5 @@ public class ConnectionService {
     }
 
   }
-
-
+  
 }

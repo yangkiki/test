@@ -30,5 +30,8 @@ public interface ConnectionsRepository extends
   @Query("update Connections  c set c.group.id=:groupId where c.memberUser.id=:userId and  c.connectedUser.id=:friendId ")
   public void updateFriendGroup(@Param("userId") Long userId, @Param("groupId") Long groupId, @Param("friendId") Long friendId);
 
+  @Query(" select  c from Connections c where c.memberUser.id=:receptId and  c.connectedUser.id=:sendId ")
+  Connections findConnectionByConnectedUserAndMemberUser(@Param("sendId") Long sendId,@Param("receptId")Long receptId);
+
 
 }
