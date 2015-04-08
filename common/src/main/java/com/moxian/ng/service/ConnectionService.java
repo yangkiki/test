@@ -4,7 +4,6 @@
  */
 package com.moxian.ng.service;
 
-<<<<<<< .mine
 import com.moxian.ng.DTOUtils;
 import com.moxian.ng.domain.Group;
 import com.moxian.ng.domain.UserAccount;
@@ -13,16 +12,6 @@ import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.repository.ConnectionsRepository;
 import com.moxian.ng.repository.GroupRepository;
 import com.moxian.ng.repository.UserRepository;
-=======
-import javax.inject.Inject;
-
-
-
-
-
-
-
->>>>>>> .theirs
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,14 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.moxian.ng.DTOUtils;
-import com.moxian.ng.domain.Post;
-import com.moxian.ng.domain.UserAccount;
-import com.moxian.ng.model.ConnectionsDetails;
-import com.moxian.ng.model.PostDetails;
-import com.moxian.ng.model.UserAccountDetails;
-import com.moxian.ng.repository.ConnectionsRepository;
-import com.moxian.ng.repository.UserRepository;
+import javax.inject.Inject;
+
 
 /**
  * @author Hantsy Bai<hantsy@gmail.com>
@@ -78,10 +61,6 @@ public class ConnectionService {
 
   }
   
-  public ConnectionsDetails savePost(ConnectionsForm form) {
-      if (log.isDebugEnabled()) {
-          log.debug("save post @" + form);
-      }
 
   public Page<UserAccountDetails> findFriendsByGroupId(Long userId,Long groupId, Pageable page) {
 
