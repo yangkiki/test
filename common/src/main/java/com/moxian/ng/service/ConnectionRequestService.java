@@ -25,6 +25,9 @@ public class ConnectionRequestService {
 	@Inject
 	private ConnectionRequestRepository connectionRequestRepository;
 	
+	@Inject
+	private ConnectionService connectionService;
+	
 	@Transactional
 	public ConnectionRequestsDetails saveConnectionRequest(ConnectionRequestForm form) {
         if (log.isDebugEnabled()) {
@@ -111,15 +114,12 @@ public class ConnectionRequestService {
             throw new ResourceNotFoundException(id);
 		}
 		
-		ConnectionRequests.Status  status = null;
-		
 		if(action){
-			status = ConnectionRequests.Status.ACCEPT;
+			connectionRequests.setStatus(ConnectionRequests.Status.ACCEPT);
+			this.connectionService.saveConnectionByConnectionRequest(connectionRequests);
 		}else{
-			status = ConnectionRequests.Status.REJECT;
+			connectionRequests.setStatus(ConnectionRequests.Status.REJECT);
 		}
-		
-		connectionRequests.setStatus(status);
 		
 		//this.connectionRequestRepository.save(connectionRequests);
 	}
