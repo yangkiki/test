@@ -7,10 +7,30 @@ public class FansForm implements Serializable {
 
 	private static final long serialVersionUID = -9069730988536092598L;
 
-	private UserAccountDetails send;
-
-	private UserAccountDetails recept;
+//	private UserAccountDetails send;
+//
+//	private UserAccountDetails recept;
 	
+	private Long sendId;
+	
+	private Long receptId;
+	
+	public Long getSendId() {
+		return sendId;
+	}
+
+	public void setSendId(Long sendId) {
+		this.sendId = sendId;
+	}
+
+	public Long getReceptId() {
+		return receptId;
+	}
+
+	public void setReceptId(Long receptId) {
+		this.receptId = receptId;
+	}
+
 	private boolean active;
 
 	public boolean isActive() {
@@ -21,21 +41,21 @@ public class FansForm implements Serializable {
 		this.active = active;
 	}
 
-	public UserAccountDetails getSend() {
-		return send;
-	}
-
-	public void setSend(UserAccountDetails send) {
-		this.send = send;
-	}
-
-	public UserAccountDetails getRecept() {
-		return recept;
-	}
-
-	public void setRecept(UserAccountDetails recept) {
-		this.recept = recept;
-	}
+//	public UserAccountDetails getSend() {
+//		return send;
+//	}
+//
+//	public void setSend(UserAccountDetails send) {
+//		this.send = send;
+//	}
+//
+//	public UserAccountDetails getRecept() {
+//		return recept;
+//	}
+//
+//	public void setRecept(UserAccountDetails recept) {
+//		this.recept = recept;
+//	}
 
 	private LocalDateTime createOn;
 

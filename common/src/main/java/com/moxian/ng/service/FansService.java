@@ -14,7 +14,6 @@ import com.moxian.ng.domain.UserAccount;
 import com.moxian.ng.exception.ResourceNotFoundException;
 import com.moxian.ng.model.FansDetails;
 import com.moxian.ng.model.FansForm;
-import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.repository.ConnectionsRepository;
 import com.moxian.ng.repository.FansRepository;
 import com.moxian.ng.repository.UserRepository;
@@ -35,13 +34,18 @@ public class FansService {
 
 	@Transactional
 	public FansDetails savefans(FansForm form) {
+		
+		UserAccount  connectedUser = this.userRepository.findOne(form.getSendId());
+		UserAccount  memberUser = this.userRepository.findOne(form.getReceptId());
 
 		if (log.isDebugEnabled()) {
 			log.debug("save fans @" + form);
 		}
 		Fans fans = DTOUtils.map(form, Fans.class);
+		fans.setSend(connectedUser);
+		fans.setRecept(memberUser);
 
-		Fans fansOld = this.findFansBySendAndRecept(form.getSend(),form.getRecept());
+		Fans fansOld = this.findFansBySendAndRecept(form.getSendId(),form.getReceptId());
 
 		Fans saved = null;
 
@@ -51,9 +55,6 @@ public class FansService {
 			saved = fansOld;
 			saved.setActive(true);
 		}
-		
-		UserAccount  connectedUser = this.userRepository.findOne(fans.getSend().getId());
-		UserAccount  memberUser = this.userRepository.findOne(fans.getRecept().getId());
 		
 		Connections send = this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connectedUser.getId(),memberUser.getId());
 		
@@ -161,19 +162,19 @@ public class FansService {
 	// return DTOUtils.mapPage(result, FansDetails.class);
 	// }
 
-	private Fans findFansBySendAndRecept(UserAccountDetails send,
-			UserAccountDetails recept) {
+	private Fans findFansBySendAndRecept(Long sendId,
+			Long receptId) {
 
-		Assert.notNull(send, "send can not be null");
-		Assert.notNull(send, "recept can not be null");
+		Assert.notNull(sendId, "send can not be null");
+		Assert.notNull(receptId, "recept can not be null");
 
 		if (log.isDebugEnabled()) {
-			log.debug("find fans by send@" + send);
-			log.debug("find fans by recept@" + recept);
+			log.debug("find fans by send@" + sendId);
+			log.debug("find fans by recept@" + receptId);
 		}
 
-		return this.fansRepository.findFansBySendAndRecept(send.getId(),
-				recept.getId());
+		return this.fansRepository.findFansBySendAndRecept(sendId,
+				receptId);
 
 	}
 
