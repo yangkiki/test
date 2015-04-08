@@ -1,9 +1,13 @@
 package com.moxian.ng.service;
 
 
+import java.time.LocalDateTime;
+
 import com.moxian.ng.domain.City;
+import com.moxian.ng.domain.Connections;
 import com.moxian.ng.domain.Country;
 import com.moxian.ng.domain.GrantedPermission;
+import com.moxian.ng.domain.Group;
 import com.moxian.ng.domain.Permission;
 import com.moxian.ng.domain.Post;
 import com.moxian.ng.domain.Province;
@@ -11,8 +15,10 @@ import com.moxian.ng.domain.Role;
 import com.moxian.ng.domain.UserAccount;
 import com.moxian.ng.domain.UserProfile;
 import com.moxian.ng.repository.CityRepository;
+import com.moxian.ng.repository.ConnectionsRepository;
 import com.moxian.ng.repository.CountryRepository;
 import com.moxian.ng.repository.GrantedPermissionRepository;
+import com.moxian.ng.repository.GroupRepository;
 import com.moxian.ng.repository.MessageRepository;
 import com.moxian.ng.repository.PermissionRepository;
 import com.moxian.ng.repository.PostRepository;
@@ -67,6 +73,12 @@ public class DataImporter {
 
     @Inject
     private GrantedPermissionRepository grantedPermissionRepository;
+    
+    @Inject
+    private GroupRepository groupRepository;
+    
+    @Inject
+    private ConnectionsRepository connectionsRepository;
 
 //    @Inject
 //    private StaffProfileRepository staffProfileRepository;
@@ -127,6 +139,7 @@ public class DataImporter {
         }
 
     }
+    
 
     private void loadAddressData() {
         if (log.isInfoEnabled()) {
@@ -502,7 +515,55 @@ public class DataImporter {
                 = new UserAccount("admin", passwordEncoder.encode("test123"), "Administrator", false,
                         UserAccount.Type.STAFF, "ADMIN");
 
+        UserAccount userAccount2
+        = new UserAccount("test001", passwordEncoder.encode("test123"), "test001", false,
+                UserAccount.Type.STAFF, "ADMIN");
+        UserAccount userAccount3
+        = new UserAccount("test002", passwordEncoder.encode("test123"), "test002", false,
+                UserAccount.Type.STAFF, "ADMIN");
         createUserAccountIfAbsent(userAccount);
+        createUserAccountIfAbsent(userAccount2);
+        createUserAccountIfAbsent(userAccount3);
+        
+        Group group = new Group();
+        group.setActive(true);
+        group.setCreateOn(LocalDateTime.now());
+        group.setMemberUser(userAccount3);
+        group.setName("好友");
+        
+        Group group1 = new Group();
+        group1.setActive(true);
+        group1.setCreateOn(LocalDateTime.now());
+        group1.setName("同事");
+        group1.setMemberUser(userAccount);
+        
+        Group group2 = new Group();
+        group2.setActive(true);
+        group2.setCreateOn(LocalDateTime.now());
+        group2.setName("同学");
+        group2.setMemberUser(userAccount2);
+        
+        Group group3 = new Group();
+        group3.setActive(true);
+        group3.setCreateOn(LocalDateTime.now());
+        group3.setName("家人");
+        
+        this.groupRepository.save(group);
+        this.groupRepository.save(group1);
+        this.groupRepository.save(group2);
+        this.groupRepository.save(group3);
+        
+        
+        Connections  con = new Connections();
+        con.setConnectedUser(userAccount);
+        con.setMemberUser(userAccount3);
+        con.setCreateOn(LocalDateTime.now());
+        con.setSource("");
+        con.setType(Connections.Type.BILATERAL);
+        
+        this.connectionsRepository.save(con);
+        
+        
     }
 
     private void createRoleIfAbsent(Role role) {
