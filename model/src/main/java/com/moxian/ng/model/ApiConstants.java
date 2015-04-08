@@ -41,5 +41,7 @@ public class ApiConstants {
     public static final String URI_API_APPUPDATE="/appupdates";
 
     public static final String URI_API_CONNECTION="/connections";
+    
+    public static final String URI_CONNECTIONREQUEST="/connectionsrequest";
 
 }
