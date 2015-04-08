@@ -4,6 +4,7 @@ package com.moxian.ng.service;
 import com.moxian.ng.domain.City;
 import com.moxian.ng.domain.Connections;
 import com.moxian.ng.domain.Country;
+import com.moxian.ng.domain.Fans;
 import com.moxian.ng.domain.GrantedPermission;
 import com.moxian.ng.domain.Group;
 import com.moxian.ng.domain.Permission;
@@ -15,6 +16,7 @@ import com.moxian.ng.domain.UserProfile;
 import com.moxian.ng.repository.CityRepository;
 import com.moxian.ng.repository.ConnectionsRepository;
 import com.moxian.ng.repository.CountryRepository;
+import com.moxian.ng.repository.FansRepository;
 import com.moxian.ng.repository.GrantedPermissionRepository;
 import com.moxian.ng.repository.GroupRepository;
 import com.moxian.ng.repository.MessageRepository;
@@ -79,6 +81,9 @@ public class DataImporter {
 
   @Inject
   private ConnectionsRepository connectionsRepository;
+  
+  @Inject
+  private FansRepository fansRepository;
 
 //    @Inject
 //    private StaffProfileRepository staffProfileRepository;
@@ -521,10 +526,30 @@ public class DataImporter {
     UserAccount userAccount3
         = new UserAccount("test002", passwordEncoder.encode("test123"), "test002", false,
                           UserAccount.Type.STAFF, "ADMIN");
+    
+    UserAccount userAccount4
+    = new UserAccount("test003", passwordEncoder.encode("test123"), "test002", false,
+                      UserAccount.Type.STAFF, "ADMIN");
+    
+    UserAccount userAccount5
+    = new UserAccount("test004", passwordEncoder.encode("test123"), "test002", false,
+                      UserAccount.Type.STAFF, "ADMIN");
+    
+    UserAccount userAccount6
+    = new UserAccount("test005", passwordEncoder.encode("test123"), "test002", false,
+                      UserAccount.Type.STAFF, "ADMIN");
+    
+    UserAccount userAccount7
+    = new UserAccount("test006", passwordEncoder.encode("test123"), "test002", false,
+                      UserAccount.Type.STAFF, "ADMIN");
 
     UserAccount saved1 = createUserAccountIfAbsent(userAccount);
     UserAccount saved2 = createUserAccountIfAbsent(userAccount2);
     UserAccount saved3 = createUserAccountIfAbsent(userAccount3);
+    UserAccount saved4 = createUserAccountIfAbsent(userAccount4);
+    UserAccount saved5 = createUserAccountIfAbsent(userAccount5);
+    UserAccount saved6 = createUserAccountIfAbsent(userAccount6);
+    UserAccount saved7 = createUserAccountIfAbsent(userAccount7);
 
     Group group = new Group();
     group.setActive(true);
@@ -549,11 +574,25 @@ public class DataImporter {
     group3.setCreateOn(LocalDateTime.now());
     group3.setName("家人");
     group3.setMemberUser(saved1);
+    
+    Group group4 = new Group();
+    group4.setActive(true);
+    group4.setCreateOn(LocalDateTime.now());
+    group4.setName("陌生人");
+    group4.setMemberUser(saved1);
+    
+    Group group5 = new Group();
+    group5.setActive(true);
+    group5.setCreateOn(LocalDateTime.now());
+    group5.setName("黑名单");
+    group5.setMemberUser(saved1);
 
     Group groupSave1 = createGroupIfAbsent(group);
     Group groupSave2 = createGroupIfAbsent(group1);
     Group groupSave3 = createGroupIfAbsent(group2);
     Group groupSave4 = createGroupIfAbsent(group3);
+    Group groupSave5 = createGroupIfAbsent(group4);
+    Group groupSave6 = createGroupIfAbsent(group4);
 
     Connections con = new Connections();
     con.setConnectedUser(saved2);
@@ -561,11 +600,176 @@ public class DataImporter {
     con.setCreateOn(LocalDateTime.now());
     con.setSource("");
     con.setType(Connections.Type.BILATERAL);
+    
+    Connections con1 = new Connections();
+    con1.setConnectedUser(saved3);
+    con1.setMemberUser(saved1);
+    con1.setCreateOn(LocalDateTime.now());
+    con1.setSource("");
+    con1.setType(Connections.Type.BILATERAL);
+    
+    
+    Connections con2 = new Connections();
+    con2.setConnectedUser(saved4);
+    con2.setMemberUser(saved1);
+    con2.setCreateOn(LocalDateTime.now());
+    con2.setSource("");
+    con2.setType(Connections.Type.BILATERAL);
+    
+    
+    Connections con3 = new Connections();
+    con3.setConnectedUser(saved5);
+    con3.setMemberUser(saved1);
+    con3.setCreateOn(LocalDateTime.now());
+    con3.setSource("");
+    con3.setType(Connections.Type.BILATERAL);
+    
+    Connections con4 = new Connections();
+    con4.setConnectedUser(saved5);
+    con4.setMemberUser(saved6);
+    con4.setCreateOn(LocalDateTime.now());
+    con4.setSource("");
+    con4.setType(Connections.Type.UNIDIRECTIONAL);
+    
+    Connections con5 = new Connections();
+    con5.setConnectedUser(saved5);
+    con5.setMemberUser(saved7);
+    con5.setCreateOn(LocalDateTime.now());
+    con5.setSource("");
+    con5.setType(Connections.Type.UNIDIRECTIONAL);
+    
+    
+    Connections con6 = new Connections();
+    con6.setConnectedUser(saved6);
+    con6.setMemberUser(saved7);
+    con6.setCreateOn(LocalDateTime.now());
+    con6.setSource("");
+    con6.setType(Connections.Type.UNIDIRECTIONAL);
+    
+    Connections con7 = new Connections();
+    con7.setConnectedUser(saved1);
+    con7.setMemberUser(saved2);
+    con7.setCreateOn(LocalDateTime.now());
+    con7.setSource("");
+    con7.setType(Connections.Type.BILATERAL);
+    
+    Connections con8 = new Connections();
+    con8.setConnectedUser(saved1);
+    con8.setMemberUser(saved3);
+    con8.setCreateOn(LocalDateTime.now());
+    con8.setSource("");
+    con8.setType(Connections.Type.BILATERAL);
+    
+    
+    Connections con9 = new Connections();
+    con9.setConnectedUser(saved1);
+    con9.setMemberUser(saved4);
+    con9.setCreateOn(LocalDateTime.now());
+    con9.setSource("");
+    con9.setType(Connections.Type.BILATERAL);
+    
+    
+    Connections con10 = new Connections();
+    con10.setConnectedUser(saved1);
+    con10.setMemberUser(saved5);
+    con10.setCreateOn(LocalDateTime.now());
+    con10.setSource("");
+    con10.setType(Connections.Type.BILATERAL);
 
     createConnectionsIfAbsent(con);
-
-
+    createConnectionsIfAbsent(con1);
+    createConnectionsIfAbsent(con2);
+    createConnectionsIfAbsent(con3);
+    createConnectionsIfAbsent(con4);
+    createConnectionsIfAbsent(con5);
+    createConnectionsIfAbsent(con6);
+    createConnectionsIfAbsent(con7);
+    createConnectionsIfAbsent(con8);
+    createConnectionsIfAbsent(con9);
+    createConnectionsIfAbsent(con10);
+    
+    Fans fans = new Fans();
+    fans.setActive(true);
+    fans.setCreateOn(LocalDateTime.now());
+    fans.setSend(saved2);
+    fans.setRecept(saved1);
+    
+    Fans fans1 = new Fans();
+    fans1.setActive(true);
+    fans1.setCreateOn(LocalDateTime.now());
+    fans1.setSend(saved1);
+    fans1.setRecept(saved2);
+    
+    Fans fans2 = new Fans();
+    fans2.setActive(true);
+    fans2.setCreateOn(LocalDateTime.now());
+    fans2.setSend(saved3);
+    fans2.setRecept(saved1);
+    
+    Fans fans3 = new Fans();
+    fans3.setActive(true);
+    fans3.setCreateOn(LocalDateTime.now());
+    fans3.setSend(saved1);
+    fans3.setRecept(saved3);
+    
+    Fans fans4 = new Fans();
+    fans4.setActive(true);
+    fans4.setCreateOn(LocalDateTime.now());
+    fans4.setSend(saved4);
+    fans4.setRecept(saved1);
+    
+    Fans fans5 = new Fans();
+    fans5.setActive(true);
+    fans5.setCreateOn(LocalDateTime.now());
+    fans5.setSend(saved1);
+    fans5.setRecept(saved4);
+    
+    Fans fans6 = new Fans();
+    fans6.setActive(true);
+    fans6.setCreateOn(LocalDateTime.now());
+    fans6.setSend(saved5);
+    fans6.setRecept(saved1);
+    
+    Fans fans7 = new Fans();
+    fans7.setActive(true);
+    fans7.setCreateOn(LocalDateTime.now());
+    fans7.setSend(saved1);
+    fans7.setRecept(saved5);
+    
+    Fans fans8 = new Fans();
+    fans8.setActive(true);
+    fans8.setCreateOn(LocalDateTime.now());
+    fans8.setSend(saved5);
+    fans8.setRecept(saved6);
+    
+    
+    Fans fans9 = new Fans();
+    fans9.setActive(true);
+    fans9.setCreateOn(LocalDateTime.now());
+    fans9.setSend(saved6);
+    fans9.setRecept(saved7);
+    
+    createFansIfAbsent(fans);
+    createFansIfAbsent(fans1);
+    createFansIfAbsent(fans2);
+    createFansIfAbsent(fans3);
+    createFansIfAbsent(fans4);
+    createFansIfAbsent(fans5);
+    createFansIfAbsent(fans6);
+    createFansIfAbsent(fans7);
+    createFansIfAbsent(fans8);
+    createFansIfAbsent(fans9);
+ 
   }
+  
+  private void createFansIfAbsent(Fans fans) {
+	  
+	  Fans existedFans = 
+			  this.fansRepository.findFansBySendAndRecept(fans.getSend().getId(),fans.getRecept().getId());
+	  if (existedFans == null) {
+	      this.fansRepository.save(fans);
+	    }
+	  }
 
   private void createRoleIfAbsent(Role role) {
     if (this.roleRepository.findByName(role.getName()) == null) {
@@ -586,8 +790,8 @@ public class DataImporter {
   private Connections createConnectionsIfAbsent(Connections connections) {
     final Connections
         existedConnections =
-        this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connections.getMemberUser().getId(),
-                                                                              connections.getConnectedUser()
+        this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connections.getConnectedUser().getId(),
+                                                                              connections.getMemberUser()
                                                                                   .getId());
     if (existedConnections == null) {
       Connections connectionsSave = this.connectionsRepository.save(connections);

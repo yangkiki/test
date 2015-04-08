@@ -1,21 +1,27 @@
 package com.moxian.ng.domain;
 
 import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import com.moxian.ng.domain.support.PersistableEntity;
 
 @Entity
 @Table(name = "fans")
 public class Fans extends PersistableEntity<Long> {
 
-	private static final long serialVersionUID = 665585765715240344L;
+	private static final long serialVersionUID = 1L;
 
-	@Column(name = "send")
+	@ManyToOne
+	@JoinColumn(name = "send_id")
 	private UserAccount send;
 
-	@Column(name = "recept")
+	@ManyToOne
+	@JoinColumn(name = "recept_id")
 	private UserAccount recept;
 
 	@Column(name = "create_on")
