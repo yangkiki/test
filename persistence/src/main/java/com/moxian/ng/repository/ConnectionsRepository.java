@@ -34,4 +34,6 @@ public interface ConnectionsRepository extends
   Connections findConnectionByConnectedUserAndMemberUser(@Param("sendId") Long sendId,@Param("receptId")Long receptId);
 
 
+
+
 }

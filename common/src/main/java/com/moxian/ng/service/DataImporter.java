@@ -1,8 +1,6 @@
 package com.moxian.ng.service;
 
 
-import java.time.LocalDateTime;
-
 import com.moxian.ng.domain.City;
 import com.moxian.ng.domain.Connections;
 import com.moxian.ng.domain.Country;
@@ -36,6 +34,8 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -45,40 +45,40 @@ import javax.sql.DataSource;
 @Transactional
 public class DataImporter {
 
-    private static final Logger log = LoggerFactory.getLogger(DataImporter.class);
+  private static final Logger log = LoggerFactory.getLogger(DataImporter.class);
 
-    @Inject
-    private Environment env;
+  @Inject
+  private Environment env;
 
-    @Inject
-    private UserRepository userRepository;
+  @Inject
+  private UserRepository userRepository;
 
-    @Inject
-    private PasswordEncoder passwordEncoder;
+  @Inject
+  private PasswordEncoder passwordEncoder;
 
-    @Inject
-    private CountryRepository countryRepository;
+  @Inject
+  private CountryRepository countryRepository;
 
-    @Inject
-    private ProvinceRepository provinceRepository;
+  @Inject
+  private ProvinceRepository provinceRepository;
 
-    @Inject
-    private CityRepository cityRepository;
+  @Inject
+  private CityRepository cityRepository;
 
-    @Inject
-    private RoleRepository roleRepository;
+  @Inject
+  private RoleRepository roleRepository;
 
-    @Inject
-    private PermissionRepository permissionRepository;
+  @Inject
+  private PermissionRepository permissionRepository;
 
-    @Inject
-    private GrantedPermissionRepository grantedPermissionRepository;
-    
-    @Inject
-    private GroupRepository groupRepository;
-    
-    @Inject
-    private ConnectionsRepository connectionsRepository;
+  @Inject
+  private GrantedPermissionRepository grantedPermissionRepository;
+
+  @Inject
+  private GroupRepository groupRepository;
+
+  @Inject
+  private ConnectionsRepository connectionsRepository;
 
 //    @Inject
 //    private StaffProfileRepository staffProfileRepository;
@@ -89,11 +89,11 @@ public class DataImporter {
 //    @Inject
 //    private EnterpriseRepository enterpriseRepository;
 
-    @Inject
-    private MessageRepository messageRepository;
+  @Inject
+  private MessageRepository messageRepository;
 
-    @Inject
-    private PostRepository postRepository;
+  @Inject
+  private PostRepository postRepository;
 //
 //    @Inject
 //    private ProductRepository productRepository;
@@ -110,84 +110,84 @@ public class DataImporter {
 //    @Inject
 //    private BackLogItemRepository backLogItemRepository;
 
-    @Inject
-    private UserProfileRepository userProfileRepository;
+  @Inject
+  private UserProfileRepository userProfileRepository;
 
 //    @Inject
 //    private BankCardInfoRepository bankCardInfoRepository;
 
-    @Inject
-    private ResourceLoader resourceLoader;
+  @Inject
+  private ResourceLoader resourceLoader;
 
-    @Inject
-    DataSource dataSource;
+  @Inject
+  DataSource dataSource;
 
-    @PostConstruct
-    public void onPostConstruct() {
-        if (log.isInfoEnabled()) {
-            log.info("importing data into database...");
-        }
-
-        initialzePostDatas();
-
-        loadAddressData();
-        loadPermissions();
-        loadReservedUserData();
-
-        if (!"prod".equals(env.getActiveProfiles()[0])) {
-           // loadTestData();
-        }
-
-    }
-    
-
-    private void loadAddressData() {
-        if (log.isInfoEnabled()) {
-            log.info("loading address data...");
-        }
-
-        // add contry, city sample data.
-        Country country = new Country("中国");
-        if (this.countryRepository.findByName("中国") == null) {
-            country = countryRepository.save(country);
-        }
-
-        Province province = new Province("上海");
-        province.setCountry(country);
-
-        if (this.provinceRepository.findByName("上海") == null) {
-            provinceRepository.save(province);
-        }
-
-        City city = new City("上海");
-        city.setProvince(province);
-        if (this.cityRepository.findByName("上海") == null) {
-            cityRepository.save(city);
-        }
-
-        Province province2 = new Province("江苏");
-        province2.setCountry(country);
-        if (this.provinceRepository.findByName("江苏") == null) {
-            provinceRepository.save(province2);
-        }
-
-        City city2 = new City("南京");
-        city2.setProvince(province2);
-        if (this.cityRepository.findByName("南京") == null) {
-            cityRepository.save(city2);
-        }
-
-        City city3 = new City("苏州");
-        city3.setProvince(province2);
-        if (this.cityRepository.findByName("苏州") == null) {
-            cityRepository.save(city3);
-        }
+  @PostConstruct
+  public void onPostConstruct() {
+    if (log.isInfoEnabled()) {
+      log.info("importing data into database...");
     }
 
-    private void loadPermissions() {
-        if (log.isInfoEnabled()) {
-            log.info("loading permissions...");
-        }
+    initialzePostDatas();
+
+    loadAddressData();
+    loadPermissions();
+    loadReservedUserData();
+
+    if (!"prod".equals(env.getActiveProfiles()[0])) {
+      // loadTestData();
+    }
+
+  }
+
+
+  private void loadAddressData() {
+    if (log.isInfoEnabled()) {
+      log.info("loading address data...");
+    }
+
+    // add contry, city sample data.
+    Country country = new Country("中国");
+    if (this.countryRepository.findByName("中国") == null) {
+      country = countryRepository.save(country);
+    }
+
+    Province province = new Province("上海");
+    province.setCountry(country);
+
+    if (this.provinceRepository.findByName("上海") == null) {
+      provinceRepository.save(province);
+    }
+
+    City city = new City("上海");
+    city.setProvince(province);
+    if (this.cityRepository.findByName("上海") == null) {
+      cityRepository.save(city);
+    }
+
+    Province province2 = new Province("江苏");
+    province2.setCountry(country);
+    if (this.provinceRepository.findByName("江苏") == null) {
+      provinceRepository.save(province2);
+    }
+
+    City city2 = new City("南京");
+    city2.setProvince(province2);
+    if (this.cityRepository.findByName("南京") == null) {
+      cityRepository.save(city2);
+    }
+
+    City city3 = new City("苏州");
+    city3.setProvince(province2);
+    if (this.cityRepository.findByName("苏州") == null) {
+      cityRepository.save(city3);
+    }
+  }
+
+  private void loadPermissions() {
+    if (log.isInfoEnabled()) {
+      log.info("loading permissions...");
+    }
 
 //        createPermissionsIfAbsent(bankPermissions());
 //        createPermissionsIfAbsent(accountPermissions());
@@ -200,7 +200,7 @@ public class DataImporter {
 //        createPermissionsIfAbsent(orderPermissions());
 //        createPermissionsIfAbsent(billPermissions());
 //        createPermissionsIfAbsent(reportPermissions());
-    }
+  }
 
 //    private Permission[] bankPermissions() {
 //        int i = 1;
@@ -494,95 +494,120 @@ public class DataImporter {
 //        }
 //    }
 
-    private void createPermissionIfAbsent(Permission permission) {
-        if (this.permissionRepository.findByName(permission.getName()) == null) {
-            this.permissionRepository.save(permission);
-        }
+  private void createPermissionIfAbsent(Permission permission) {
+    if (this.permissionRepository.findByName(permission.getName()) == null) {
+      this.permissionRepository.save(permission);
+    }
+  }
+
+  private void loadReservedUserData() {
+    if (log.isInfoEnabled()) {
+      log.info("loading reserved roles...");
     }
 
-    private void loadReservedUserData() {
-        if (log.isInfoEnabled()) {
-            log.info("loading reserved roles...");
-        }
+    Role[] roles = new Role[]{new Role(Role.ROLE_ADMIN), new Role(Role.ROLE_USER)};
 
-        Role[] roles = new Role[]{new Role(Role.ROLE_ADMIN), new Role(Role.ROLE_USER)};
+    for (Role r : roles) {
+      createRoleIfAbsent(r);
+    }
 
-        for (Role r : roles) {
-            createRoleIfAbsent(r);
-        }
+    UserAccount userAccount
+        = new UserAccount("admin", passwordEncoder.encode("test123"), "Administrator", false,
+                          UserAccount.Type.STAFF, "ADMIN");
 
-        UserAccount userAccount
-                = new UserAccount("admin", passwordEncoder.encode("test123"), "Administrator", false,
-                        UserAccount.Type.STAFF, "ADMIN");
-
-        UserAccount userAccount2
+    UserAccount userAccount2
         = new UserAccount("test001", passwordEncoder.encode("test123"), "test001", false,
-                UserAccount.Type.STAFF, "ADMIN");
-        UserAccount userAccount3
+                          UserAccount.Type.STAFF, "ADMIN");
+    UserAccount userAccount3
         = new UserAccount("test002", passwordEncoder.encode("test123"), "test002", false,
-                UserAccount.Type.STAFF, "ADMIN");
-        createUserAccountIfAbsent(userAccount);
-        createUserAccountIfAbsent(userAccount2);
-        createUserAccountIfAbsent(userAccount3);
-        
-        Group group = new Group();
-        group.setActive(true);
-        group.setCreateOn(LocalDateTime.now());
-        group.setMemberUser(userAccount3);
-        group.setName("好友");
-        
-        Group group1 = new Group();
-        group1.setActive(true);
-        group1.setCreateOn(LocalDateTime.now());
-        group1.setName("同事");
-        group1.setMemberUser(userAccount);
-        
-        Group group2 = new Group();
-        group2.setActive(true);
-        group2.setCreateOn(LocalDateTime.now());
-        group2.setName("同学");
-        group2.setMemberUser(userAccount2);
-        
-        Group group3 = new Group();
-        group3.setActive(true);
-        group3.setCreateOn(LocalDateTime.now());
-        group3.setName("家人");
-        
-        this.groupRepository.save(group);
-        this.groupRepository.save(group1);
-        this.groupRepository.save(group2);
-        this.groupRepository.save(group3);
-        
-        
-        Connections  con = new Connections();
-        con.setConnectedUser(userAccount);
-        con.setMemberUser(userAccount3);
-        con.setCreateOn(LocalDateTime.now());
-        con.setSource("");
-        con.setType(Connections.Type.BILATERAL);
-        
-        this.connectionsRepository.save(con);
-        
-        
-    }
+                          UserAccount.Type.STAFF, "ADMIN");
 
-    private void createRoleIfAbsent(Role role) {
-        if (this.roleRepository.findByName(role.getName()) == null) {
-            this.roleRepository.save(role);
-        }
-    }
+    UserAccount saved1 = createUserAccountIfAbsent(userAccount);
+    UserAccount saved2 = createUserAccountIfAbsent(userAccount2);
+    UserAccount saved3 = createUserAccountIfAbsent(userAccount3);
 
-    private UserAccount createUserAccountIfAbsent(UserAccount user) {
-        final UserAccount existedUserAccount = this.userRepository.findByUsername(user.getUsername());
-        if (existedUserAccount == null) {
-            UserAccount userAccount = this.userRepository.save(user);
-            this.userRepository.flush();
-            return userAccount;
-        }
-        return existedUserAccount;
-    }
+    Group group = new Group();
+    group.setActive(true);
+    group.setCreateOn(LocalDateTime.now());
+    group.setMemberUser(saved1);
+    group.setName("好友");
 
-//    private void loadTestData() {
+    Group group1 = new Group();
+    group1.setActive(true);
+    group1.setCreateOn(LocalDateTime.now());
+    group1.setName("同事");
+    group1.setMemberUser(saved1);
+
+    Group group2 = new Group();
+    group2.setActive(true);
+    group2.setCreateOn(LocalDateTime.now());
+    group2.setName("同学");
+    group2.setMemberUser(saved1);
+
+    Group group3 = new Group();
+    group3.setActive(true);
+    group3.setCreateOn(LocalDateTime.now());
+    group3.setName("家人");
+    group3.setMemberUser(saved1);
+
+    Group groupSave1 = createGroupIfAbsent(group);
+    Group groupSave2 = createGroupIfAbsent(group1);
+    Group groupSave3 = createGroupIfAbsent(group2);
+    Group groupSave4 = createGroupIfAbsent(group3);
+
+    Connections con = new Connections();
+    con.setConnectedUser(saved2);
+    con.setMemberUser(saved1);
+    con.setCreateOn(LocalDateTime.now());
+    con.setSource("");
+    con.setType(Connections.Type.BILATERAL);
+
+    createConnectionsIfAbsent(con);
+
+
+  }
+
+  private void createRoleIfAbsent(Role role) {
+    if (this.roleRepository.findByName(role.getName()) == null) {
+      this.roleRepository.save(role);
+    }
+  }
+
+  private Group createGroupIfAbsent(Group group) {
+    final Group existedGroup = this.groupRepository.findGroupByName(group.getName());
+    if (existedGroup == null) {
+      Group groupSave = this.groupRepository.save(group);
+      this.groupRepository.flush();
+      return groupSave;
+    }
+    return existedGroup;
+  }
+
+  private Connections createConnectionsIfAbsent(Connections connections) {
+    final Connections
+        existedConnections =
+        this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connections.getMemberUser().getId(),
+                                                                              connections.getConnectedUser()
+                                                                                  .getId());
+    if (existedConnections == null) {
+      Connections connectionsSave = this.connectionsRepository.save(connections);
+      this.connectionsRepository.flush();
+      return connectionsSave;
+    }
+    return existedConnections;
+  }
+
+  private UserAccount createUserAccountIfAbsent(UserAccount user) {
+    final UserAccount existedUserAccount = this.userRepository.findByUsername(user.getUsername());
+    if (existedUserAccount == null) {
+      UserAccount userAccount = this.userRepository.save(user);
+      this.userRepository.flush();
+      return userAccount;
+    }
+    return existedUserAccount;
+  }
+
+  //    private void loadTestData() {
 //        if (log.isInfoEnabled()) {
 //            log.info("load test user data...");
 //        }
@@ -1142,24 +1167,24 @@ public class DataImporter {
 //        createOrderIfAbsent(order7);
 //    }
 //
-    private Post createPostIfAbsent(Post post) {
-        final Post existedPost = postRepository.findByTitle(post.getTitle());
-        if (existedPost == null) {
-            return postRepository.save(post);
-        }
-        return existedPost;
+  private Post createPostIfAbsent(Post post) {
+    final Post existedPost = postRepository.findByTitle(post.getTitle());
+    if (existedPost == null) {
+      return postRepository.save(post);
     }
+    return existedPost;
+  }
 
-    private UserProfile createUserProfileIfAbsent(UserProfile profile) {
-        if (log.isDebugEnabled()) {
-            log.debug("findByAccountId @" + profile.getAccount().getId());
-        }
-        final UserProfile existedProfile = userProfileRepository.findByAccountId(profile.getAccount().getId());
-        if (existedProfile == null) {
-            return userProfileRepository.save(profile);
-        }
-        return existedProfile;
+  private UserProfile createUserProfileIfAbsent(UserProfile profile) {
+    if (log.isDebugEnabled()) {
+      log.debug("findByAccountId @" + profile.getAccount().getId());
     }
+    final UserProfile existedProfile = userProfileRepository.findByAccountId(profile.getAccount().getId());
+    if (existedProfile == null) {
+      return userProfileRepository.save(profile);
+    }
+    return existedProfile;
+  }
 
 //    private BankCardInfo createBankCardInfoIfAbsent(BankCardInfo bankCardInfo) {
 //        if (log.isDebugEnabled()) {
@@ -1189,12 +1214,12 @@ public class DataImporter {
 //        return orderFindBySerialNumber;
 //    }
 
-    private void createGrantedPermissionIfAbsent(GrantedPermission grantedPermission) {
-        if (this.grantedPermissionRepository.findByRoleAndPermission(grantedPermission.getRole(),
-                grantedPermission.getPermission()) == null) {
-            grantedPermissionRepository.save(grantedPermission);
-        }
+  private void createGrantedPermissionIfAbsent(GrantedPermission grantedPermission) {
+    if (this.grantedPermissionRepository.findByRoleAndPermission(grantedPermission.getRole(),
+                                                                 grantedPermission.getPermission()) == null) {
+      grantedPermissionRepository.save(grantedPermission);
     }
+  }
 
 //    private Bank createBankIfAbsent(Bank bank) {
 //        final Bank bankFindByName = this.bankRepository.findByName(bank.getName());
@@ -1230,31 +1255,31 @@ public class DataImporter {
 //        return backLogItemCheck;
 //    }
 
-    // private void loadReservedProductData() {
-    //
-    // if (log.isInfoEnabled()) {
-    // log.info("loading reserved enterprise...");
-    // }
-    //
-    // Address address = new Address();
-    // address.setCity("上海");
-    // address.setStreet("浦东");
-    // address.setZipcode("200023");
-    // UserAccount userAccount2 = new UserAccount("test3", passwordEncoder.encode("test123"),
-    // "Test User 3", true,
-    // "TEST");
-    //
-    // userAccount2.setRoles(Arrays.asList("TEST"));
-    //
-    // UserAccount saved2 = createUserAccountIfAbsent(userAccount2);
-    //
-    // Product product = new Product();
-    // product.setName("");
-    // product.setActive(true);
-    //
-    // // this.createProductIfAbsent(product);
-    // }
-    //
+  // private void loadReservedProductData() {
+  //
+  // if (log.isInfoEnabled()) {
+  // log.info("loading reserved enterprise...");
+  // }
+  //
+  // Address address = new Address();
+  // address.setCity("上海");
+  // address.setStreet("浦东");
+  // address.setZipcode("200023");
+  // UserAccount userAccount2 = new UserAccount("test3", passwordEncoder.encode("test123"),
+  // "Test User 3", true,
+  // "TEST");
+  //
+  // userAccount2.setRoles(Arrays.asList("TEST"));
+  //
+  // UserAccount saved2 = createUserAccountIfAbsent(userAccount2);
+  //
+  // Product product = new Product();
+  // product.setName("");
+  // product.setActive(true);
+  //
+  // // this.createProductIfAbsent(product);
+  // }
+  //
 //    private Product createProductIfAbsent(Product product) {
 //        final Product existedProduct = this.productRepository.findByName(product.getName());
 //        if (existedProduct == null) {
@@ -1263,10 +1288,10 @@ public class DataImporter {
 //        return existedProduct;
 //    }
 
-    private void initialzePostDatas() {
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-        populator.addScript(resourceLoader.getResource("classpath:/post_data.sql"));
-        populator.setContinueOnError(true);
-        DatabasePopulatorUtils.execute(populator, dataSource);
-    }
+  private void initialzePostDatas() {
+    ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+    populator.addScript(resourceLoader.getResource("classpath:/post_data.sql"));
+    populator.setContinueOnError(true);
+    DatabasePopulatorUtils.execute(populator, dataSource);
+  }
 }

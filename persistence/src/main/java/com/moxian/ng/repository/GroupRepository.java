@@ -21,4 +21,6 @@ public interface GroupRepository extends JpaRepository<Group, Long>,//
   @Query("update Group g set g.active=:active where g.id=:id")
   public void updateActiveStatus(@Param("id") Long id, @Param("active") boolean active);
 
+  public  Group findGroupByName(String name);
+
 }
