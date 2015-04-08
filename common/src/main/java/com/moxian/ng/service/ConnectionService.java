@@ -5,16 +5,18 @@
 package com.moxian.ng.service;
 
 import com.moxian.ng.DTOUtils;
+import com.moxian.ng.domain.Group;
 import com.moxian.ng.domain.UserAccount;
+import com.moxian.ng.model.GroupDetails;
 import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.repository.ConnectionsRepository;
+import com.moxian.ng.repository.GroupRepository;
 import com.moxian.ng.repository.UserRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,17 +37,20 @@ public class ConnectionService {
   @Inject
   private ConnectionsRepository connectionsRepository;
 
+  @Inject
+  private GroupRepository groupRepository;
 
-  public Page<UserAccountDetails> findDefaultGroupFriends(Long userId, Pageable page) {
+
+
+  public Page<UserAccountDetails> findUserAllGroupFriends(Long userId, Pageable page) {
 
     if (log.isDebugEnabled()) {
-      log.debug(" findDefaultGroupFriends begin userId {} , page {} ", userId, page);
+      log.debug(" findUserAllGroupFriends begin userId {} , page {} ", userId, page);
     }
 
-    Sort sort=new Sort(Sort.Direction.ASC,"name");
 
     Page<UserAccount> users
-        = connectionsRepository.findDefaultGroupFriends(userId, page);
+        = connectionsRepository.findAllGroupFriends(userId, page);
 
     if (log.isDebugEnabled()) {
       log.debug("total elements@" + users.getTotalElements());
@@ -53,6 +58,41 @@ public class ConnectionService {
 
     return DTOUtils.mapPage(users, UserAccountDetails.class);
 
+  }
+
+  public Page<UserAccountDetails> findFriendsByGroupId(Long userId,Long groupId, Pageable page) {
+
+    if (log.isDebugEnabled()) {
+      log.debug(" findFriendsByGroupId begin userId {} ,groupId {} , page {} ", userId, groupId, page);
+    }
+
+
+    Page<UserAccount> users
+        = connectionsRepository.findFriendsByGroup(userId,groupId, page);
+
+    if (log.isDebugEnabled()) {
+      log.debug("total elements@" + users.getTotalElements());
+    }
+
+    return DTOUtils.mapPage(users, UserAccountDetails.class);
+
+  }
+
+  public Page<GroupDetails> findUserAllGroups(Long userId, Pageable page){
+
+    if (log.isDebugEnabled()) {
+      log.debug(" findUserAllGroups begin userId {} , page {} ", userId, page);
+    }
+
+
+    Page<Group> groups
+        = groupRepository.findAllGroups(userId,page);
+
+    if (log.isDebugEnabled()) {
+      log.debug("total elements@" + groups.getTotalElements());
+    }
+
+    return DTOUtils.mapPage(groups, GroupDetails.class);
   }
 
 

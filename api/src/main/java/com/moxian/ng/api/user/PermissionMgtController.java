@@ -10,8 +10,6 @@ import com.moxian.ng.model.CategorizedPermission;
 import com.moxian.ng.model.PermissionDetails;
 import com.moxian.ng.model.PermissionForm;
 import com.moxian.ng.service.UserService;
-import java.util.List;
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  *
