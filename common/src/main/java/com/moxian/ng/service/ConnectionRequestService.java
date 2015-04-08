@@ -7,14 +7,12 @@ import com.moxian.ng.model.ConnectionRequestForm;
 import com.moxian.ng.model.ConnectionRequestsDetails;
 import com.moxian.ng.repository.ConnectionRequestRepository;
 import com.moxian.ng.repository.ConnectionRequestSpecifications;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -90,13 +88,40 @@ public class ConnectionRequestService {
             log.debug("find connectionrequest by id@" + id);
 	    }
 	
-		ConnectionRequests result = this.connectionRequestRepository.findOne(id);
+		ConnectionRequests connectionRequests = this.connectionRequestRepository.findOne(id);
 	
-        if (result == null) {
+        if (connectionRequests == null) {
 	            throw new ResourceNotFoundException(id);
 	    }
 
-		return DTOUtils.map(result, ConnectionRequestsDetails.class);
+		return DTOUtils.map(connectionRequests, ConnectionRequestsDetails.class);
+	}
+
+	@Transactional
+	public void updateReceipt(Long id, boolean action) {
+		Assert.notNull(id, "ConnectionRequests id can not be null");
+		
+		if (log.isDebugEnabled()) {
+            log.debug("find connectionrequest by id@" + id);
+	    }
+	
+		ConnectionRequests connectionRequests = this.connectionRequestRepository.findOne(id);
+		
+		if (connectionRequests == null) {
+            throw new ResourceNotFoundException(id);
+		}
+		
+		ConnectionRequests.Status  status = null;
+		
+		if(action){
+			status = ConnectionRequests.Status.ACCEPT;
+		}else{
+			status = ConnectionRequests.Status.REJECT;
+		}
+		
+		connectionRequests.setStatus(status);
+		
+		//this.connectionRequestRepository.save(connectionRequests);
 	}
 	
 }
