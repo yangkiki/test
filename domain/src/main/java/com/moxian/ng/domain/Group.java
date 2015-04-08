@@ -32,6 +32,17 @@ public class Group extends PersistableEntity<Long> {
   @Column(name = "create_on")
   private LocalDateTime createOn = LocalDateTime.now();
 
+  @Column(name = "active")
+  private boolean active ;
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
+  }
+
   public UserAccount getMemberUser() {
     return memberUser;
   }
@@ -62,6 +73,7 @@ public class Group extends PersistableEntity<Long> {
            "memberUser=" + memberUser +
            ", name='" + name + '\'' +
            ", createOn=" + createOn +
+           ", active=" + active +
            '}';
   }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -21,6 +22,13 @@ public interface ConnectionsRepository extends
 
   @Query(" select  u from Connections c inner  join  c.memberUser as u where  u.id=:userId order by  u.name asc ")
   Page<UserAccount> findAllGroupFriends(@Param("userId") Long userId,  Pageable page);
+
+  @Query(" select  u from Connections c inner  join  c.memberUser as u where c.group.id= null  and u.id=:userId order by  u.name asc ")
+  Page<UserAccount> findNotGroupFriends(@Param("userId") Long userId, Pageable page);
+
+  @Modifying
+  @Query("update Connections  c set c.group.id=:groupId where c.memberUser.id=:userId and  c.connectedUser.id=:friendId ")
+  public void updateFriendGroup(@Param("userId") Long userId, @Param("groupId") Long groupId, @Param("friendId") Long friendId);
 
 
 }

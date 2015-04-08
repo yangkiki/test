@@ -1,7 +1,12 @@
 package com.moxian.ng.service;
 
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import com.moxian.ng.DTOUtils;
+import com.moxian.ng.domain.ConnectionRequests;
+import com.moxian.ng.exception.ResourceNotFoundException;
+import com.moxian.ng.model.ConnectionRequestForm;
+import com.moxian.ng.model.ConnectionRequestsDetails;
+import com.moxian.ng.repository.ConnectionRequestRepository;
+import com.moxian.ng.repository.ConnectionRequestSpecifications;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.moxian.ng.DTOUtils;
-import com.moxian.ng.domain.ConnectionRequests;
-import com.moxian.ng.exception.ResourceNotFoundException;
-import com.moxian.ng.model.ConnectionRequestForm;
-import com.moxian.ng.model.ConnectionRequestsDetails;
-import com.moxian.ng.repository.ConnectionRequestRepository;
-import com.moxian.ng.repository.ConnectionRequestSpecifications;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 
 @Service

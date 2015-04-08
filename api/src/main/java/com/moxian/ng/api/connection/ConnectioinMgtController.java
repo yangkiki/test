@@ -4,6 +4,7 @@ import com.moxian.ng.api.security.CurrentUser;
 import com.moxian.ng.domain.UserAccount;
 import com.moxian.ng.model.ApiConstants;
 import com.moxian.ng.model.GroupDetails;
+import com.moxian.ng.model.GroupForm;
 import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.service.ConnectionService;
 
@@ -12,11 +13,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.inject.Inject;
 
@@ -76,7 +82,7 @@ public class ConnectioinMgtController {
       log.debug("user search criteria   page@ {} ", page);
     }
 
-    Page<GroupDetails> groups = connectionService.findUserAllGroups(user.getId(),page);
+    Page<GroupDetails> groups = connectionService.findUserAllGroups(user.getId(), page);
 
     if (log.isDebugEnabled()) {
       log.debug("count of users @" + groups.getTotalElements());
@@ -84,6 +90,62 @@ public class ConnectioinMgtController {
 
     return groups;
   }
+
+  @RequestMapping(value = {"/groups"}, method = RequestMethod.POST)
+  @ResponseBody
+  public ResponseEntity<Void> createGroup(@RequestBody GroupForm form, UriComponentsBuilder uriComponentsBuilder) {
+    log.debug("save GroupForm data @ {}", form);
+
+    GroupDetails saved = connectionService.saveGroup(form);
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setLocation(uriComponentsBuilder.path(ApiConstants.URI_API_PUBLIC + ApiConstants.URI_BILLES + "/{id}")
+                            .buildAndExpand(saved.getId()).toUri());
+
+    return new ResponseEntity<>(headers, HttpStatus.CREATED);
+  }
+
+  @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=DELETE"})
+  @ResponseBody
+  public ResponseEntity<Void> deleteGroup(@PathVariable("id") Long id) {
+
+    log.debug("delete group id {} @", id);
+
+    connectionService.deleteGroup(id);
+
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=ADD"})
+  @ResponseBody
+  public ResponseEntity<Void> addFriendToGroup(@PathVariable("id") Long groupId,  //
+                                               @CurrentUser UserAccount user,//
+                                               @RequestBody Long[] friends) {
+    if (log.isDebugEnabled()) {
+      log.debug(" user {} add friend length {}  friend  {}  to group {}" ,user.getId(),friends.length,friends,groupId);
+    }
+
+    connectionService.addFriendToGroup(user.getId(), groupId, friends);
+
+
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=REMOVE"})
+  @ResponseBody
+  public ResponseEntity<Void> removeFriendFromGroup(@PathVariable("id") Long groupId,  //
+                                               @CurrentUser UserAccount user,//
+                                               @RequestBody Long[] friends) {
+    if (log.isDebugEnabled()) {
+      log.debug(" user {} remove friend length {}  friend  {}  from group {}" ,user.getId(),friends.length,friends,groupId);
+    }
+
+    connectionService.removeFriendFromGroup(user.getId(), friends);
+
+
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
 
 
 }
