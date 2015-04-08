@@ -50,7 +50,7 @@ public class Connections extends PersistableEntity<Long> {
 
   @Column(name = "type")
   @Enumerated(EnumType.STRING)
-  private Type status=Type.UNIDIRECTIONAL;
+  private Type type = Type.UNIDIRECTIONAL;
 
   public String getSource() {
     return source;
@@ -92,12 +92,12 @@ public class Connections extends PersistableEntity<Long> {
     this.group = group;
   }
 
-  public Type getStatus() {
-    return status;
+  public Type getType() {
+    return type;
   }
 
-  public void setStatus(Type status) {
-    this.status = status;
+  public void setType(Type type) {
+    this.type = type;
   }
 
   @Override
@@ -108,7 +108,7 @@ public class Connections extends PersistableEntity<Long> {
            ", memberUser=" + memberUser +
            ", group=" + group +
            ", connectedUser=" + connectedUser +
-           ", status=" + status +
+           ", type=" + type +
            '}';
   }
 }

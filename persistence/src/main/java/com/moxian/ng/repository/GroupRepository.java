@@ -14,7 +14,7 @@ public interface GroupRepository extends JpaRepository<Group, Long>,//
                                                JpaSpecificationExecutor<Group> {
 
 
-  @Query(" select g from Group  g  inner  join  g.memberUser u where u.id=:userId order by  g.createOn asc  ")
+  @Query(" select g from Group  g  inner  join  g.memberUser u where u.id=:userId  and g.active=true order by  g.createOn asc  ")
   Page<Group> findAllGroups(@Param("userId") Long userId, Pageable page);
 
   @Modifying

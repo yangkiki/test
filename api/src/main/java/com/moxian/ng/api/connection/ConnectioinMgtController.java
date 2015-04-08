@@ -54,6 +54,25 @@ public class ConnectioinMgtController {
     return users;
   }
 
+  @RequestMapping(value = {"/friends"}, method = RequestMethod.GET, params = {"action=NOTINGROUP"})
+  @ResponseBody
+  public Page<UserAccountDetails> getNotGroupFriends(
+      @CurrentUser UserAccount user,
+      @PageableDefault(value = 10) Pageable page) {
+    if (log.isDebugEnabled()) {
+      log.debug("user search criteria   page@ {} ", page);
+    }
+
+    Page<UserAccountDetails> users = connectionService.findNotGroupFriends(user.getId(), page);
+
+    if (log.isDebugEnabled()) {
+      log.debug("count of users @" + users.getTotalElements());
+    }
+
+    return users;
+  }
+
+
   @RequestMapping(value = {"/friends/{id}"}, method = RequestMethod.GET)
   @ResponseBody
   public Page<UserAccountDetails> getFriendsByGroupId(
@@ -91,6 +110,17 @@ public class ConnectioinMgtController {
     return groups;
   }
 
+  @RequestMapping(value = {"/groups/{id}",}, method = RequestMethod.GET)
+  @ResponseBody
+  public ResponseEntity<GroupDetails> getBill(@PathVariable("id") Long id) {
+
+    log.debug("get group data by id @ {}", id);
+
+    GroupDetails bill = connectionService.findGroupById(id);
+
+    return new ResponseEntity<>(bill, HttpStatus.OK);
+  }
+
   @RequestMapping(value = {"/groups"}, method = RequestMethod.POST)
   @ResponseBody
   public ResponseEntity<Void> createGroup(@RequestBody GroupForm form, UriComponentsBuilder uriComponentsBuilder) {
@@ -99,7 +129,7 @@ public class ConnectioinMgtController {
     GroupDetails saved = connectionService.saveGroup(form);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(uriComponentsBuilder.path(ApiConstants.URI_API_PUBLIC + ApiConstants.URI_BILLES + "/{id}")
+    headers.setLocation(uriComponentsBuilder.path(ApiConstants.URI_API_MGT + ApiConstants.URI_API_CONNECTION + "/groups/{id}")
                             .buildAndExpand(saved.getId()).toUri());
 
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
@@ -122,11 +152,11 @@ public class ConnectioinMgtController {
                                                @CurrentUser UserAccount user,//
                                                @RequestBody Long[] friends) {
     if (log.isDebugEnabled()) {
-      log.debug(" user {} add friend length {}  friend  {}  to group {}" ,user.getId(),friends.length,friends,groupId);
+      log.debug(" user {} add friend length {}  friend  {}  to group {}", user.getId(), friends.length, friends,
+                groupId);
     }
 
     connectionService.addFriendToGroup(user.getId(), groupId, friends);
-
 
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
@@ -134,18 +164,17 @@ public class ConnectioinMgtController {
   @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=REMOVE"})
   @ResponseBody
   public ResponseEntity<Void> removeFriendFromGroup(@PathVariable("id") Long groupId,  //
-                                               @CurrentUser UserAccount user,//
-                                               @RequestBody Long[] friends) {
+                                                    @CurrentUser UserAccount user,//
+                                                    @RequestBody Long[] friends) {
     if (log.isDebugEnabled()) {
-      log.debug(" user {} remove friend length {}  friend  {}  from group {}" ,user.getId(),friends.length,friends,groupId);
+      log.debug(" user {} remove friend length {}  friend  {}  from group {}", user.getId(), friends.length,
+                friends, groupId);
     }
 
     connectionService.removeFriendFromGroup(user.getId(), friends);
 
-
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
-
 
 
 }

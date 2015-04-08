@@ -17,13 +17,13 @@ public interface ConnectionsRepository extends
 
 	
 
-  @Query(" select  u from Connections c inner  join  c.memberUser as u where c.group.id=:groupId and u.id=:userId order by  u.name asc ")
+  @Query(" select  c.connectedUser from Connections c inner  join  c.memberUser as u where c.group.id=:groupId and u.id=:userId and c.type='BILATERAL' order by  u.name asc ")
   Page<UserAccount> findFriendsByGroup(@Param("userId") Long userId, @Param("groupId") Long groupId, Pageable page);
 
-  @Query(" select  u from Connections c inner  join  c.memberUser as u where  u.id=:userId order by  u.name asc ")
+  @Query(" select  c.connectedUser from Connections c inner  join  c.memberUser as u where  u.id=:userId  and c.type='BILATERAL'  order by  u.name asc ")
   Page<UserAccount> findAllGroupFriends(@Param("userId") Long userId,  Pageable page);
 
-  @Query(" select  u from Connections c inner  join  c.memberUser as u where c.group.id= null  and u.id=:userId order by  u.name asc ")
+  @Query(" select  c.connectedUser from Connections c inner  join  c.memberUser as u where c.group.id is null  and u.id=:userId  and c.type='BILATERAL'  order by  u.name asc ")
   Page<UserAccount> findNotGroupFriends(@Param("userId") Long userId, Pageable page);
 
   @Modifying

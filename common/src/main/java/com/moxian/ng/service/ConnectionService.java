@@ -4,15 +4,6 @@
  */
 package com.moxian.ng.service;
 
-import java.time.LocalDateTime;
-import javax.inject.Inject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import com.moxian.ng.DTOUtils;
 import com.moxian.ng.domain.ConnectionRequests;
 import com.moxian.ng.domain.Connections;
@@ -26,7 +17,17 @@ import com.moxian.ng.repository.ConnectionsRepository;
 import com.moxian.ng.repository.GroupRepository;
 import com.moxian.ng.repository.UserRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import java.time.LocalDateTime;
+
+import javax.inject.Inject;
 
 /**
  * @author Hantsy Bai<hantsy@gmail.com>
@@ -179,39 +180,54 @@ public class ConnectionService {
     }
   }
 
+  public GroupDetails findGroupById(Long id) {
+    Assert.notNull(id, "group id can not be null");
+
+    log.debug("find group by id @ {}", id);
+
+    Group group = groupRepository.findOne(id);
+
+    if (group == null) {
+      throw new ResourceNotFoundException(id);
+    }
+    GroupDetails groupDetails = DTOUtils.map(group, GroupDetails.class);
+
+    return groupDetails;
+  }
+
 
   @Transactional
   public <S> void saveConnectionByConnectionRequest(ConnectionRequests connectionRequests) {
-	  
-	  	final ConnectionRequests  cr = connectionRequests;
-	  
-	  	Assert.notNull(connectionRequests, "ConnectionRequests id can not be null");
-	  	
-	  	UserAccount  connectedUser = this.userRepository.findOne(cr.getConnectedUser().getId());
-	  	UserAccount  memberUser = this.userRepository.findOne(cr.getMemberUser().getId());
-	  	
-	  	Connections  connected = new Connections();
-	  	connected.setConnectedUser(connectedUser);
-	  	connected.setMemberUser(memberUser);
+
+    final ConnectionRequests cr = connectionRequests;
+
+    Assert.notNull(connectionRequests, "ConnectionRequests id can not be null");
+
+    UserAccount connectedUser = this.userRepository.findOne(cr.getConnectedUser().getId());
+    UserAccount memberUser = this.userRepository.findOne(cr.getMemberUser().getId());
+
+    Connections connected = new Connections();
+    connected.setConnectedUser(connectedUser);
+    connected.setMemberUser(memberUser);
 //	  	connected.setGroup(group);
-	  	connected.setSource(cr.getSource());
-	  	connected.setCreateOn(LocalDateTime.now());
-	  	
-	    this.connectionsRepository.save(connected);
-	  	
-	  	Connections  memberUsers = new Connections();
-	  	memberUsers.setConnectedUser(memberUser);
-	  	memberUsers.setMemberUser(connectedUser);
+    connected.setSource(cr.getSource());
+    connected.setCreateOn(LocalDateTime.now());
+
+    this.connectionsRepository.save(connected);
+
+    Connections memberUsers = new Connections();
+    memberUsers.setConnectedUser(memberUser);
+    memberUsers.setMemberUser(connectedUser);
 //	  	memberUser.setGroup(group);
-	  	memberUsers.setSource(cr.getSource());
-	  	memberUsers.setCreateOn(LocalDateTime.now());
-	  
-	  	this.connectionsRepository.save(memberUsers);
-	  	
-		if (log.isDebugEnabled()) {
-          log.debug("save connection by id@" + connected.getId()+ " and member by id@" + memberUsers.getId());
-	    }
-	
+    memberUsers.setSource(cr.getSource());
+    memberUsers.setCreateOn(LocalDateTime.now());
+
+    this.connectionsRepository.save(memberUsers);
+
+    if (log.isDebugEnabled()) {
+      log.debug("save connection by id@" + connected.getId() + " and member by id@" + memberUsers.getId());
+    }
+
   }
 
 
