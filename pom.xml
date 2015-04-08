@@ -800,9 +800,9 @@
 
                 <!-- jdbc connetion -->
                 <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:mysql://localhost:3306/flbill?useUnicode=true&characterEncoding=utf8]]></jdbc.url>
-                <jdbc.username>fluser</jdbc.username>
-                <jdbc.password>flpwd</jdbc.password>
+                <jdbc.url><![CDATA[jdbc:mysql://localhost:3306/mxdb?useUnicode=true&characterEncoding=utf8]]></jdbc.url>
+                <jdbc.username>mxuser</jdbc.username>
+                <jdbc.password>mxpwd</jdbc.password>
 
                 <!-- hibernate properties -->
                 <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
