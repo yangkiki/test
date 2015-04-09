@@ -1,14 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this
+ * template file, choose Tools | Templates and open the template in the editor.
  */
 package com.moxian.ng.domain;
 
 import com.moxian.ng.domain.support.PersistableEntity;
-
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,98 +14,95 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "connections")
 public class Connections extends PersistableEntity<Long> {
 
-  public enum Type {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-    UNIDIRECTIONAL,//
-    BILATERAL; //
+    public enum Type {
 
-  }
+        UNIDIRECTIONAL, //
+        BILATERAL; //
 
-  @Column(name = "source")
-  private String source;
+    }
 
-  @Column(name = "create_on")
-  private LocalDateTime createOn;
+    @Column(name = "source")
+    private String source;
 
+    @Column(name = "create_on")
+    private LocalDateTime createOn;
 
-  @ManyToOne
-  @JoinColumn(name = "member_id")
-  private UserAccount memberUser;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private UserAccount memberUser;
 
-  @ManyToOne
-  @JoinColumn(name = "group_id")
-  private Group group;
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
-  @ManyToOne
-  @JoinColumn(name = "connected_to")
-  private UserAccount connectedUser;
+    @ManyToOne
+    @JoinColumn(name = "connected_to")
+    private UserAccount connectedUser;
 
-  @Column(name = "type")
-  @Enumerated(EnumType.STRING)
-  private Type type = Type.UNIDIRECTIONAL;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private Type type = Type.UNIDIRECTIONAL;
 
-  public String getSource() {
-    return source;
-  }
+    public String getSource() {
+        return source;
+    }
 
-  public void setSource(String source) {
-    this.source = source;
-  }
+    public void setSource(String source) {
+        this.source = source;
+    }
 
-  public LocalDateTime getCreateOn() {
-    return createOn;
-  }
+    public LocalDateTime getCreateOn() {
+        return createOn;
+    }
 
-  public void setCreateOn(LocalDateTime createOn) {
-    this.createOn = createOn;
-  }
+    public void setCreateOn(LocalDateTime createOn) {
+        this.createOn = createOn;
+    }
 
-  public UserAccount getMemberUser() {
-    return memberUser;
-  }
+    public UserAccount getMemberUser() {
+        return memberUser;
+    }
 
-  public void setMemberUser(UserAccount memberUser) {
-    this.memberUser = memberUser;
-  }
+    public void setMemberUser(UserAccount memberUser) {
+        this.memberUser = memberUser;
+    }
 
-  public UserAccount getConnectedUser() {
-    return connectedUser;
-  }
+    public UserAccount getConnectedUser() {
+        return connectedUser;
+    }
 
-  public void setConnectedUser(UserAccount connectedUser) {
-    this.connectedUser = connectedUser;
-  }
+    public void setConnectedUser(UserAccount connectedUser) {
+        this.connectedUser = connectedUser;
+    }
 
-  public Group getGroup() {
-    return group;
-  }
+    public Group getGroup() {
+        return group;
+    }
 
-  public void setGroup(Group group) {
-    this.group = group;
-  }
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
-  public Type getType() {
-    return type;
-  }
+    public Type getType() {
+        return type;
+    }
 
-  public void setType(Type type) {
-    this.type = type;
-  }
+    public void setType(Type type) {
+        this.type = type;
+    }
 
-  @Override
-  public String toString() {
-    return "Connections{" +
-           "source='" + source + '\'' +
-           ", createOn=" + createOn +
-           ", memberUser=" + memberUser +
-           ", group=" + group +
-           ", connectedUser=" + connectedUser +
-           ", type=" + type +
-           '}';
-  }
+    @Override
+    public String toString() {
+        return "Connections{" + "source='" + source + '\'' + ", createOn=" + createOn + ", memberUser=" + memberUser
+                + ", group=" + group + ", connectedUser=" + connectedUser + ", type=" + type + '}';
+    }
 }
