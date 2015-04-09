@@ -1,17 +1,14 @@
 package com.moxian.ng.service;
 
 import java.time.LocalDateTime;
-
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-
 import com.moxian.ng.DTOUtils;
 import com.moxian.ng.domain.Connections;
 import com.moxian.ng.domain.Fans;
@@ -21,7 +18,7 @@ import com.moxian.ng.model.FansDetails;
 import com.moxian.ng.model.FansForm;
 import com.moxian.ng.repository.ConnectionsRepository;
 import com.moxian.ng.repository.FansRepository;
-import com.moxian.ng.repository.FansSpecifications;
+//import com.moxian.ng.repository.FansSpecifications;
 import com.moxian.ng.repository.UserRepository;
 
 @Service
@@ -159,60 +156,61 @@ public class FansService {
 	// }
 	// }
 
-	public Page<FansDetails> findFansBySendAndRecept(Long sendId,
-			Long receptId, Pageable page) {
-		Assert.notNull(sendId, "sendId id can not be null");
-		Assert.notNull(receptId, "receptId id can not be null");
+	// public Page<FansDetails> findFansBySendAndRecept(Long sendId,
+	// Long receptId, Pageable page) {
+	// Assert.notNull(sendId, "sendId id can not be null");
+	// Assert.notNull(receptId, "receptId id can not be null");
+	//
+	// if (log.isDebugEnabled()) {
+	// log.debug("find fans by sendId@" + sendId);
+	// log.debug("find fans by receptId@" + receptId);
+	// }
+	//
+	// Page<Fans> result = this.fansRepository.findAll(
+	// FansSpecifications.filterFansBySendAndRecept(sendId, receptId),
+	// page);
+	//
+	// if (result == null) {
+	// throw new ResourceNotFoundException(sendId);
+	// }
+	//
+	// if (log.isDebugEnabled()) {
+	// log.debug("get result size @" + result.getTotalElements());
+	// }
+	//
+	// return DTOUtils.mapPage(result, FansDetails.class);
+	// }
+
+	private Fans findFansBySendAndRecept(Long followingUserId, Long memberUserId) {
+
+		Assert.notNull(followingUserId, "send can not be null");
+		Assert.notNull(memberUserId, "recept can not be null");
 
 		if (log.isDebugEnabled()) {
-			log.debug("find fans by sendId@" + sendId);
-			log.debug("find fans by receptId@" + receptId);
+			log.debug("find fans by send@" + followingUserId);
+			log.debug("find fans by recept@" + memberUserId);
 		}
 
-		Page<Fans> result = this.fansRepository.findAll(
-				FansSpecifications.filterFansBySendAndRecept(sendId, receptId),
-				page);
+		return this.fansRepository.findFansBySendAndRecept(followingUserId,
+				memberUserId);
 
-		if (result == null) {
-			throw new ResourceNotFoundException(sendId);
-		}
-
-		if (log.isDebugEnabled()) {
-			log.debug("get result size @" + result.getTotalElements());
-		}
-
-		return DTOUtils.mapPage(result, FansDetails.class);
 	}
 
-	// private Fans findFansBySendAndRecept(Long sendId, Long receptId) {
-	//
-	// Assert.notNull(sendId, "send can not be null");
-	// Assert.notNull(receptId, "recept can not be null");
-	//
-	// if (log.isDebugEnabled()) {
-	// log.debug("find fans by send@" + sendId);
-	// log.debug("find fans by recept@" + receptId);
-	// }
-	//
-	// return this.fansRepository.findFansBySendAndRecept(sendId, receptId);
-	//
-	// }
-	//
-	// public FansDetails findfansById(Long id) {
-	// Assert.notNull(id, "Fans id can not be null");
-	//
-	// if (log.isDebugEnabled()) {
-	// log.debug("find fans by id@" + id);
-	// }
-	//
-	// Fans Fans = this.fansRepository.findOne(id);
-	//
-	// if (Fans == null) {
-	// throw new ResourceNotFoundException(id);
-	// }
-	//
-	// return DTOUtils.map(Fans, FansDetails.class);
-	// }
+	public FansDetails findfansById(Long id) {
+		Assert.notNull(id, "Fans id can not be null");
+
+		if (log.isDebugEnabled()) {
+			log.debug("find fans by id@" + id);
+		}
+
+		Fans Fans = this.fansRepository.findOne(id);
+
+		if (Fans == null) {
+			throw new ResourceNotFoundException(id);
+		}
+
+		return DTOUtils.map(Fans, FansDetails.class);
+	}
 	//
 	// @Transactional
 	// public void updateReceipt(Long id, boolean action) {
