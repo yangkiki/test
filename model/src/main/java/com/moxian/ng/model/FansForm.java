@@ -5,66 +5,66 @@ import java.time.LocalDateTime;
 
 public class FansForm implements Serializable {
 
-	private static final long serialVersionUID = -9069730988536092598L;
+    private static final long serialVersionUID = -9069730988536092598L;
 
-//	private UserAccountDetails send;
-//
-//	private UserAccountDetails recept;
-	
-	private Long sendId;
-	
-	private Long receptId;
-	
-	public Long getSendId() {
-		return sendId;
-	}
+    // private UserAccountDetails send;
+    //
+    // private UserAccountDetails recept;
 
-	public void setSendId(Long sendId) {
-		this.sendId = sendId;
-	}
+    private Long sendId;
 
-	public Long getReceptId() {
-		return receptId;
-	}
+    private Long receptId;
 
-	public void setReceptId(Long receptId) {
-		this.receptId = receptId;
-	}
+    private LocalDateTime createOn;
 
-	private boolean active;
+    public Long getSendId() {
+        return sendId;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public void setSendId(Long sendId) {
+        this.sendId = sendId;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public Long getReceptId() {
+        return receptId;
+    }
 
-//	public UserAccountDetails getSend() {
-//		return send;
-//	}
-//
-//	public void setSend(UserAccountDetails send) {
-//		this.send = send;
-//	}
-//
-//	public UserAccountDetails getRecept() {
-//		return recept;
-//	}
-//
-//	public void setRecept(UserAccountDetails recept) {
-//		this.recept = recept;
-//	}
+    public void setReceptId(Long receptId) {
+        this.receptId = receptId;
+    }
 
-	private LocalDateTime createOn;
+    private boolean active;
 
-	public LocalDateTime getCreateOn() {
-		return createOn;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setCreateOn(LocalDateTime createOn) {
-		this.createOn = createOn;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    // public UserAccountDetails getSend() {
+    // return send;
+    // }
+    //
+    // public void setSend(UserAccountDetails send) {
+    // this.send = send;
+    // }
+    //
+    // public UserAccountDetails getRecept() {
+    // return recept;
+    // }
+    //
+    // public void setRecept(UserAccountDetails recept) {
+    // this.recept = recept;
+    // }
+
+    public LocalDateTime getCreateOn() {
+        return createOn;
+    }
+
+    public void setCreateOn(LocalDateTime createOn) {
+        this.createOn = createOn;
+    }
 
 }

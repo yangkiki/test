@@ -1,14 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this
+ * template file, choose Tools | Templates and open the template in the editor.
  */
 package com.moxian.ng.domain;
 
 import com.moxian.ng.domain.support.PersistableEntity;
-
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,84 +14,83 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "connection_requests")
 public class ConnectionRequests extends PersistableEntity<Long> {
 
-  public enum Status {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-    UNREAD,//
-    ACCEPT, //
-    REJECT;//
-  }
+    public enum Status {
 
-  @Column(name = "source")
-  private String source;
+        UNREAD, //
+        ACCEPT, //
+        REJECT;//
+    }
 
-  @Column(name = "status")
-  @Enumerated(EnumType.STRING)
-  private Status status=Status.UNREAD;
+    @Column(name = "source")
+    private String source;
 
-  @Column(name = "create_on")
-  private LocalDateTime createOn;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.UNREAD;
 
-  @ManyToOne
-  @JoinColumn(name = "member_id")
-  private UserAccount memberUser;
+    @Column(name = "create_on")
+    private LocalDateTime createOn;
 
-  @ManyToOne
-  @JoinColumn(name = "connected_to")
-  private UserAccount connectedUser;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private UserAccount memberUser;
 
-  public String getSource() {
-    return source;
-  }
+    @ManyToOne
+    @JoinColumn(name = "connected_to")
+    private UserAccount connectedUser;
 
-  public void setSource(String source) {
-    this.source = source;
-  }
+    public String getSource() {
+        return source;
+    }
 
-  public LocalDateTime getCreateOn() {
-    return createOn;
-  }
+    public void setSource(String source) {
+        this.source = source;
+    }
 
-  public void setCreateOn(LocalDateTime createOn) {
-    this.createOn = createOn;
-  }
+    public LocalDateTime getCreateOn() {
+        return createOn;
+    }
 
-  public UserAccount getMemberUser() {
-    return memberUser;
-  }
+    public void setCreateOn(LocalDateTime createOn) {
+        this.createOn = createOn;
+    }
 
-  public void setMemberUser(UserAccount memberUser) {
-    this.memberUser = memberUser;
-  }
+    public UserAccount getMemberUser() {
+        return memberUser;
+    }
 
-  public UserAccount getConnectedUser() {
-    return connectedUser;
-  }
+    public void setMemberUser(UserAccount memberUser) {
+        this.memberUser = memberUser;
+    }
 
-  public void setConnectedUser(UserAccount connectedUser) {
-    this.connectedUser = connectedUser;
-  }
+    public UserAccount getConnectedUser() {
+        return connectedUser;
+    }
 
-  public Status getStatus() {
-    return status;
-  }
+    public void setConnectedUser(UserAccount connectedUser) {
+        this.connectedUser = connectedUser;
+    }
 
-  public void setStatus(Status status) {
-    this.status = status;
-  }
+    public Status getStatus() {
+        return status;
+    }
 
-  @Override
-  public String toString() {
-    return "ConnectionRequests{" +
-           "source='" + source + '\'' +
-           ", status='" + status + '\'' +
-           ", createOn=" + createOn +
-           ", memberUser=" + memberUser +
-           ", connectedUser=" + connectedUser +
-           '}';
-  }
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "ConnectionRequests{" + "source='" + source + '\'' + ", status='" + status + '\'' + ", createOn="
+                + createOn + ", memberUser=" + memberUser + ", connectedUser=" + connectedUser + '}';
+    }
 }

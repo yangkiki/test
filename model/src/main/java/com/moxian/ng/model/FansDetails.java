@@ -5,55 +5,56 @@ import java.time.LocalDateTime;
 
 public class FansDetails implements Serializable {
 
-	private Long id;
+    private static final long serialVersionUID = 1L;
 
-	public Long getId() {
-		return id;
-	}
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private UserAccountDetails send;
 
-	public UserAccountDetails getSend() {
-		return send;
-	}
+    private UserAccountDetails recept;
 
-	public void setSend(UserAccountDetails send) {
-		this.send = send;
-	}
+    private boolean active;
 
-	public UserAccountDetails getRecept() {
-		return recept;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setRecept(UserAccountDetails recept) {
-		this.recept = recept;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	private static final long serialVersionUID = 1L;
-	private UserAccountDetails send;
+    public UserAccountDetails getSend() {
+        return send;
+    }
 
-	private UserAccountDetails recept;
+    public void setSend(UserAccountDetails send) {
+        this.send = send;
+    }
 
-	private boolean active;
+    public UserAccountDetails getRecept() {
+        return recept;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public void setRecept(UserAccountDetails recept) {
+        this.recept = recept;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public LocalDateTime getCreateOn() {
-		return createOn;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public void setCreateOn(LocalDateTime createOn) {
-		this.createOn = createOn;
-	}
+    public LocalDateTime getCreateOn() {
+        return createOn;
+    }
 
-	private LocalDateTime createOn;
+    public void setCreateOn(LocalDateTime createOn) {
+        this.createOn = createOn;
+    }
+
+    private LocalDateTime createOn;
 
 }
