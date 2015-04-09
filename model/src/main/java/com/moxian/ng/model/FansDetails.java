@@ -9,11 +9,13 @@ public class FansDetails implements Serializable {
 
     private Long id;
 
-    private UserAccountDetails send;
+    private UserAccountDetails memberUser;
 
-    private UserAccountDetails recept;
+    private UserAccountDetails followingUser;
 
     private boolean active;
+
+    private LocalDateTime createOn;
 
     public Long getId() {
         return id;
@@ -23,24 +25,40 @@ public class FansDetails implements Serializable {
         this.id = id;
     }
 
-    public UserAccountDetails getSend() {
-        return send;
-    }
-
-    public void setSend(UserAccountDetails send) {
-        this.send = send;
-    }
-
-    public UserAccountDetails getRecept() {
-        return recept;
-    }
-
-    public void setRecept(UserAccountDetails recept) {
-        this.recept = recept;
-    }
+    // public UserAccountDetails getSend() {
+    // return send;
+    // }
+    //
+    // public void setSend(UserAccountDetails send) {
+    // this.send = send;
+    // }
+    //
+    // public UserAccountDetails getRecept() {
+    // return recept;
+    // }
+    //
+    // public void setRecept(UserAccountDetails recept) {
+    // this.recept = recept;
+    // }
 
     public boolean isActive() {
         return active;
+    }
+
+    public UserAccountDetails getMemberUser() {
+        return memberUser;
+    }
+
+    public void setMemberUser(UserAccountDetails memberUser) {
+        this.memberUser = memberUser;
+    }
+
+    public UserAccountDetails getFollowingUser() {
+        return followingUser;
+    }
+
+    public void setFollowingUser(UserAccountDetails followingUser) {
+        this.followingUser = followingUser;
     }
 
     public void setActive(boolean active) {
@@ -54,7 +72,5 @@ public class FansDetails implements Serializable {
     public void setCreateOn(LocalDateTime createOn) {
         this.createOn = createOn;
     }
-
-    private LocalDateTime createOn;
 
 }

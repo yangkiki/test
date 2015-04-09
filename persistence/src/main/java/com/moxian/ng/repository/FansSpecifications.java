@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.moxian.ng.repository;
 
 import com.moxian.ng.domain.Fans;
@@ -15,24 +18,31 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class Fanspecifications {
 
-	
-	public static Specification<Fans> filterFansBySendAndRecept(final Long sendId,final Long receptId) {
+/**
+ * @author yang
+ *
+ */
+public class FansSpecifications {
+
+    public static Specification<Fans> filterFansBySendAndRecept(final Long sendId, final Long receptId) {
         return (Root<Fans> root, CriteriaQuery<?> query, CriteriaBuilder cb) -> {
             List<Predicate> predicates = new ArrayList<>();
-            
-            Join<Fans, UserAccount> sendJoin = root.join(root.getModel().getSingularAttribute("send", UserAccount.class),JoinType.INNER);
-            Join<Fans, UserAccount> receptJoin = root.join(root.getModel().getSingularAttribute("recept", UserAccount.class),JoinType.INNER);
+
+            Join<Fans, UserAccount> sendJoin =
+                    root.join(root.getModel().getSingularAttribute("followingUser", UserAccount.class), JoinType.INNER);
+            Join<Fans, UserAccount> receptJoin =
+                    root.join(root.getModel().getSingularAttribute("memberUser", UserAccount.class), JoinType.INNER);
             if (sendId != null) {
-                predicates.add(cb.equal(sendJoin.get("id"),sendId));
+                predicates.add(cb.equal(sendJoin.get("id"), sendId));
             }
-            
+
             if (receptId != null) {
-                predicates.add(cb.equal(receptJoin.get("id"),receptId));
+                predicates.add(cb.equal(receptJoin.get("id"), receptId));
             }
 
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
     }
+
 }

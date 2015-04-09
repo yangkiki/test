@@ -11,29 +11,45 @@ public class FansForm implements Serializable {
     //
     // private UserAccountDetails recept;
 
-    private Long sendId;
+    private Long memberUserId;
 
-    private Long receptId;
+    private Long followingUserId;
 
     private LocalDateTime createOn;
 
-    public Long getSendId() {
-        return sendId;
-    }
-
-    public void setSendId(Long sendId) {
-        this.sendId = sendId;
-    }
-
-    public Long getReceptId() {
-        return receptId;
-    }
-
-    public void setReceptId(Long receptId) {
-        this.receptId = receptId;
-    }
+    // public Long getSendId() {
+    // return sendId;
+    // }
+    //
+    // public void setSendId(Long sendId) {
+    // this.sendId = sendId;
+    // }
+    //
+    // public Long getReceptId() {
+    // return receptId;
+    // }
+    //
+    // public void setReceptId(Long receptId) {
+    // this.receptId = receptId;
+    // }
 
     private boolean active;
+
+    public Long getMemberUserId() {
+        return memberUserId;
+    }
+
+    public void setMemberUserId(Long memberUserId) {
+        this.memberUserId = memberUserId;
+    }
+
+    public Long getFollowingUserId() {
+        return followingUserId;
+    }
+
+    public void setFollowingUserId(Long followingUserId) {
+        this.followingUserId = followingUserId;
+    }
 
     public boolean isActive() {
         return active;
