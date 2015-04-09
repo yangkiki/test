@@ -16,11 +16,11 @@ public class Fans extends PersistableEntity<Long> {
 
     @ManyToOne
     @JoinColumn(name = "send_id")
-    private UserAccount send;
+    private UserAccount followingUser;
 
     @ManyToOne
     @JoinColumn(name = "recept_id")
-    private UserAccount recept;
+    private UserAccount memberUser;
 
     @Column(name = "create_on")
     private LocalDateTime createOn;
@@ -44,25 +44,42 @@ public class Fans extends PersistableEntity<Long> {
         this.createOn = createOn;
     }
 
-    public UserAccount getSend() {
-        return send;
+    public UserAccount getMemberUser() {
+        return memberUser;
     }
 
-    public void setSend(UserAccount send) {
-        this.send = send;
+    public void setMemberUser(UserAccount memberUser) {
+        this.memberUser = memberUser;
     }
 
-    public UserAccount getRecept() {
-        return recept;
+    public UserAccount getFollowingUser() {
+        return followingUser;
     }
 
-    public void setRecept(UserAccount recept) {
-        this.recept = recept;
+    public void setFollowingUser(UserAccount followingUser) {
+        this.followingUser = followingUser;
     }
 
-    @Override
-    public String toString() {
-        return "Fans [send=" + send + ", recept=" + recept + ", createOn=" + createOn + ", active=" + active + "]";
-    }
+    // public UserAccount getSend() {
+    // return send;
+    // }
+    //
+    // public void setSend(UserAccount send) {
+    // this.send = send;
+    // }
+    //
+    // public UserAccount getRecept() {
+    // return recept;
+    // }
+    //
+    // public void setRecept(UserAccount recept) {
+    // this.recept = recept;
+    // }
+    //
+    // @Override
+    // public String toString() {
+    // return "Fans [send=" + send + ", recept=" + recept + ", createOn=" + createOn + ", active=" +
+    // active + "]";
+    // }
 
 }

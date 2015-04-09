@@ -27,8 +27,8 @@ public interface ConnectionsRepository extends JpaRepository<Connections, Long>,
     void updateFriendGroup(@Param("userId") Long userId, @Param("groupId") Long groupId,
             @Param("friendId") Long friendId);
 
-    @Query(" select  c from Connections c where c.memberUser.id=:receptId and  c.connectedUser.id=:sendId ")
-    Connections findConnectionByConnectedUserAndMemberUser(@Param("sendId") Long sendId,
-            @Param("receptId") Long receptId);
+    @Query(" select  c from Connections c where c.memberUser.id=:connectedId and  c.connectedUser.id=:memberId ")
+    Connections findConnectionByConnectedUserAndMemberUser(@Param("memberId") Long memberId,
+            @Param("connectedId") Long connectedId);
 
 }

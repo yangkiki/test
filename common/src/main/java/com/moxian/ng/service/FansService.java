@@ -38,17 +38,19 @@ public class FansService {
     @Transactional
     public FansDetails savefans(FansForm form) {
 
-        UserAccount connectedUser = this.userRepository.findOne(form.getSendId());
-        UserAccount memberUser = this.userRepository.findOne(form.getReceptId());
+        UserAccount followingUser = this.userRepository.findOne(form.getFollowingUserId());
+        UserAccount memberUser = this.userRepository.findOne(form.getMemberUserId());
 
         if (log.isDebugEnabled()) {
             log.debug("save fans @" + form);
         }
         Fans fans = DTOUtils.map(form, Fans.class);
-        fans.setSend(connectedUser);
-        fans.setRecept(memberUser);
+        // fans.setSend(connectedUser);
+        // fans.setRecept(memberUser);
+        fans.setFollowingUser(followingUser);
+        fans.setMemberUser(memberUser);
 
-        Fans fansOld = this.findFansBySendAndRecept(form.getSendId(), form.getReceptId());
+        Fans fansOld = this.findFansBySendAndRecept(form.getFollowingUserId(), form.getMemberUserId());
 
         Fans saved = null;
 
@@ -60,21 +62,21 @@ public class FansService {
         }
 
         Connections send =
-                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connectedUser.getId(),
-                        memberUser.getId());
+                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(memberUser.getId(),
+                        followingUser.getId());
 
         if (send == null) {
             send = new Connections();
-            send.setConnectedUser(connectedUser);
-            send.setMemberUser(memberUser);
+            send.setConnectedUser(memberUser);
+            send.setMemberUser(followingUser);
             send.setCreateOn(LocalDateTime.now());
             send.setType(Connections.Type.UNIDIRECTIONAL);
             this.connectionsRepository.save(send);
         }
 
         Connections recept =
-                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(memberUser.getId(),
-                        connectedUser.getId());
+                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(followingUser.getId(),
+                        memberUser.getId());
 
         if (recept != null) {
             send.setType(Connections.Type.BILATERAL);
@@ -105,12 +107,12 @@ public class FansService {
             throw new ResourceNotFoundException(id);
         }
 
-        UserAccount connectedUser = this.userRepository.findOne(fans.getSend().getId());
-        UserAccount memberUser = this.userRepository.findOne(fans.getRecept().getId());
+        UserAccount connectedUser = this.userRepository.findOne(fans.getFollowingUser().getId());
+        UserAccount memberUser = this.userRepository.findOne(fans.getMemberUser().getId());
 
         Connections send =
-                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connectedUser.getId(),
-                        memberUser.getId());
+                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(memberUser.getId(),
+                        connectedUser.getId());
 
         if (send != null) {
             // send.setType(Connections.Type.UNIDIRECTIONAL);
@@ -119,8 +121,8 @@ public class FansService {
         }
 
         Connections recept =
-                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(memberUser.getId(),
-                        connectedUser.getId());
+                this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connectedUser.getId(),
+                        memberUser.getId());
 
         if (recept != null) {
             recept.setType(Connections.Type.UNIDIRECTIONAL);
@@ -130,42 +132,42 @@ public class FansService {
         fans.setActive(false);
     }
 
-    @Transactional
-    public void updatefans(Long id, FansForm form) {
-        Assert.notNull(id, "fans id can not be null");
-
-        if (log.isDebugEnabled()) {
-            log.debug("update fans @" + form);
-        }
-
-        Fans fans = this.fansRepository.findOne(id);
-        DTOUtils.mapTo(form, fans);
-
-        Fans saved = this.fansRepository.save(fans);
-
-        if (log.isDebugEnabled()) {
-            log.debug("updated fans@" + saved);
-        }
-    }
-
-    // public Page<FansDetails> findFansBySendAndRecept(Long sendId,Long
-    // receptId,Pageable page) {
-    // Assert.notNull(sendId, "sendId id can not be null");
-    // Assert.notNull(receptId, "receptId id can not be null");
+    // @Transactional
+    // public void updatefans(Long id, FansForm form) {
+    // Assert.notNull(id, "fans id can not be null");
     //
     // if (log.isDebugEnabled()) {
-    // log.debug("find fans by sendId@" + sendId);
-    // log.debug("find fans by receptId@" + receptId);
+    // log.debug("update fans @" + form);
     // }
     //
-    // Page<Fans> result =
-    // this.fansRepository.findAll(Fanspecifications.filterFansBySendAndRecept(sendId,
-    // receptId),page);
+    // Fans fans = this.fansRepository.findOne(id);
+    // DTOUtils.mapTo(form, fans);
     //
-    // if (result == null) {
-    // throw new ResourceNotFoundException(sendId);
+    // Fans saved = this.fansRepository.save(fans);
+    //
+    // if (log.isDebugEnabled()) {
+    // log.debug("updated fans@" + saved);
     // }
-    //
+    // }
+
+     public Page<FansDetails> findFansBySendAndRecept(Long sendId,Long
+     receptId,Pageable page) {
+     Assert.notNull(sendId, "sendId id can not be null");
+     Assert.notNull(receptId, "receptId id can not be null");
+    
+     if (log.isDebugEnabled()) {
+     log.debug("find fans by sendId@" + sendId);
+     log.debug("find fans by receptId@" + receptId);
+     }
+    
+     Page<Fans> result =
+     this.fansRepository.findAll(Fanspecifications.filterFansBySendAndRecept(sendId,
+     receptId),page);
+    
+     if (result == null) {
+     throw new ResourceNotFoundException(sendId);
+     }
+    
     // if (log.isDebugEnabled()) {
     // log.debug("get result size @" + result.getTotalElements());
     // }
@@ -173,51 +175,51 @@ public class FansService {
     // return DTOUtils.mapPage(result, FansDetails.class);
     // }
 
-    private Fans findFansBySendAndRecept(Long sendId, Long receptId) {
-
-        Assert.notNull(sendId, "send can not be null");
-        Assert.notNull(receptId, "recept can not be null");
-
-        if (log.isDebugEnabled()) {
-            log.debug("find fans by send@" + sendId);
-            log.debug("find fans by recept@" + receptId);
-        }
-
-        return this.fansRepository.findFansBySendAndRecept(sendId, receptId);
-
-    }
-
-    public FansDetails findfansById(Long id) {
-        Assert.notNull(id, "Fans id can not be null");
-
-        if (log.isDebugEnabled()) {
-            log.debug("find fans by id@" + id);
-        }
-
-        Fans Fans = this.fansRepository.findOne(id);
-
-        if (Fans == null) {
-            throw new ResourceNotFoundException(id);
-        }
-
-        return DTOUtils.map(Fans, FansDetails.class);
-    }
-
-    @Transactional
-    public void updateReceipt(Long id, boolean action) {
-        Assert.notNull(id, "Fans id can not be null");
-
-        if (log.isDebugEnabled()) {
-            log.debug("find fans by id@" + id);
-        }
-
-        Fans Fans = this.fansRepository.findOne(id);
-
-        if (Fans == null) {
-            throw new ResourceNotFoundException(id);
-        }
-
-        // this.fansRepository.save(Fans);
-    }
+    // private Fans findFansBySendAndRecept(Long sendId, Long receptId) {
+    //
+    // Assert.notNull(sendId, "send can not be null");
+    // Assert.notNull(receptId, "recept can not be null");
+    //
+    // if (log.isDebugEnabled()) {
+    // log.debug("find fans by send@" + sendId);
+    // log.debug("find fans by recept@" + receptId);
+    // }
+    //
+    // return this.fansRepository.findFansBySendAndRecept(sendId, receptId);
+    //
+    // }
+    //
+    // public FansDetails findfansById(Long id) {
+    // Assert.notNull(id, "Fans id can not be null");
+    //
+    // if (log.isDebugEnabled()) {
+    // log.debug("find fans by id@" + id);
+    // }
+    //
+    // Fans Fans = this.fansRepository.findOne(id);
+    //
+    // if (Fans == null) {
+    // throw new ResourceNotFoundException(id);
+    // }
+    //
+    // return DTOUtils.map(Fans, FansDetails.class);
+    // }
+    //
+    // @Transactional
+    // public void updateReceipt(Long id, boolean action) {
+    // Assert.notNull(id, "Fans id can not be null");
+    //
+    // if (log.isDebugEnabled()) {
+    // log.debug("find fans by id@" + id);
+    // }
+    //
+    // Fans Fans = this.fansRepository.findOne(id);
+    //
+    // if (Fans == null) {
+    // throw new ResourceNotFoundException(id);
+    // }
+    //
+    // // this.fansRepository.save(Fans);
+    // }
 
 }

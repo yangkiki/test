@@ -29,7 +29,7 @@ public class FansMgtController {
 
     @RequestMapping(value = {""}, method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> createConnectionRequest(@RequestBody FansForm form,
+    public ResponseEntity<Void> saveFans(@RequestBody FansForm form,
             UriComponentsBuilder uriComponentsBuilder) {
         if (log.isDebugEnabled()) {
             log.debug("save connectionRequest data @" + form);
