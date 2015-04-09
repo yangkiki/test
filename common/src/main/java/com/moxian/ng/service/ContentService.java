@@ -10,9 +10,8 @@ import com.moxian.ng.domain.Post;
 import com.moxian.ng.exception.ResourceNotFoundException;
 import com.moxian.ng.model.PostDetails;
 import com.moxian.ng.model.PostForm;
-import com.moxian.ng.repository.PostSpecifications;
 import com.moxian.ng.repository.PostRepository;
-import javax.inject.Inject;
+import com.moxian.ng.repository.PostSpecifications;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import javax.inject.Inject;
 
 /**
  *

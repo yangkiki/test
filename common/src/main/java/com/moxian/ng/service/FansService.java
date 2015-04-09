@@ -1,12 +1,5 @@
 package com.moxian.ng.service;
 
-import java.time.LocalDateTime;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import com.moxian.ng.DTOUtils;
 import com.moxian.ng.domain.Connections;
 import com.moxian.ng.domain.Fans;
@@ -17,6 +10,16 @@ import com.moxian.ng.model.FansForm;
 import com.moxian.ng.repository.ConnectionsRepository;
 import com.moxian.ng.repository.FansRepository;
 import com.moxian.ng.repository.UserRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import java.time.LocalDateTime;
+
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 @Service
 public class FansService {
