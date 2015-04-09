@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -185,7 +186,7 @@ public class ConnectioinMgtController {
   @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
   @ResponseBody
   public Page<UserAccountDetails> getUserAccountByKeyword(
-      String keyword ,
+      @RequestParam("keyword") String keyword ,
       @PageableDefault(value = 10) Pageable page) {
     if (log.isDebugEnabled()) {
       log.debug("user search keyword  {} page@ {} ",keyword, page);

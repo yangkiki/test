@@ -719,7 +719,7 @@
                 <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
                 <jdbc.url><![CDATA[jdbc:mysql://localhost:3306/mxdb?useUnicode=true&characterEncoding=utf8]]></jdbc.url>
                 <jdbc.username>root</jdbc.username>
-                <jdbc.password></jdbc.password>
+                <jdbc.password>123456</jdbc.password>
 
                 <!-- hibernate -->
                 <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>

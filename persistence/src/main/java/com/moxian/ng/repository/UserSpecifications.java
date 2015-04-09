@@ -162,15 +162,16 @@ public class UserSpecifications {
 
       List<Predicate> predicates = new ArrayList<>();
 
-   //   predicates.add(cb.equal(root.get(UserAccount_.type), UserAccount.Type.USER));
-
+      //   predicates.add(cb.equal(root.get(UserAccount_.type), UserAccount.Type.USER));
 
       if (StringUtils.hasText(keyword)) {
-        predicates.add(
-            cb.or(
-                cb.equal(root.get(UserAccount_.id), keyword),
-                cb.like(root.get(UserAccount_.username), "%" + keyword + "%")
-            ));
+        if (org.apache.commons.lang3.math.NumberUtils.isNumber(keyword)) {
+          predicates.add(cb.equal(root.get(UserAccount_.id), Long.valueOf(keyword)));
+        } else {
+          predicates.add(cb.like(root.get(UserAccount_.username), "%" + keyword + "%"));
+        }
+
+
       }
 
       return cb.and(predicates.toArray(new Predicate[predicates.size()]));
