@@ -1,15 +1,16 @@
 package com.moxian.ng.notifier.app.config;
 
-import javax.inject.Inject;
-
 import com.moxian.ng.notifier.sms.api.SmsConfiguration;
 import com.moxian.ng.notifier.sms.api.SmsOperations;
 import com.moxian.ng.notifier.sms.impl.AbstractSmsConfigurer;
+
 import org.slf4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+
+import javax.inject.Inject;
 
 /**
  *

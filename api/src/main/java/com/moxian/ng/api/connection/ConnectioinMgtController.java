@@ -7,6 +7,7 @@ import com.moxian.ng.model.GroupDetails;
 import com.moxian.ng.model.GroupForm;
 import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.service.ConnectionService;
+import com.moxian.ng.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,9 @@ public class ConnectioinMgtController {
   @Inject
   private ConnectionService connectionService;
 
+  @Inject
+  private UserService userService;
+
   @RequestMapping(value = {"/friends"}, method = RequestMethod.GET)
   @ResponseBody
   public Page<UserAccountDetails> getAllFriends(
@@ -44,8 +48,9 @@ public class ConnectioinMgtController {
     if (log.isDebugEnabled()) {
       log.debug("user search criteria   page@ {} ", page);
     }
+    Page<UserAccountDetails> users=null;
 
-    Page<UserAccountDetails> users = connectionService.findUserAllGroupFriends(user.getId(), page);
+    users = connectionService.findUserAllGroupFriends(user.getId(), page);
 
     if (log.isDebugEnabled()) {
       log.debug("count of users @" + users.getTotalElements());
@@ -161,7 +166,7 @@ public class ConnectioinMgtController {
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
-  @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=REMOVE"})
+  @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.DELETE)
   @ResponseBody
   public ResponseEntity<Void> removeFriendFromGroup(@PathVariable("id") Long groupId,  //
                                                     @CurrentUser UserAccount user,//
@@ -175,6 +180,27 @@ public class ConnectioinMgtController {
 
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
+
+
+  @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
+  @ResponseBody
+  public Page<UserAccountDetails> getUserAccountByKeyword(
+      String keyword ,
+      @PageableDefault(value = 10) Pageable page) {
+    if (log.isDebugEnabled()) {
+      log.debug("user search keyword  {} page@ {} ",keyword, page);
+    }
+    Page<UserAccountDetails> users=null;
+
+    users = userService.findUserAccountByKeyword(keyword, page);
+
+    if (log.isDebugEnabled()) {
+      log.debug("count of users @" + users.getTotalElements());
+    }
+
+    return users;
+  }
+
 
 
 }

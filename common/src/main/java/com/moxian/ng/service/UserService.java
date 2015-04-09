@@ -721,4 +721,22 @@ public class UserService {
 //
 //        return null;
 //    }
+
+
+    public Page<UserAccountDetails> findUserAccountByKeyword(String keyword, Pageable page) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("findUserAccountByKeyword {} page {} ",keyword,page);
+        }
+
+        Page<UserAccount> users
+            = userRepository.findAll(
+            UserSpecifications.filterUserAccountsByIdAndName(keyword), page);
+
+        if (log.isDebugEnabled()) {
+            log.debug("total elements@" + users.getTotalElements());
+        }
+
+        return DTOUtils.mapPage(users, UserAccountDetails.class);
+    }
 }

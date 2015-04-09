@@ -1,5 +1,10 @@
 package com.moxian.ng.repository;
 
+import com.moxian.ng.domain.Fans;
+import com.moxian.ng.domain.UserAccount;
+
+import org.springframework.data.jpa.domain.Specification;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +14,6 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.springframework.data.jpa.domain.Specification;
-
-import com.moxian.ng.domain.Fans;
-import com.moxian.ng.domain.UserAccount;
 
 public class Fanspecifications {
 

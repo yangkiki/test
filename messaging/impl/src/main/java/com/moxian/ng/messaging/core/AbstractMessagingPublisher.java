@@ -6,11 +6,12 @@
 package com.moxian.ng.messaging.core;
 
 import com.moxian.ng.messaging.api.MessagingPublisher;
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+
+import javax.inject.Inject;
 
 /**
  *

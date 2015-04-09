@@ -1,15 +1,15 @@
 package com.moxian.ng.repository;
 
+import com.moxian.ng.domain.UserAccount;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.moxian.ng.domain.UserAccount;
-
 public interface UserRepository extends JpaRepository<UserAccount, Long>,//
-        JpaSpecificationExecutor<UserAccount>{
+        JpaSpecificationExecutor<UserAccount>,UserRepositoryCustom{
 
     public UserAccount findByUsername(String username);
     

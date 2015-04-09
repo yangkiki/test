@@ -1,6 +1,9 @@
 package com.moxian.ng.api.friend;
 
-import javax.inject.Inject;
+import com.moxian.ng.model.ApiConstants;
+import com.moxian.ng.model.FansDetails;
+import com.moxian.ng.service.FansService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.moxian.ng.model.ApiConstants;
-import com.moxian.ng.model.FansDetails;
-import com.moxian.ng.service.FansService;
+
+import javax.inject.Inject;
 
 
 

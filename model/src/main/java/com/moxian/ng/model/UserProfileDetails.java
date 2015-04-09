@@ -7,36 +7,32 @@ public class UserProfileDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String secondaryEmail;
+    private UserAccountDetails account;
 
-    private String secondaryMobileNumber;
+    private String avatar;
 
-    private String instantMessager;
 
-    public String getSecondaryEmail() {
-        return secondaryEmail;
+    public UserAccountDetails getAccount() {
+        return account;
     }
 
-    public void setSecondaryEmail(String secondaryEmail) {
-        this.secondaryEmail = secondaryEmail;
+    public void setAccount(UserAccountDetails account) {
+        this.account = account;
     }
 
-    public String getSecondaryMobileNumber() {
-        return secondaryMobileNumber;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setSecondaryMobileNumber(String secondaryMobileNumber) {
-        this.secondaryMobileNumber = secondaryMobileNumber;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public String getInstantMessager() {
-        return instantMessager;
+    @Override
+    public String toString() {
+        return "UserProfileDetails{" +
+               "account=" + account +
+               ", avatar='" + avatar + '\'' +
+               '}';
     }
-
-    public void setInstantMessager(String instantMessager) {
-        this.instantMessager = instantMessager;
-    }
-
-
-
 }
