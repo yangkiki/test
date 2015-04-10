@@ -8,13 +8,14 @@ package com.moxian.ng.captcha;
 import com.moxian.ng.cache.service.CacheService;
 import com.moxian.ng.model.ImgCaptchaRequest;
 import com.moxian.ng.model.ImgCaptchaResult;
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 /**
  *

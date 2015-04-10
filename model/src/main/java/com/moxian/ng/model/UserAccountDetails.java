@@ -27,6 +27,13 @@ public class UserAccountDetails implements Serializable {
 
     private boolean locked = false;
 
+    private String phoneCountryCode;
+
+    private String emailVerify ;
+
+    private Long moxianId;
+
+
     private LocalDateTime createdDate;
 
     private String idCardVerificationCardNumber;
@@ -170,11 +177,52 @@ public class UserAccountDetails implements Serializable {
         this.totalPaymentAmount = totalPaymentAmount;
     }
 
-    @Override
-    public String toString() {
-        return "UserAccountDetails [id=" + id + ", username=" + username + ", name=" + name
-                + ", gender=" + gender + ", mobileNumber=" + mobileNumber + ", email=" + email + ", active=" + active
-                + ", createdDate=" + createdDate + ", roles=" + roles + "]";
+    public String getPhoneCountryCode() {
+        return phoneCountryCode;
     }
 
+    public void setPhoneCountryCode(String phoneCountryCode) {
+        this.phoneCountryCode = phoneCountryCode;
+    }
+
+    public String getEmailVerify() {
+        return emailVerify;
+    }
+
+    public void setEmailVerify(String emailVerify) {
+        this.emailVerify = emailVerify;
+    }
+
+    public Long getMoxianId() {
+        return moxianId;
+    }
+
+    public void setMoxianId(Long moxianId) {
+        this.moxianId = moxianId;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccountDetails{" +
+               "id=" + id +
+               ", username='" + username + '\'' +
+               ", name='" + name + '\'' +
+               ", gender='" + gender + '\'' +
+               ", mobileNumber='" + mobileNumber + '\'' +
+               ", email='" + email + '\'' +
+               ", active=" + active +
+               ", locked=" + locked +
+               ", phoneCountryCode='" + phoneCountryCode + '\'' +
+               ", emailVerify='" + emailVerify + '\'' +
+               ", moxianId=" + moxianId +
+               ", createdDate=" + createdDate +
+               ", idCardVerificationCardNumber='" + idCardVerificationCardNumber + '\'' +
+               ", idCardVerificationVerifiedDate=" + idCardVerificationVerifiedDate +
+               ", mobileNumberVerificationVerifiedDate=" + mobileNumberVerificationVerifiedDate +
+               ", roles=" + roles +
+               ", totalOrderAmount=" + totalOrderAmount +
+               ", totalPaymentAmount=" + totalPaymentAmount +
+               ", accountingInfo=" + accountingInfo +
+               '}';
+    }
 }

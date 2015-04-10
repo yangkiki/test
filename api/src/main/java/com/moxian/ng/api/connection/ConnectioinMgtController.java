@@ -3,8 +3,10 @@ package com.moxian.ng.api.connection;
 import com.moxian.ng.api.security.CurrentUser;
 import com.moxian.ng.domain.UserAccount;
 import com.moxian.ng.model.ApiConstants;
+import com.moxian.ng.model.ErrorCode;
 import com.moxian.ng.model.GroupDetails;
 import com.moxian.ng.model.GroupForm;
+import com.moxian.ng.model.ListResponse;
 import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.service.ConnectionService;
 import com.moxian.ng.service.UserService;
@@ -43,13 +45,13 @@ public class ConnectioinMgtController {
 
   @RequestMapping(value = {"/friends"}, method = RequestMethod.GET)
   @ResponseBody
-  public Page<UserAccountDetails> getAllFriends(
+  public ListResponse<UserAccountDetails> getAllFriends(
       @CurrentUser UserAccount user,
-      @PageableDefault(value = 10) Pageable page) {
+      @PageableDefault(value = 2) Pageable page) {
     if (log.isDebugEnabled()) {
       log.debug("user search criteria   page@ {} ", page);
     }
-    Page<UserAccountDetails> users=null;
+    Page<UserAccountDetails> users = null;
 
     users = connectionService.findUserAllGroupFriends(user.getId(), page);
 
@@ -57,7 +59,12 @@ public class ConnectioinMgtController {
       log.debug("count of users @" + users.getTotalElements());
     }
 
-    return users;
+    ListResponse<UserAccountDetails> response = ListResponse.successRsp();
+    response.setCode(ErrorCode.SUCCESS);
+    response.setData(users.getContent());
+    response.setTotalCount(users.getTotalElements());
+
+    return response;
   }
 
   @RequestMapping(value = {"/friends"}, method = RequestMethod.GET, params = {"action=NOTINGROUP"})
@@ -135,8 +142,9 @@ public class ConnectioinMgtController {
     GroupDetails saved = connectionService.saveGroup(form);
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setLocation(uriComponentsBuilder.path(ApiConstants.URI_API_MGT + ApiConstants.URI_API_CONNECTION + "/groups/{id}")
-                            .buildAndExpand(saved.getId()).toUri());
+    headers.setLocation(
+        uriComponentsBuilder.path(ApiConstants.URI_API_MGT + ApiConstants.URI_API_CONNECTION + "/groups/{id}")
+            .buildAndExpand(saved.getId()).toUri());
 
     return new ResponseEntity<>(headers, HttpStatus.CREATED);
   }
@@ -186,12 +194,12 @@ public class ConnectioinMgtController {
   @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
   @ResponseBody
   public Page<UserAccountDetails> getUserAccountByKeyword(
-      @RequestParam("keyword") String keyword ,
+      @RequestParam("keyword") String keyword,
       @PageableDefault(value = 10) Pageable page) {
     if (log.isDebugEnabled()) {
-      log.debug("user search keyword  {} page@ {} ",keyword, page);
+      log.debug("user search keyword  {} page@ {} ", keyword, page);
     }
-    Page<UserAccountDetails> users=null;
+    Page<UserAccountDetails> users = null;
 
     users = userService.findUserAccountByKeyword(keyword, page);
 
@@ -201,7 +209,6 @@ public class ConnectioinMgtController {
 
     return users;
   }
-
 
 
 }
