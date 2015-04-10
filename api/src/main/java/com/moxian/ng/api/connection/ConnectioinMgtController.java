@@ -7,6 +7,7 @@ import com.moxian.ng.model.ErrorCode;
 import com.moxian.ng.model.GroupDetails;
 import com.moxian.ng.model.GroupForm;
 import com.moxian.ng.model.ListResponse;
+import com.moxian.ng.model.SingleResponse;
 import com.moxian.ng.model.UserAccountDetails;
 import com.moxian.ng.service.ConnectionService;
 import com.moxian.ng.service.UserService;
@@ -162,7 +163,7 @@ public class ConnectioinMgtController {
 
   @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=ADD"})
   @ResponseBody
-  public ResponseEntity<Void> addFriendToGroup(@PathVariable("id") Long groupId,  //
+  public ResponseEntity<SingleResponse<Void>> addFriendToGroup(@PathVariable("id") Long groupId,  //
                                                @CurrentUser UserAccount user,//
                                                @RequestBody Long[] friends) {
     if (log.isDebugEnabled()) {
@@ -172,7 +173,9 @@ public class ConnectioinMgtController {
 
     connectionService.addFriendToGroup(user.getId(), groupId, friends);
 
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    SingleResponse<Void> response=SingleResponse.successRsp();
+
+    return new ResponseEntity<>(response,HttpStatus.CREATED);
   }
 
   @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.DELETE)
