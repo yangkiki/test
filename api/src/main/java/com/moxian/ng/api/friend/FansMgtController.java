@@ -1,13 +1,15 @@
 package com.moxian.ng.api.friend;
 
 import com.moxian.ng.model.ApiConstants;
-import com.moxian.ng.model.FansDetails;
+import com.moxian.ng.model.ErrorCode;
+//import com.moxian.ng.model.FansDetails;
 import com.moxian.ng.model.FansForm;
+import com.moxian.ng.model.SingleResponse;
 import com.moxian.ng.service.FansService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
+//import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,20 +34,25 @@ public class FansMgtController {
 
 	@RequestMapping(value = { "" }, method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<Void> saveFans(@RequestBody FansForm form,
+	public ResponseEntity<SingleResponse<Void>> saveFans(
+			@RequestBody FansForm form,
 			UriComponentsBuilder uriComponentsBuilder) {
 		if (log.isDebugEnabled()) {
 			log.debug("save connectionRequest data @" + form);
 		}
 
-		FansDetails saved = this.fansService.savefans(form);
+		// FansDetails saved =
+		this.fansService.savefans(form);
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(uriComponentsBuilder
-				.path(ApiConstants.URI_API_PUBLIC + ApiConstants.URI_FANS
-						+ "/{id}").buildAndExpand(saved.getId()).toUri());
+		SingleResponse<Void> response = SingleResponse.successRsp();
+		response.setCode(ErrorCode.SUCCESS);
 
-		return new ResponseEntity<>(headers, HttpStatus.CREATED);
+		// HttpHeaders headers = new HttpHeaders();
+		// headers.setLocation(uriComponentsBuilder
+		// .path(ApiConstants.URI_API_PUBLIC + ApiConstants.URI_FANS
+		// + "/{id}").buildAndExpand(saved.getId()).toUri());
+
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
