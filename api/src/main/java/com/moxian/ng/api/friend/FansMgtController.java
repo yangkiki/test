@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
+// import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.inject.Inject;
 
@@ -33,8 +33,7 @@ public class FansMgtController {
 
     @RequestMapping(value = {""}, method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<SingleResponse<Void>> saveFans(@RequestBody FansForm form,
-            UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<SingleResponse<Void>> saveFans(@RequestBody FansForm form) {
         if (log.isDebugEnabled()) {
             log.debug("save connectionRequest data @" + form);
         }
@@ -55,14 +54,17 @@ public class FansMgtController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<Void> deleteFans(@PathVariable("id") Long id) {
+    public ResponseEntity<SingleResponse<Void>> deleteFans(@PathVariable("id") Long id) {
         if (log.isDebugEnabled()) {
             log.debug("delete fans by id @" + id);
         }
 
         fansService.deactivateFans(id);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        SingleResponse<Void> response = SingleResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET, params =

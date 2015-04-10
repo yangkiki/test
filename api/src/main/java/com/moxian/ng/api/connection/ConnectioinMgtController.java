@@ -26,240 +26,223 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
+// import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.inject.Inject;
 
-//import org.springframework.http.HttpHeaders;
+// import org.springframework.http.HttpHeaders;
 
 @RestController
-@RequestMapping(value = ApiConstants.URI_API_MGT+ ApiConstants.URI_API_CONNECTION)
+@RequestMapping(value = ApiConstants.URI_API_MGT + ApiConstants.URI_API_CONNECTION)
 public class ConnectioinMgtController {
 
-  private static final Logger log = LoggerFactory
-      .getLogger(ConnectioinMgtController.class);
+    private static final Logger log = LoggerFactory.getLogger(ConnectioinMgtController.class);
 
-  @Inject
-  private ConnectionService connectionService;
+    @Inject
+    private ConnectionService connectionService;
 
-  @Inject
-  private UserService userService;
+    @Inject
+    private UserService userService;
 
-  @RequestMapping(value = {"/friends"}, method = RequestMethod.GET)
-  @ResponseBody
-  public ListResponse<UserAccountDetails> getAllFriends(
-      @CurrentUser UserAccount user,
-      @PageableDefault(value = 2) Pageable page) {
-    if (log.isDebugEnabled()) {
-      log.debug("user search criteria   page@ {} ", page);
-    }
-    Page<UserAccountDetails> users = null;
+    @RequestMapping(value = {"/friends"}, method = RequestMethod.GET)
+    @ResponseBody
+    public ListResponse<UserAccountDetails> getAllFriends(@CurrentUser UserAccount user,
+            @PageableDefault(value = 2) Pageable page) {
+        if (log.isDebugEnabled()) {
+            log.debug("user search criteria   page@ {} ", page);
+        }
+        Page<UserAccountDetails> users = null;
 
-    users = connectionService.findUserAllGroupFriends(user.getId(), page);
+        users = connectionService.findUserAllGroupFriends(user.getId(), page);
 
-    if (log.isDebugEnabled()) {
-      log.debug("count of users @" + users.getTotalElements());
-    }
+        if (log.isDebugEnabled()) {
+            log.debug("count of users @" + users.getTotalElements());
+        }
 
-    ListResponse<UserAccountDetails> response = ListResponse.successRsp();
-    response.setCode(ErrorCode.SUCCESS);
-    response.setData(users.getContent());
-    response.setTotalCount(users.getTotalElements());
+        ListResponse<UserAccountDetails> response = ListResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(users.getContent());
+        response.setTotalCount(users.getTotalElements());
 
-    return response;
-  }
-
-  @RequestMapping(value = {"/friends"}, method = RequestMethod.GET, params = {"action=NOTINGROUP"})
-  @ResponseBody
-  public ListResponse<UserAccountDetails> getNotGroupFriends(
-      @CurrentUser UserAccount user,
-      @PageableDefault(value = 10) Pageable page) {
-    if (log.isDebugEnabled()) {
-      log.debug("user search criteria   page@ {} ", page);
+        return response;
     }
 
-    Page<UserAccountDetails> users = connectionService.findNotGroupFriends(
-        user.getId(), page);
+    @RequestMapping(value = {"/friends"}, method = RequestMethod.GET, params = {"action=NOTINGROUP"})
+    @ResponseBody
+    public ListResponse<UserAccountDetails> getNotGroupFriends(@CurrentUser UserAccount user, @PageableDefault(
+            value = 10) Pageable page) {
+        if (log.isDebugEnabled()) {
+            log.debug("user search criteria   page@ {} ", page);
+        }
 
-    if (log.isDebugEnabled()) {
-      log.debug("count of users @" + users.getTotalElements());
+        Page<UserAccountDetails> users = connectionService.findNotGroupFriends(user.getId(), page);
+
+        if (log.isDebugEnabled()) {
+            log.debug("count of users @" + users.getTotalElements());
+        }
+
+        ListResponse<UserAccountDetails> response = ListResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(users.getContent());
+        response.setTotalCount(users.getTotalElements());
+
+        return response;
     }
 
-    ListResponse<UserAccountDetails> response = ListResponse.successRsp();
-    response.setCode(ErrorCode.SUCCESS);
-    response.setData(users.getContent());
-    response.setTotalCount(users.getTotalElements());
+    @RequestMapping(value = {"/friends/{id}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public ListResponse<UserAccountDetails> getFriendsByGroupId(@CurrentUser UserAccount user,
+            @PathVariable("id") Long groupId, @PageableDefault(value = 10) Pageable page) {
+        if (log.isDebugEnabled()) {
+            log.debug("user search criteria   page@ {} ", page);
+        }
 
-    return response;
-  }
+        Page<UserAccountDetails> users = connectionService.findFriendsByGroupId(user.getId(), groupId, page);
 
-  @RequestMapping(value = {"/friends/{id}"}, method = RequestMethod.GET)
-  @ResponseBody
-  public ListResponse<UserAccountDetails> getFriendsByGroupId(
-      @CurrentUser UserAccount user, @PathVariable("id") Long groupId,
-      @PageableDefault(value = 10) Pageable page) {
-    if (log.isDebugEnabled()) {
-      log.debug("user search criteria   page@ {} ", page);
+        if (log.isDebugEnabled()) {
+            log.debug("count of users @" + users.getTotalElements());
+        }
+
+        ListResponse<UserAccountDetails> response = ListResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(users.getContent());
+        response.setTotalCount(users.getTotalElements());
+
+        return response;
     }
 
-    Page<UserAccountDetails> users = connectionService
-        .findFriendsByGroupId(user.getId(), groupId, page);
+    @RequestMapping(value = {"/groups"}, method = RequestMethod.GET)
+    @ResponseBody
+    public ListResponse<GroupDetails> getAllGroups(@CurrentUser UserAccount user,
+            @PageableDefault(value = 10) Pageable page) {
+        if (log.isDebugEnabled()) {
+            log.debug("user search criteria   page@ {} ", page);
+        }
 
-    if (log.isDebugEnabled()) {
-      log.debug("count of users @" + users.getTotalElements());
+        Page<GroupDetails> groups = connectionService.findUserAllGroups(user.getId(), page);
+
+        if (log.isDebugEnabled()) {
+            log.debug("count of users @" + groups.getTotalElements());
+        }
+        ListResponse<GroupDetails> response = ListResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(groups.getContent());
+        response.setTotalCount(groups.getTotalElements());
+
+        return response;
     }
 
-    ListResponse<UserAccountDetails> response = ListResponse.successRsp();
-    response.setCode(ErrorCode.SUCCESS);
-    response.setData(users.getContent());
-    response.setTotalCount(users.getTotalElements());
+    @RequestMapping(value = {"/groups/{id}",}, method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<SingleResponse<GroupDetails>> getGroup(@PathVariable("id") Long id) {
 
-    return response;
-  }
+        log.debug("get group data by id @ {}", id);
 
-  @RequestMapping(value = {"/groups"}, method = RequestMethod.GET)
-  @ResponseBody
-  public ListResponse<GroupDetails> getAllGroups(
-      @CurrentUser UserAccount user,
-      @PageableDefault(value = 10) Pageable page) {
-    if (log.isDebugEnabled()) {
-      log.debug("user search criteria   page@ {} ", page);
+        GroupDetails groups = connectionService.findGroupById(id);
+
+        SingleResponse<GroupDetails> response = SingleResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(groups);
+        // return response;
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    Page<GroupDetails> groups = connectionService.findUserAllGroups(
-        user.getId(), page);
+    @RequestMapping(value = {"/groups"}, method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<SingleResponse<GroupDetails>> createGroup(@RequestBody GroupForm form) {
+        log.debug("save GroupForm data @ {}", form);
 
-    if (log.isDebugEnabled()) {
-      log.debug("count of users @" + groups.getTotalElements());
+        GroupDetails saved = connectionService.saveGroup(form);
+
+        SingleResponse<GroupDetails> response = SingleResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(saved);
+        // response.setMsg(msg);
+        // response.setData(groups);
+        //
+        // HttpHeaders headers = new HttpHeaders();
+        // headers.setLocation(
+        // uriComponentsBuilder.path(ApiConstants.URI_API_MGT +
+        // ApiConstants.URI_API_CONNECTION + "/groups/{id}")
+        // .buildAndExpand(saved.getId()).toUri());
+
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-    ListResponse<GroupDetails> response = ListResponse.successRsp();
-    response.setCode(ErrorCode.SUCCESS);
-    response.setData(groups.getContent());
-    response.setTotalCount(groups.getTotalElements());
 
-    return response;
-  }
+    @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=DELETE"})
+    @ResponseBody
+    public ResponseEntity<SingleResponse<Void>> deleteGroup(@PathVariable("id") Long id) {
 
-  @RequestMapping(value = {"/groups/{id}",}, method = RequestMethod.GET)
-  @ResponseBody
-  public ResponseEntity<SingleResponse<GroupDetails>> getBill(
-      @PathVariable("id") Long id) {
+        log.debug("delete group id {} @", id);
 
-    log.debug("get group data by id @ {}", id);
+        connectionService.deleteGroup(id);
+        // SingleResponse<Void> response = SingleResponse.successRsp();
+        // response.setCode(ErrorCode.SUCCESS);
+        SingleResponse<Void> response = SingleResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
 
-    GroupDetails groups = connectionService.findGroupById(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
-    SingleResponse<GroupDetails> response = SingleResponse.successRsp();
-    response.setCode(ErrorCode.SUCCESS);
-    response.setData(groups);
-    // return response;
-
-    return new ResponseEntity<>(response, HttpStatus.OK);
-  }
-
-  @RequestMapping(value = {"/groups"}, method = RequestMethod.POST)
-  @ResponseBody
-  public ResponseEntity<SingleResponse<GroupDetails>> createGroup(
-      @RequestBody GroupForm form,
-      UriComponentsBuilder uriComponentsBuilder) {
-    log.debug("save GroupForm data @ {}", form);
-
-    GroupDetails saved = connectionService.saveGroup(form);
-
-    SingleResponse<GroupDetails> response = SingleResponse.successRsp();
-    response.setCode(ErrorCode.SUCCESS);
-    response.setData(saved);
-    // response.setMsg(msg);
-    // response.setData(groups);
-    //
-    // HttpHeaders headers = new HttpHeaders();
-    // headers.setLocation(
-    // uriComponentsBuilder.path(ApiConstants.URI_API_MGT +
-    // ApiConstants.URI_API_CONNECTION + "/groups/{id}")
-    // .buildAndExpand(saved.getId()).toUri());
-
-    return new ResponseEntity<>(response, HttpStatus.CREATED);
-  }
-
-  @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=DELETE"})
-  @ResponseBody
-  public ResponseEntity<SingleResponse<Void>> deleteGroup(
-      @PathVariable("id") Long id) {
-
-    log.debug("delete group id {} @", id);
-
-    connectionService.deleteGroup(id);
-    // SingleResponse<Void> response = SingleResponse.successRsp();
-    // response.setCode(ErrorCode.SUCCESS);
-    SingleResponse<Void> response = SingleResponse.successRsp();
-    response.setCode(ErrorCode.SUCCESS);
-
-     return new ResponseEntity<>(response, HttpStatus.OK);
-
-  }
+    }
 
     @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.PUT, params = {"action=ADD"})
     @ResponseBody
-    public ResponseEntity<SingleResponse<Void>> addFriendToGroup (@PathVariable("id") Long groupId,  //
-        @CurrentUser UserAccount user,//
-        @RequestBody Long[]friends){
-      if (log.isDebugEnabled()) {
-        log.debug(" user {} add friend length {}  friend  {}  to group {}", user.getId(), friends.length, friends,
-                  groupId);
-      }
-      
-      connectionService.addFriendToGroup(user.getId(),groupId, friends);
+    public ResponseEntity<SingleResponse<Void>> addFriendToGroup(@PathVariable("id") Long groupId, //
+            @CurrentUser UserAccount user,//
+            @RequestBody Long[] friends) {
+        if (log.isDebugEnabled()) {
+            log.debug(" user {} add friend length {}  friend  {}  to group {}", user.getId(), friends.length, friends,
+                    groupId);
+        }
 
-      SingleResponse<Void> response = SingleResponse.successRsp();
-      response.setCode(ErrorCode.SUCCESS);
+        connectionService.addFriendToGroup(user.getId(), groupId, friends);
 
-      return new ResponseEntity<>(response, HttpStatus.OK);
+        SingleResponse<Void> response = SingleResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
 
     @RequestMapping(value = {"/groups/{id}"}, method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<SingleResponse<Void>> removeFriendFromGroup (
-        @PathVariable("id") Long groupId, //
-        @CurrentUser UserAccount user,//
-        @RequestBody Long[]friends){
-      if (log.isDebugEnabled()) {
-        log.debug(
-            " user {} remove friend length {}  friend  {}  from group {}",
-            user.getId(), friends.length, friends, groupId);
-      }
+    public ResponseEntity<SingleResponse<Void>> removeFriendFromGroup(@PathVariable("id") Long groupId, //
+            @CurrentUser UserAccount user,//
+            @RequestBody Long[] friends) {
+        if (log.isDebugEnabled()) {
+            log.debug(" user {} remove friend length {}  friend  {}  from group {}", user.getId(), friends.length,
+                    friends, groupId);
+        }
 
-      connectionService.removeFriendFromGroup(user.getId(), friends);
+        connectionService.removeFriendFromGroup(user.getId(), friends);
 
-      SingleResponse<Void> response = SingleResponse.successRsp();
-      response.setCode(ErrorCode.SUCCESS);
+        SingleResponse<Void> response = SingleResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
 
-      return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
     @ResponseBody
-    public ListResponse<UserAccountDetails> getUserAccountByKeyword (
-        @RequestParam("keyword") String keyword,
-        @PageableDefault(value = 10) Pageable page){
-      if (log.isDebugEnabled()) {
-        log.debug("user search keyword  {} page@ {} ", keyword, page);
-      }
-      Page<UserAccountDetails> users = null;
+    public ListResponse<UserAccountDetails> getUserAccountByKeyword(@RequestParam("keyword") String keyword,
+            @PageableDefault(value = 10) Pageable page) {
+        if (log.isDebugEnabled()) {
+            log.debug("user search keyword  {} page@ {} ", keyword, page);
+        }
+        Page<UserAccountDetails> users = null;
 
-      users = userService.findUserAccountByKeyword(keyword, page);
+        users = userService.findUserAccountByKeyword(keyword, page);
 
-      if (log.isDebugEnabled()) {
-        log.debug("count of users @" + users.getTotalElements());
-      }
+        if (log.isDebugEnabled()) {
+            log.debug("count of users @" + users.getTotalElements());
+        }
 
-      ListResponse<UserAccountDetails> response = ListResponse.successRsp();
-      response.setCode(ErrorCode.SUCCESS);
-      response.setData(users.getContent());
-      response.setTotalCount(users.getTotalElements());
+        ListResponse<UserAccountDetails> response = ListResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(users.getContent());
+        response.setTotalCount(users.getTotalElements());
 
-      return response;
+        return response;
     }
 
-  }
+}

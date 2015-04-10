@@ -8,99 +8,97 @@ import java.util.List;
  */
 public class ListResponse<T> implements Serializable {
 
-  private boolean result;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5517349973506325452L;
 
-  private String code;
+    private boolean result;
 
-  private String msg;
+    private String code;
 
-  private long date;
+    private String msg;
 
-  private List<T> data;
+    private long date;
 
-  private long totalCount;
+    private List<T> data;
 
-  public ListResponse(boolean result, String msg, long date) {
-    this.result = result;
-    this.msg = msg;
-    this.date = date;
-  }
-  public ListResponse(boolean result, String msg, long date,String code) {
-    this.result = result;
-    this.msg = msg;
-    this.date = date;
-    this.code=code;
-  }
+    private long totalCount;
 
+    public ListResponse(boolean result, String msg, long date) {
+        this.result = result;
+        this.msg = msg;
+        this.date = date;
+    }
 
-  public static ListResponse successRsp() {
-    ListResponse response = new ListResponse(true, "success", System.currentTimeMillis() / 1000,ErrorCode.SUCCESS);
-    return response;
-  }
+    public ListResponse(boolean result, String msg, long date, String code) {
+        this.result = result;
+        this.msg = msg;
+        this.date = date;
+        this.code = code;
+    }
 
-  public static ListResponse failRsp() {
-    ListResponse response = new ListResponse(false, "failed", System.currentTimeMillis() / 1000);
-    return response;
-  }
+    public static ListResponse successRsp() {
+        ListResponse response = new ListResponse(true, "success", System.currentTimeMillis() / 1000, ErrorCode.SUCCESS);
+        return response;
+    }
 
+    public static ListResponse failRsp() {
+        ListResponse response = new ListResponse(false, "failed", System.currentTimeMillis() / 1000);
+        return response;
+    }
 
-  public boolean isResult() {
-    return result;
-  }
+    public boolean isResult() {
+        return result;
+    }
 
-  public void setResult(boolean result) {
-    this.result = result;
-  }
+    public void setResult(boolean result) {
+        this.result = result;
+    }
 
-  public String getCode() {
-    return code;
-  }
+    public String getCode() {
+        return code;
+    }
 
-  public void setCode(String code) {
-    this.code = code;
-  }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-  public String getMsg() {
-    return msg;
-  }
+    public String getMsg() {
+        return msg;
+    }
 
-  public void setMsg(String msg) {
-    this.msg = msg;
-  }
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
-  public long getDate() {
-    return date;
-  }
+    public long getDate() {
+        return date;
+    }
 
-  public void setDate(long date) {
-    this.date = date;
-  }
+    public void setDate(long date) {
+        this.date = date;
+    }
 
-  public List<T> getData() {
-    return data;
-  }
+    public List<T> getData() {
+        return data;
+    }
 
-  public void setData(List<T> data) {
-    this.data = data;
-  }
+    public void setData(List<T> data) {
+        this.data = data;
+    }
 
-  public long getTotalCount() {
-    return totalCount;
-  }
+    public long getTotalCount() {
+        return totalCount;
+    }
 
-  public void setTotalCount(long totalCount) {
-    this.totalCount = totalCount;
-  }
+    public void setTotalCount(long totalCount) {
+        this.totalCount = totalCount;
+    }
 
-  @Override
-  public String toString() {
-    return "ListResponse{" +
-           "result=" + result +
-           ", code='" + code + '\'' +
-           ", msg='" + msg + '\'' +
-           ", date=" + date +
-           ", data=" + data +
-           ", totalCount=" + totalCount +
-           '}';
-  }
+    @Override
+    public String toString() {
+        return "ListResponse{" + "result=" + result + ", code='" + code + '\'' + ", msg='" + msg + '\'' + ", date="
+                + date + ", data=" + data + ", totalCount=" + totalCount + '}';
+    }
 }
