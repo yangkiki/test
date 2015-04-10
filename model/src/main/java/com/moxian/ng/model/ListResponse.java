@@ -25,9 +25,16 @@ public class ListResponse<T> implements Serializable {
     this.msg = msg;
     this.date = date;
   }
+  public ListResponse(boolean result, String msg, long date,String code) {
+    this.result = result;
+    this.msg = msg;
+    this.date = date;
+    this.code=code;
+  }
+
 
   public static ListResponse successRsp() {
-    ListResponse response = new ListResponse(true, "success", System.currentTimeMillis() / 1000);
+    ListResponse response = new ListResponse(true, "success", System.currentTimeMillis() / 1000,ErrorCode.SUCCESS);
     return response;
   }
 

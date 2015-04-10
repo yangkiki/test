@@ -17,6 +17,13 @@ public class SingleResponse<T> implements Serializable {
 
   private T data;
 
+  public SingleResponse(boolean result, String msg, long date,String code) {
+    this.result = result;
+    this.msg = msg;
+    this.date = date;
+    this.code=code;
+  }
+
   public SingleResponse(boolean result, String msg, long date) {
     this.result = result;
     this.msg = msg;
@@ -25,7 +32,7 @@ public class SingleResponse<T> implements Serializable {
 
 
   public static SingleResponse successRsp() {
-    SingleResponse response = new SingleResponse(true, "success", System.currentTimeMillis() / 1000);
+    SingleResponse response = new SingleResponse(true, "success", System.currentTimeMillis() / 1000,ErrorCode.SUCCESS);
     return response;
   }
 
