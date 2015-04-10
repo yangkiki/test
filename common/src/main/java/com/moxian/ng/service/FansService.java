@@ -47,7 +47,10 @@ public class FansService {
 		if (log.isDebugEnabled()) {
 			log.debug("save fans @" + form);
 		}
-		Fans fans = DTOUtils.map(form, Fans.class);
+		
+		Fans fans = new Fans();
+		
+		// Fans fans = DTOUtils.map(form, Fans.class);
 		// fans.setSend(connectedUser);
 		// fans.setRecept(memberUser);
 		fans.setFollowingUser(followingUser);
@@ -126,9 +129,7 @@ public class FansService {
 			this.connectionsRepository.delete(send);
 		}
 
-		Connections recept = this.connectionsRepository
-				.findConnectionByConnectedUserAndMemberUser(
-						connectedUser.getId(), memberUser.getId());
+		Connections recept = this.connectionsRepository.findConnectionByConnectedUserAndMemberUser(connectedUser.getId(), memberUser.getId());
 
 		if (recept != null) {
 			recept.setType(Connections.Type.UNIDIRECTIONAL);
@@ -136,6 +137,7 @@ public class FansService {
 		}
 
 		fans.setActive(false);
+		this.fansRepository.save(fans);
 	}
 
 	// @Transactional
