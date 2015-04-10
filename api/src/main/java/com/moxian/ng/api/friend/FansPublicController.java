@@ -22,28 +22,26 @@ import javax.inject.Inject;
 @RequestMapping(value = ApiConstants.URI_API_PUBLIC + ApiConstants.URI_FANS)
 public class FansPublicController {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(FansPublicController.class);
+    private static final Logger log = LoggerFactory.getLogger(FansPublicController.class);
 
-	@Inject
-	private FansService fansService;
+    @Inject
+    private FansService fansService;
 
-	@RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<SingleResponse<FansDetails>> getUser(
-			@PathVariable("id") Long id) {
+    @RequestMapping(value = {"/{id}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<SingleResponse<FansDetails>> getUser(@PathVariable("id") Long id) {
 
-		if (log.isDebugEnabled()) {
-			log.debug("get user data by id @" + id);
-		}
+        if (log.isDebugEnabled()) {
+            log.debug("get user data by id @" + id);
+        }
 
-		FansDetails fansDetails = this.fansService.findfansById(id);
+        FansDetails fansDetails = this.fansService.findfansById(id);
 
-		SingleResponse<FansDetails> response = SingleResponse.successRsp();
-		response.setCode(ErrorCode.SUCCESS);
-		response.setData(fansDetails);
+        SingleResponse<FansDetails> response = SingleResponse.successRsp();
+        response.setCode(ErrorCode.SUCCESS);
+        response.setData(fansDetails);
 
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
