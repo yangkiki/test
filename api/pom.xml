@@ -533,7 +533,20 @@
                     <artifactId>mysql-connector-java</artifactId>
                 </dependency>             
             </dependencies>
-        </profile> 
+        </profile>
+        <profile>
+            <id>mx</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.moxian.ng</groupId>
+                    <artifactId>mx-sdoc</artifactId>
+                </dependency>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>staging</id>
             <dependencies>

@@ -422,6 +422,16 @@
     
     <profiles>
         <profile>
+            <id>mx</id>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>5.1.30</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
             <id>staging</id>
             <dependencies>
                 <dependency>

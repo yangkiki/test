@@ -184,7 +184,16 @@
                     <artifactId>mysql-connector-java</artifactId>
                 </dependency>             
             </dependencies>
-        </profile> 
+        </profile>
+        <profile>
+            <id>mx</id>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
         <profile>
             <id>staging</id>
             <dependencies>     
