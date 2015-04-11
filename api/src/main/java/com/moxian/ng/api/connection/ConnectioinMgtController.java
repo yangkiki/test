@@ -150,9 +150,12 @@ public class ConnectioinMgtController {
 
     @RequestMapping(value = {"/groups"}, method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<SingleResponse<GroupDetails>> createGroup(@RequestBody GroupForm form) {
+    public ResponseEntity<SingleResponse<GroupDetails>> createGroup( @CurrentUser UserAccount user,//
+        @RequestBody GroupForm form) {
         log.debug("save GroupForm data @ {}", form);
 
+
+        form.setMemberUserPK(user.getId());
         GroupDetails saved = connectionService.saveGroup(form);
 
         SingleResponse<GroupDetails> response = SingleResponse.successRsp();

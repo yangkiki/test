@@ -12,8 +12,6 @@ import com.moxian.ng.model.ApiConstants;
 import com.moxian.ng.model.GlobalConfigDetails;
 import com.moxian.ng.model.GlobalConfigForm;
 import com.moxian.ng.service.ConfigService;
-import javax.inject.Inject;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
 
 /**
  *

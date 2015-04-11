@@ -5,7 +5,6 @@
  */
 package com.moxian.ng.config.caching;
 
-import javax.inject.Inject;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
@@ -21,6 +20,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+
+import javax.inject.Inject;
 
 /**
  *
