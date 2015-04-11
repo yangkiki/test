@@ -773,6 +773,96 @@
                 </resources>
             </build>
         </profile>
+        
+         <profile>
+            <id>mx</id>
+            <properties>
+                <!-- log4j level -->
+                <log4j.level>DEBUG</log4j.level>
+
+                <!-- spring active profiles -->
+                <spring.profiles.active>staging</spring.profiles.active>
+				
+                <!-- redis configuration -->
+                <redis.host>172.24.0.100</redis.host>
+                <redis.password>mxdev123</redis.password>
+				
+                <!-- mongo configuration -->
+                <mongo.host>localhost</mongo.host>
+                <mongo.dbname>flbill</mongo.dbname>
+                <mongo.username></mongo.username>
+                <mongo.password></mongo.password>
+                <mongo.options.connectionsPerHost>200</mongo.options.connectionsPerHost>
+                <mongo.options.threadsAllowedToBlockForConnectionMultiplier>20</mongo.options.threadsAllowedToBlockForConnectionMultiplier>
+                <mongo.options.connectTimeout>5000</mongo.options.connectTimeout>
+                <mongo.options.maxWaitTime>5000</mongo.options.maxWaitTime>
+                <mongo.options.socketKeepAlive>true</mongo.options.socketKeepAlive>
+                <mongo.options.socketTimeout>5000</mongo.options.socketTimeout>
+
+                <!-- jdbc connetion -->
+                <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+                <jdbc.url><![CDATA[jdbc:mysql://172.24.0.100:3306/moxian?useUnicode=true&characterEncoding=utf8]]></jdbc.url>
+                <jdbc.username>mxdev</jdbc.username>
+                <jdbc.password>mxdev123</jdbc.password>
+
+                <!-- hibernate properties -->
+                <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+                <hibernate.show_sql>false</hibernate.show_sql>
+                <hibernate.format_sql>false</hibernate.format_sql>
+                <hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</hibernate.dialect>
+                <batch.schema.script>classpath*:/org/springframework/batch/core/schema-mysql.sql</batch.schema.script>
+
+                <!-- mail config -->
+                <mail.host>smtp.googlemail.com</mail.host>
+                <mail.port>465</mail.port>
+                <mail.username>test@51haitao.im</mail.username>
+                <mail.password>test!@#%^</mail.password>
+                <mail.from>test@51haitao.im</mail.from>
+                <mail.debug>true</mail.debug>
+                <!-- rabbitmq config -->
+                <rb.addresses>172.24.0.100:5672</rb.addresses>
+                <rb.vhost>/</rb.vhost>
+                <rb.username>mxdev</rb.username>
+                <rb.password>mxdev123</rb.password>
+                <rb.executor.poolSize>10</rb.executor.poolSize>
+                
+                <!--sms config-->
+                <sms.appKey>6SDK-EMY-6688-KGUNM</sms.appKey>
+                <sms.appSecret>201827</sms.appSecret>
+                
+                <!-- payment gateway config-->
+                <gwApiUrl>http://www.storevm.org:8660/paygw/services/</gwApiUrl>
+                
+                <!-- account operations for withfunding -->
+                <signature.algorthm>RSA</signature.algorthm>
+                <signature.channelNo>880001</signature.channelNo>
+                <signature.reqUrl>http://s-171477.gotocdn.com:8080/with_funding/fenglianAPI/accountServer</signature.reqUrl>
+                <signature.prefixRetUrl>http://192.168.0.112:8180/mx-api/api/public/acct/withFunding/</signature.prefixRetUrl>
+            </properties>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.30</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.moxian.ng</groupId>
+                        <artifactId>mx-sdoc</artifactId>
+                        <version>1.0.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement> 
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources-staging</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        
         <profile>
             <id>staging</id>
             <properties>
