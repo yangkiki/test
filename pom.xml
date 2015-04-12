@@ -784,12 +784,12 @@
                 <spring.profiles.active>staging</spring.profiles.active>
 				
                 <!-- redis configuration -->
-                <redis.host>172.24.0.100</redis.host>
-                <redis.password>mxdev123</redis.password>
+                <redis.host>127.0.0.1</redis.host>
+                <redis.password></redis.password>
 				
                 <!-- mongo configuration -->
-                <mongo.host>localhost</mongo.host>
-                <mongo.dbname>flbill</mongo.dbname>
+                <mongo.host>192.168.0.21</mongo.host>
+                <mongo.dbname>mxdev</mongo.dbname>
                 <mongo.username></mongo.username>
                 <mongo.password></mongo.password>
                 <mongo.options.connectionsPerHost>200</mongo.options.connectionsPerHost>
@@ -801,7 +801,7 @@
 
                 <!-- jdbc connetion -->
                 <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:mysql://172.24.0.100:3306/moxian?useUnicode=true&characterEncoding=utf8]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:mysql://127.0.0.1:3306/moxian?useUnicode=true&characterEncoding=utf8]]></jdbc.url>
                 <jdbc.username>mxdev</jdbc.username>
                 <jdbc.password>mxdev123</jdbc.password>
 
@@ -820,7 +820,7 @@
                 <mail.from>test@51haitao.im</mail.from>
                 <mail.debug>true</mail.debug>
                 <!-- rabbitmq config -->
-                <rb.addresses>172.24.0.100:5672</rb.addresses>
+                <rb.addresses>192.168.0.21:5672</rb.addresses>
                 <rb.vhost>/</rb.vhost>
                 <rb.username>mxdev</rb.username>
                 <rb.password>mxdev123</rb.password>
@@ -965,7 +965,7 @@
                 <redis.password></redis.password>
 
                 <!-- mongo configuration -->
-                <mongo.host>192.168.187.177</mongo.host>
+                <mongo.host>localhost</mongo.host>
                 <mongo.dbname>flbill</mongo.dbname>
                 <mongo.username></mongo.username>
                 <mongo.password></mongo.password>

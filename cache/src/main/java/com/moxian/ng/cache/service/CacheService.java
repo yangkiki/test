@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this
+ * template file, choose Tools | Templates and open the template in the editor.
  */
 package com.moxian.ng.cache.service;
 
@@ -31,8 +30,7 @@ public class CacheService {
     @Inject
     private RedisTemplate<Object, Object> redisTemplate;
 
-    public CacheService() {
-    }
+    public CacheService() {}
 
     public void set(Object key, final Object value, final int expire) {
 
@@ -42,33 +40,33 @@ public class CacheService {
 
         redisTemplate.opsForValue().set(key, value, expire, TimeUnit.SECONDS);
 
-//        if (value instanceof Map) {
-//            if (log.isDebugEnabled()) {
-//                log.debug("value is a map@");
-//            }
-//            redisTemplate.opsForHash().putAll(key, (Map) value);
-//            redisTemplate.expire(key, expire, TimeUnit.SECONDS);
-//        } else {
-//            if (log.isDebugEnabled()) {
-//                log.debug("value is an object@");
-//            }
-//            final byte[] rawKey = rawKey(key);
-//            redisTemplate.execute(new RedisCallback<Object>() {
-//                @Override
-//                public Object doInRedis(RedisConnection connection) throws DataAccessException {
-//
-//                    final byte[] serializedData = objSer.serialize(value);
-//                    if (log.isDebugEnabled()) {
-//                        log.debug("stored serialized object in cache@" + serializedData);
-//                    }
-//                    connection.set(rawKey, serializedData);
-//                    connection.expire(rawKey, expire);
-//
-//                   
-//                    return connection.closePipeline();
-//                }
-//            });
-//        }
+        // if (value instanceof Map) {
+        // if (log.isDebugEnabled()) {
+        // log.debug("value is a map@");
+        // }
+        // redisTemplate.opsForHash().putAll(key, (Map) value);
+        // redisTemplate.expire(key, expire, TimeUnit.SECONDS);
+        // } else {
+        // if (log.isDebugEnabled()) {
+        // log.debug("value is an object@");
+        // }
+        // final byte[] rawKey = rawKey(key);
+        // redisTemplate.execute(new RedisCallback<Object>() {
+        // @Override
+        // public Object doInRedis(RedisConnection connection) throws DataAccessException {
+        //
+        // final byte[] serializedData = objSer.serialize(value);
+        // if (log.isDebugEnabled()) {
+        // log.debug("stored serialized object in cache@" + serializedData);
+        // }
+        // connection.set(rawKey, serializedData);
+        // connection.expire(rawKey, expire);
+        //
+        //
+        // return connection.closePipeline();
+        // }
+        // });
+        // }
     }
 
     public void set(Object key, Object value) {
@@ -87,40 +85,40 @@ public class CacheService {
 
         return val;
 
-//        final byte[] rawKey = rawKey(key);
-//
-//        return redisTemplate.execute(new RedisCallback<Object>() {
-//            @Override
-//            public Object doInRedis(RedisConnection connection) throws DataAccessException {
-//                byte[] value = connection.get(rawKey);
-//                final Object deserializedData = objSer.deserialize(value);
-//
-//                if (log.isDebugEnabled()) {
-//                    log.debug("get cache value for key @" + key + ":" + deserializedData);
-//                }
-//
-//                return value == null ? null : deserializedData;
-//            }
-//        });
+        // final byte[] rawKey = rawKey(key);
+        //
+        // return redisTemplate.execute(new RedisCallback<Object>() {
+        // @Override
+        // public Object doInRedis(RedisConnection connection) throws DataAccessException {
+        // byte[] value = connection.get(rawKey);
+        // final Object deserializedData = objSer.deserialize(value);
+        //
+        // if (log.isDebugEnabled()) {
+        // log.debug("get cache value for key @" + key + ":" + deserializedData);
+        // }
+        //
+        // return value == null ? null : deserializedData;
+        // }
+        // });
     }
 
     public void delete(Object key) {
         redisTemplate.delete(key);
     }
 
-//    public void flushAll() {
-//        redisTemplate.execute(new RedisCallback<Object>() {
-//            @Override
-//            public Object doInRedis(RedisConnection connection) throws DataAccessException {
-//                connection.flushAll();
-//
-//                return null;
-//            }
-//        });
-//    }
-//
-//    private byte[] rawKey(String key) {
-//        return redisTemplate.getStringSerializer().serialize(key);
-//    }
+    // public void flushAll() {
+    // redisTemplate.execute(new RedisCallback<Object>() {
+    // @Override
+    // public Object doInRedis(RedisConnection connection) throws DataAccessException {
+    // connection.flushAll();
+    //
+    // return null;
+    // }
+    // });
+    // }
+    //
+    // private byte[] rawKey(String key) {
+    // return redisTemplate.getStringSerializer().serialize(key);
+    // }
 
 }

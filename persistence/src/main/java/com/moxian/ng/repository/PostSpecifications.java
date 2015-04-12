@@ -21,8 +21,7 @@ import com.moxian.ng.domain.Post_;
  */
 public class PostSpecifications {
 
-    public static Specification<Post> filterPostsByKeywordAndStatus(
-            final String keyword,//
+    public static Specification<Post> filterPostsByKeywordAndStatus(final String keyword,//
             final boolean active,//
             final Post.Type type,//
             final Post.Status status) {
@@ -37,7 +36,7 @@ public class PostSpecifications {
             if (type != null) {
                 predicates.add(cb.equal(root.get(Post_.type), type));
             }
-            
+
             if (status != null) {
                 predicates.add(cb.equal(root.get(Post_.status), status));
             }
