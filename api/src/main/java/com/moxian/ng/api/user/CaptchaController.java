@@ -14,9 +14,6 @@ import com.moxian.ng.model.SmsCaptchaResult;
 import com.moxian.ng.model.SmsCodeResult;
 import com.moxian.ng.service.SmsService;
 import com.moxian.ng.service.UserService;
-import java.util.HashMap;
-import java.util.Map;
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +24,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 /**
  *
  * @author Hantsy Bai<hantsy@gmail.com>
  */
 @RequestMapping(value = ApiConstants.URI_API_PUBLIC)
-@RestController
+//@RestController
 public class CaptchaController {
 
     private static final Logger log = LoggerFactory.getLogger(CaptchaController.class);

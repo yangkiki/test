@@ -1,10 +1,11 @@
 package com.moxian.ng.api.user;
 
-import javax.inject.Inject;
-
 import com.moxian.ng.model.ApiConstants;
 import com.moxian.ng.model.SystemUserDetails;
 import com.moxian.ng.model.SystemUserForm;
+import com.moxian.ng.model.UserAccountDetails;
+import com.moxian.ng.service.UserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,13 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.moxian.ng.model.UserAccountDetails;
-import com.moxian.ng.service.UserService;
+import javax.inject.Inject;
 
-@RestController
+//@RestController
 @RequestMapping(value = ApiConstants.URI_API_MGT + ApiConstants.URI_ACCOUNTS)
 public class AccountMgtController {
 

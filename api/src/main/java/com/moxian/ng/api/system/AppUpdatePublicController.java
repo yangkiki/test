@@ -8,7 +8,6 @@ package com.moxian.ng.api.system;
 import com.moxian.ng.model.ApiConstants;
 import com.moxian.ng.model.AppUpdateDetails;
 import com.moxian.ng.service.AppUpdateService;
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +16,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import javax.inject.Inject;
 
 /**
  *
  * @author Hantsy Bai<hantsy@gmail.com>
  */
 @RequestMapping(value = ApiConstants.URI_API_PUBLIC + ApiConstants.URI_API_APPUPDATE)
-@RestController
+//@RestController
 public class AppUpdatePublicController {
 
     private static final Logger log = LoggerFactory.getLogger(AppUpdatePublicController.class);

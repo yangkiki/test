@@ -47,7 +47,7 @@ public class ConnectioinMgtController {
     @RequestMapping(value = {"/friends"}, method = RequestMethod.GET)
     @ResponseBody
     public ListResponse<UserAccountDetails> getAllFriends(@CurrentUser UserAccount user,
-            @PageableDefault(value = 2) Pageable page) {
+            @PageableDefault(value = 10) Pageable page) {
         if (log.isDebugEnabled()) {
             log.debug("user search criteria   page@ {} ", page);
         }

@@ -6,14 +6,12 @@
 package com.moxian.ng.api.user;
 
 import com.moxian.ng.exception.InvalidRequestException;
-import com.moxian.ng.model.*;
-import com.moxian.ng.model.UserAccountDetails;
-import com.moxian.ng.service.UserService;
-import javax.inject.Inject;
-import javax.validation.Valid;
-
 import com.moxian.ng.model.ApiConstants;
 import com.moxian.ng.model.ApiErrors;
+import com.moxian.ng.model.SignupForm;
+import com.moxian.ng.model.UserAccountDetails;
+import com.moxian.ng.service.UserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
 
 /**
  *
