@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this license header, choose License Headers in Project Properties. To change this
+ * template file, choose Tools | Templates and open the template in the editor.
  */
 package com.moxian.ng.service;
 
@@ -35,14 +34,16 @@ public class ContentService {
 
     @Inject
     private PostRepository postRepository;
+    
 
-    public Page<PostDetails> findPostDetailsByKeyword(String q, boolean active, Post.Type type, Post.Status status, Pageable page) {
+    public Page<PostDetails> findPostDetailsByKeyword(String q, boolean active, Post.Type type, Post.Status status,
+            Pageable page) {
         if (log.isDebugEnabled()) {
             log.debug("search posts by keyword@" + q + ", active @" + active + ", type=" + type + ", status @" + status);
         }
 
-        Page<Post> posts = postRepository.findAll(PostSpecifications.filterPostsByKeywordAndStatus(q, active, type, status),
-                page);
+        Page<Post> posts =
+                postRepository.findAll(PostSpecifications.filterPostsByKeywordAndStatus(q, active, type, status), page);
 
         if (log.isDebugEnabled()) {
             log.debug("get posts size @" + posts.getTotalElements());

@@ -2,16 +2,19 @@ package com.moxian.ng.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-
-import com.moxian.ng.domain.support.AuditableEntity;
-
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import com.moxian.ng.domain.support.AuditableEntity;
 
 /**
  *
@@ -29,15 +32,12 @@ public class Post extends AuditableEntity<UserAccount, Long> {
 
     public enum Type {
 
-        ANNOUNCEMENT,
-        NEWS,
-        LICENSE
+        ANNOUNCEMENT, NEWS, LICENSE
     }
 
     public enum Status {
 
-        DRAFT,
-        PUBLISHED
+        DRAFT, PUBLISHED
     }
 
     @Column(name = "title")
@@ -57,6 +57,15 @@ public class Post extends AuditableEntity<UserAccount, Long> {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status = Status.DRAFT;
+
+    @Cascade(value = {CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "forward_id", referencedColumnName = "id")
+    private Post post;
+
+    @Cascade(value = {CascadeType.SAVE_UPDATE})
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    private java.util.Set<Post> forward;
 
     public String getTitle() {
         return title;
@@ -96,6 +105,34 @@ public class Post extends AuditableEntity<UserAccount, Long> {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    /**
+     * @return the post
+     */
+    public Post getPost() {
+        return post;
+    }
+
+    /**
+     * @param post the post to set
+     */
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    /**
+     * @return the forward
+     */
+    public java.util.Set<Post> getForward() {
+        return forward;
+    }
+
+    /**
+     * @param forward the forward to set
+     */
+    public void setForward(java.util.Set<Post> forward) {
+        this.forward = forward;
     }
 
     @Override
@@ -142,6 +179,5 @@ public class Post extends AuditableEntity<UserAccount, Long> {
             return false;
         return true;
     }
-    
 
 }

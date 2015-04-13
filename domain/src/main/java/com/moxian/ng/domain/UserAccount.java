@@ -105,7 +105,7 @@ public class UserAccount extends AuditableEntity<UserAccount, Long> implements U
 
   @ElementCollection(fetch = FetchType.EAGER)
   @JoinTable(//
-      name = "user_roles", //
+      name = "mx_user_roles", //
       joinColumns = @JoinColumn(name = "user_id")//
   )
   private List<String> roles = new ArrayList<>();
