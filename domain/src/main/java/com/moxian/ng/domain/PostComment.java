@@ -3,6 +3,8 @@
  */
 package com.moxian.ng.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -48,9 +50,26 @@ public class PostComment extends PersistableEntity<Long> {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     public Status status;
-    
+
     @Column(name = "active")
     private boolean active;
+
+    @Column(name = "create_on")
+    private LocalDateTime createOn;
+
+    /**
+     * @return the createOn
+     */
+    public LocalDateTime getCreateOn() {
+        return createOn;
+    }
+
+    /**
+     * @param createOn the createOn to set
+     */
+    public void setCreateOn(LocalDateTime createOn) {
+        this.createOn = createOn;
+    }
 
     /**
      * @return the active
